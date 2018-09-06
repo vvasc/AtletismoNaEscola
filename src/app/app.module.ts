@@ -1,3 +1,4 @@
+import { TableModule } from './@core/components/table/table.module';
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -24,6 +25,7 @@ import { config } from '../app/config/config';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    TableModule,
     AngularFireModule.initializeApp(config.fire),
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
