@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: './register/register.module#RegisterModule',
       },
       {
+        path: 'aluno',
+        loadChildren: './aluno/aluno.module#AlunoModule',
+      },
+      {
         path: '**',
         redirectTo: 'main',
       },
