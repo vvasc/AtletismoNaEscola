@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+.atletismo {
+    position: absolute;
+    left: 25%;
+    top: 0;
+    width: auto;
+    height: auto;
+    right: 25%;
+    padding-top: 10px;
+}
+
+.btn {
+    width: 200px;
+    margin: 10px;
+    color: blue;
+}
+
+.offset {
+    padding-top: 100px;
+    margin-bottom: 100px;
+}
