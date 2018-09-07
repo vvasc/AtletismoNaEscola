@@ -1,3 +1,5 @@
+import { BackgroundService } from './../../../services/background.service';
+import { Router, NavigationEnd } from '@angular/router';
 import { Component, OnDestroy } from '@angular/core';
 import { delay, withLatestFrom, takeWhile } from 'rxjs/operators';
 import {
@@ -17,10 +19,11 @@ import { StateService } from '../../../@core/data/state.service';
   styleUrls: ['./sample.layout.scss'],
   template: `
     <nb-layout [center]="layout.id === 'center-column'" windowMode>
-      <nb-layout-header fixed>
+      <nb-layout-header *ngIf="!isMain" fixed>
         <ngx-header [position]="sidebar.id === 'start' ? 'normal': 'inverse'"></ngx-header>
       </nb-layout-header>
-      <nb-layout-column class="main-content">
+
+      <nb-layout-column [ngClass]="background" class="main-content">
         <ng-content select="router-outlet"></ng-content>
       </nb-layout-column>
 
@@ -47,6 +50,9 @@ import { StateService } from '../../../@core/data/state.service';
   `,
 })
 export class SampleLayoutComponent implements OnDestroy {
+
+  background: string; // Seta o style do componente (usado para trocar a imagem de fundo)
+  isMain: boolean = false; // Para mostrar o logo na tela principal
 
   subMenu: NbMenuItem[] = [
     {
@@ -100,7 +106,10 @@ export class SampleLayoutComponent implements OnDestroy {
               protected menuService: NbMenuService,
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
-              protected sidebarService: NbSidebarService) {
+              protected sidebarService: NbSidebarService,
+              protected fundo: BackgroundService,
+              protected router: Router,
+            ) {
     this.stateService.onLayoutState()
       .pipe(takeWhile(() => this.alive))
       .subscribe((layout: string) => this.layout = layout);
@@ -129,6 +138,18 @@ export class SampleLayoutComponent implements OnDestroy {
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
         this.currentTheme = theme.name;
+    });
+    this.fundo.onBackgroundChange().pipe(takeWhile(() => this.alive)) // Ao trocar fundo,
+      .subscribe(bg => {
+        this.background = bg;
+    });
+    this.router.events.subscribe( (event) => { // Pra nao mostrar o header na tela principal
+      if (event instanceof NavigationEnd) {
+        if (event.urlAfterRedirects === '/home/main')
+          this.isMain = true;
+        else
+          this.isMain = false;
+      }
     });
   }
 
