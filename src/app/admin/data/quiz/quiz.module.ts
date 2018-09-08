@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 
-import { QuizComponent } from './quiz.component';
 import { ThemeModule } from '../../../@theme-admin/theme.module';
+import { QuestaoModule } from './questao/questao.module';
 import { QuizRoutingModule } from './quiz-routing.module';
+import { QuizComponent } from './quiz.component';
 
 const QUIZ_COMPONENTS = [QuizComponent];
 
 @NgModule({
-  imports: [QuizRoutingModule, ThemeModule],
+  imports: [QuizRoutingModule, ThemeModule, QuestaoModule],
   declarations: [...QUIZ_COMPONENTS],
 })
 export class QuizModule {}

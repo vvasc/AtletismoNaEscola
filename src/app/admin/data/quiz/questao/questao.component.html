@@ -1,0 +1,40 @@
+<nb-card>
+    <nb-card-header>Criar Questão</nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div class="col-lg-12">
+          <form [formGroup]="formQuiz" (ngSubmit)="onSubmit(formQuiz.value)">
+            <div class="form-group">
+              <div class="row full-name-inputs">
+                <div class="col-sm-12 input-group">
+                  <input formControlName="Pergunta" placeholder="Pergunta" id="Pergunta" class="form-control" type="text">
+                </div>
+              </div>
+              <br>
+              <div class="row full-name-inputs">
+                <div class="col-sm-12 input-group">
+                  <input formControlName="RespostaCorreta" placeholder="Resposta Correta" id="RespostaCorreta" class="form-control" type="text">
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class = "row justify-content-center">
+              <div class = "col-3">
+                <button class="btn btn-warning" type="button" (click)="addAlternativa()"><i class="fa fa-plus"></i> Adicionar Alternativa</button>
+              </div>
+              <div *ngIf="formAlternativas.length > 2" class = "col-3">
+                <button class="btn btn-danger" type="button" (click)="removeAlternativa()"><i class="fa fa-minus"></i> Remover Alternativa</button>
+              </div>
+            </div>
+            <br>
+            <div formArrayName="Alternativas" *ngFor="let alternativa of formAlternativas.controls; let i = index;">
+              <input formArrayControlName="i" placeholder="Alternativa {{ i+1 }}" id="Alternativa" class="form-control" type="text">
+              <br>
+            </div>
+            <br>
+            <button class="btn btn-primary" type="submit">Criar</button>
+          </form>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
