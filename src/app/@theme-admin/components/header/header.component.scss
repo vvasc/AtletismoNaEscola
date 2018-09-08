@@ -7,6 +7,30 @@
   justify-content: space-between;
   width: 100%;
 
+  .opcoes a {
+    padding-left: 10px;
+    padding-right: 10px;
+    color: rgb(0, 0, 172);
+    font-size: 20px;
+  }
+
+  .opcoes a:hover {
+    cursor: pointer;
+    color:  rgb(15, 15, 160);
+    text-shadow: 2px 2px 5px rgb(149, 155, 189);
+  }
+
+  .atletismo {
+    height: 60px;
+  }
+
+  .foto {
+    height: 55px;
+    margin-top: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
   .left {
     display: flex;
     width: 100%;
@@ -38,7 +62,7 @@
     display: flex;
     align-items: center;
     width: auto;
-
+    
     .navigation {
       @include nb-ltr(padding-right, nb-theme(padding));
       @include nb-rtl(padding-left, nb-theme(padding));

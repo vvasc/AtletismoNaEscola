@@ -1,21 +1,28 @@
-<div class="header-container"
-     [class.left]="position === 'normal'"
-     [class.right]="position === 'inverse'">
-  <div class="logo-containter">
-    <div class="logo" (click)="goToHome()">ED<span>-JRCOM</span></div>
-  </div>
- <!--  <ngx-theme-switcher></ngx-theme-switcher> -->
-  <button class="btn btn-hero-secondary" (click)="admin()">Admin</button>
+<div class="header-container">
+  
+</div>
+
+<div class="header-container first">
+  <img src="../../../../assets/atletismo_logo.png" class="atletismo">
 </div>
 
 <div class="header-container">
-  <nb-actions *ngIf="logado" 
-    size="medium"
-    [class.right]="position === 'normal'"
-    [class.left]="position === 'inverse'">
-    <nb-action *nbIsGranted="['view', 'user']" >
-      <nb-user [nbContextMenu]="userMenu" [name]="user?.name"></nb-user>
-    </nb-action>
-    <nb-action class="control-item" disabled icon="nb-notifications"></nb-action>
-  </nb-actions>
+  <img src="../../../../assets/usuario.png" class="rounded foto">
+  <div class="container">
+    <div class="row">Maria Luiza R. de Grande</div>
+    <div class="row">5º ano</div>
+    <div class="row">Colégio Puta que pariu</div>
+  </div>
+</div>
+
+<div class="header-container">
+  <div class="opcoes">
+    <a>MEUS RECORDES</a>
+    <a>CONTEÚDO</a>
+    <a>QUIZ</a>
+  </div>
+</div>
+
+<div class="header-container last">
+  <nb-action icon="nb-gear" class="toggle-layout" (click)="admin()"></nb-action>
 </div>
