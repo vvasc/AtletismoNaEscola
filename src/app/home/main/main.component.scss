@@ -3,18 +3,28 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
     flex-direction: column;
 }
 
-.atletismo {
-    position: absolute;
-    left: 25%;
+.white-bg {
     top: 0;
-    width: auto;
-    height: auto;
-    right: 25%;
-    padding-top: 10px;
+    background-color: white;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.fixed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+.atletismo {
+    display: flex;
+    position: absolute;
+    height: max-content;
 }
 
 .btn {
@@ -24,6 +34,6 @@
 }
 
 .offset {
-    padding-top: 100px;
-    margin-bottom: 100px;
+    padding-top: 7%;
+    margin-bottom: 12%;
 }

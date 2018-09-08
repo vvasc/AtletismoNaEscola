@@ -35,7 +35,7 @@ export class QuestaoComponent implements OnInit {
   }
 
   onSubmit(value: any) {
-    console.log(value);
+
   }
 
 

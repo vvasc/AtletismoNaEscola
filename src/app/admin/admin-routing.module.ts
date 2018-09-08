@@ -17,6 +17,18 @@ const routes: Routes = [
         loadChildren: './data/quiz/quiz.module#QuizModule',
       },
       {
+        path: 'pontuacao',
+        loadChildren: './pontuacao/pontuacao.module#PontuacaoModule',
+      },
+      {
+        path: 'conteudo',
+        loadChildren: './conteudo/conteudo.module#ConteudoModule',
+      },
+      {
+        path: 'aluno',
+        loadChildren: './aluno-admin/aluno-admin.module#AlunoAdminModule',
+      },
+      {
         path: '**',
         redirectTo: 'main',
       },

@@ -12,16 +12,58 @@ export const MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
-    title: 'Eventos',
+    title: 'Aluno',
+    icon: 'ion-person',
+    children: [
+      {
+        title: 'Criar Aluno',
+        link: '/admin/aluno/create',
+      },
+      {
+        title: 'Editar Aluno',
+        link: '/admin/aluno/edit',
+      },
+    ],
+  },
+  {
+    title: 'Pontuação',
+    icon: 'nb-star',
+    children: [
+      {
+        title: 'Criar Pontuação',
+        link: '/admin/pontuacao/create',
+      },
+      {
+        title: 'Editar Pontuação',
+        link: '/admin/pontuacao/edit',
+      },
+    ],
+  },
+  {
+    title: 'Conteúdo',
     icon: 'nb-compose',
     children: [
       {
-        title: 'Criar Evento',
-        link: '/admin/events/create',
+        title: 'Criar Conteúdo',
+        link: '/admin/conteudo/create',
       },
       {
-        title: 'Editar Eventos',
-        link: '/admin/events/edit',
+        title: 'Editar Conteúdo',
+        link: '/admin/conteudo/edit',
+      },
+    ],
+  },
+  {
+    title: 'Quiz',
+    icon: 'ion-help',
+    children: [
+      {
+        title: 'Criar Quiz',
+        link: '/admin/quiz/create',
+      },
+      {
+        title: 'Editar Quiz',
+        link: '/admin/quiz/edit',
       },
     ],
   },
