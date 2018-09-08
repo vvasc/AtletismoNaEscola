@@ -13,8 +13,16 @@ const routes: Routes = [
         component: DataComponent,
       },
       {
-        path: 'events',
-        loadChildren: './events/events.module#EventsModule',
+        path: 'pontuacao',
+        loadChildren: './pontuacao/pontuacao.module#PontuacaoModule',
+      },
+      {
+        path: 'conteudo',
+        loadChildren: './conteudo/conteudo.module#ConteudoModule',
+      },
+      {
+        path: 'aluno',
+        loadChildren: './aluno-admin/aluno-admin.module#AlunoAdminModule',
       },
       {
         path: '**',
