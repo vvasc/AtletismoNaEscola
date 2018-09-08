@@ -1,1 +1,32 @@
-<ngx-questao></ngx-questao>
+<div class = "row justify-content-center">
+  <div class = "col-2">
+    <p>
+      <button type="button" class="btn btn-warning" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed">
+        Criar Questão
+      </button>
+    </p>
+  </div>
+  <div class = "col-2">
+    <p>
+      <button type="button" class="btn btn-warning" (click)="isCollapsedProva = !isCollapsedProva"
+        [attr.aria-expanded]="!isCollapsedProva">
+        Criar Prova
+      </button>
+    </p>
+  </div>
+</div>
+<div id="collapseQuestao" [ngbCollapse]="isCollapsed">
+  <div class="card">
+    <div class="card-body">
+      <ngx-questao></ngx-questao>
+    </div>
+  </div>
+</div>
+<div id="collapseProva" [ngbCollapse]="isCollapsedProva">
+  <div class="card">
+    <div class="card-body">
+      <ngx-prova></ngx-prova>
+    </div>
+  </div>
+</div>

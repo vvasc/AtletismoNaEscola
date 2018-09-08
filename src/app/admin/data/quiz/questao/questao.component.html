@@ -28,7 +28,7 @@
             </div>
             <br>
             <div formArrayName="Alternativas" *ngFor="let alternativa of formAlternativas.controls; let i = index;">
-              <input formArrayControlName="i" placeholder="Alternativa {{ i+1 }}" id="Alternativa" class="form-control" type="text">
+              <input [formControlName]="i" placeholder="Alternativa {{ i+1 }}" id="Alternativa" class="form-control" type="text">
               <br>
             </div>
             <br>

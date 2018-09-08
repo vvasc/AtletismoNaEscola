@@ -3,11 +3,11 @@ import { QuestaoComponent } from './questao.component';
 import { ThemeModule } from '../../../../@theme-admin/theme.module';
 
 
-const QUIZ_COMPONENTS = [QuestaoComponent];
+const QUESTAO_COMPONENTS = [QuestaoComponent];
 
 @NgModule({
   imports: [ThemeModule],
-  declarations: [...QUIZ_COMPONENTS, QuestaoComponent],
+  declarations: [...QUESTAO_COMPONENTS],
   exports: [QuestaoComponent],
 })
 export class QuestaoModule {}

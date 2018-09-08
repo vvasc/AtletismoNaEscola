@@ -1,3 +1,4 @@
+import { QuizService } from './../../../../services/quiz.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
 
@@ -10,7 +11,10 @@ export class QuestaoComponent implements OnInit {
   formQuiz: FormGroup;
   formAlternativas: FormArray;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private quizService: QuizService,
+  ) { }
 
   ngOnInit() {
     this.formQuiz = this.formBuilder.group({
@@ -35,7 +39,7 @@ export class QuestaoComponent implements OnInit {
   }
 
   onSubmit(value: any) {
-
+    this.quizService.addQuestao(value);
   }
 
 
