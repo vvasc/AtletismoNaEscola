@@ -13,8 +13,8 @@ const routes: Routes = [
         component: DataComponent,
       },
       {
-        path: 'events',
-        loadChildren: './events/events.module#EventsModule',
+        path: 'quiz',
+        loadChildren: './data/quiz/quiz.module#QuizModule',
       },
       {
         path: '**',
