@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ngx-events',
+  selector: 'ngx-conteudo',
   template: `
-  <router-outlet></router-outlet>
-`,
+    <router-outlet></router-outlet>
+  `,
 })
-export class EventsComponent implements OnInit {
+export class ConteudoComponent implements OnInit {
 
   constructor() { }
 
