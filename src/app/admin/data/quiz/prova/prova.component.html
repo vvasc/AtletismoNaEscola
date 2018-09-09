@@ -1,3 +1,13 @@
-<p>
-  prova works!
-</p>
+<ngx-table
+  [dataAsync]="QuestoesAsync"
+  [dataIdAsync]="QuestaoIdAsync"
+  [cat$]="catID$"
+  (editE)="resolver($event)"
+  titulo="Tabela de Questões"
+  columns='questao'
+>
+</ngx-table>
+<ngx-select-prova
+[questao]="QuestaoResolver"
+>
+</ngx-select-prova>

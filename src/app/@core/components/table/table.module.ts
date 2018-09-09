@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-
 import { TableComponent } from './table.component';
-import { ThemeModule } from '../../../@theme/theme.module';
+import { ThemeModule } from '../../../@theme-admin/theme.module';
 import { TableService } from '../../../services/table.service';
 
 @NgModule({
