@@ -11,7 +11,7 @@ import { AnalyticsService } from '../../../@core/utils/analytics.service';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
-  logado = false;
+  logado = true;
 
   @Input() position = 'normal';
 
@@ -64,5 +64,9 @@ export class HeaderComponent implements OnInit {
 
   admin() {
     this.route.navigate(['/admin/main']);
+  }
+
+  recordes() {
+    this.route.navigate(['home/aluno/recordes']);
   }
 }
