@@ -149,6 +149,12 @@ export class SampleLayoutComponent implements OnDestroy {
           this.isMain = true;
         else
           this.isMain = false;
+
+        if (event.urlAfterRedirects.includes('recordes')) { // significa que está na pagina de recordes
+          this.fundo.setBackground('fundo-recordes');
+        } else if (event.urlAfterRedirects.includes('conteudo')) { // significa que está na pagina de conteudo
+          this.fundo.setBackground('fundo-conteudo');
+        } else this.fundo.setBackground('fundo-main');
       }
     });
   }
