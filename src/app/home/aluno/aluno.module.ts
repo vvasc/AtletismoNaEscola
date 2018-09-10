@@ -1,3 +1,4 @@
+import { RankingModule } from './recordes/ranking/ranking.module';
 import { RecordesModule } from './recordes/recordes.module';
 import { NgModule } from '@angular/core';
 import { AlunoComponent } from './aluno.component';
@@ -12,6 +13,7 @@ const ALUNO_COMPONENTS = [AlunoComponent];
     AlunoRoutingModule,
     ThemeModule,
     RecordesModule,
+    RankingModule,
   ],
   declarations: [...ALUNO_COMPONENTS],
   exports: [...ALUNO_COMPONENTS],
