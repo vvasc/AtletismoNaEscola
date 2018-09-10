@@ -13,7 +13,4 @@ export class RankingTabelaComponent implements OnInit {
   ngOnInit() {
   }
 
-  evaluate(i) {
-    return i === this.dados.colocacao ? true : false;
-  }
 }
