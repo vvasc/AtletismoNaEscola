@@ -1,7 +1,21 @@
-<div class="row">
-  <div *ngFor="let questao of questoesSelected" class="col-2">
+<nb-card>
+    <nb-card-header>Questões Selecionadas</nb-card-header>
     <nb-card-body>
-      
+      <div class="row">
+        <div class="col-sm-12 col-md-3" *ngFor="let questao of questoesSelected">
+          <div class="row box">
+            <div class="col-12">
+              {{ questao.Pergunta }}
+            </div>
+            <div class="col-12">
+              <button class="btn btn-danger" type="button" (click)="remove(questao)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <button type="button" class="btn btn-primary">Criar Prova</button>
     </nb-card-body>
-  </div>
-</div>
+  </nb-card>

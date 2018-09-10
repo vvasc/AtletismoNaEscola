@@ -93,8 +93,8 @@ export class TableComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribeData.next();
     this.unsubscribeDataId.next();
-    this.unsubscribeData.complete();
     this.unsubscribeDataId.complete();
+    this.unsubscribeData.complete();
     this.cat$.next();
     this.cat$.complete();
   }
