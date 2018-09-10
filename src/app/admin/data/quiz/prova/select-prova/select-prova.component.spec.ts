@@ -8,7 +8,7 @@ describe('SelectProvaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectProvaComponent ]
+      declarations: [ SelectProvaComponent ],
     })
     .compileComponents();
   }));

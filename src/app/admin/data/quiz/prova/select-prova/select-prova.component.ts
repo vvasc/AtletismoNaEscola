@@ -1,6 +1,7 @@
-import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, Input, OnDestroy, OnInit, DoCheck, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { find, remove } from 'lodash';
+
 @Component({
   selector: 'ngx-select-prova',
   templateUrl: './select-prova.component.html',
@@ -48,6 +49,10 @@ export class SelectProvaComponent implements OnInit, OnDestroy, OnChanges {
 
   remove(questao: any) {
     remove(this.questoesSelected, ['Pergunta', questao.Pergunta]);
+  }
+
+  createProva() {
+
   }
 
 }

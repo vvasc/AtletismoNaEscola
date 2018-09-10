@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class QuizService {
   private QuestaoCollection: AngularFirestoreCollection<any> = this.db.collection('/Questao');
-  private QuizCollection: AngularFirestoreCollection<any> = this.db.collection('/Quiz');
+  // private QuizCollection: AngularFirestoreCollection<any> = this.db.collection('/Quiz');
 
   constructor(private db: AngularFirestore) { }
 
