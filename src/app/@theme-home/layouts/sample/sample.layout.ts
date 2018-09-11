@@ -35,7 +35,7 @@ import { StateService } from '../../../@core/data/state.service';
         <nb-menu [items]="subMenu"></nb-menu>
       </nb-layout-column>
 
-      <nb-layout-footer fixed>
+      <nb-layout-footer class="sobreposta" fixed>
         <ngx-footer></ngx-footer>
       </nb-layout-footer>
 

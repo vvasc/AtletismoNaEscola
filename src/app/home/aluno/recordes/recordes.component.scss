@@ -1,0 +1,135 @@
+@function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+  }
+  
+  @mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+    $u1: unit($min-vw);
+    $u2: unit($max-vw);
+    $u3: unit($min-font-size);
+    $u4: unit($max-font-size);
+  
+    @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+      & {
+        font-size: $min-font-size;
+        @media screen and (min-width: $min-vw) {
+          font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
+          ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+        }
+        @media screen and (min-width: $max-vw) {
+          font-size: $max-font-size;
+        }
+      }
+    }
+  }
+  
+.containera {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+.centered {
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.wrap {
+    max-width: max-content;
+    display: flex;
+}
+
+.right.wrap {
+    transition: transform 0.2s;
+}
+
+.right.wrap:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+.icon {
+    max-height: 85px;
+}
+
+.bottompad {
+    padding-bottom: 15px;
+}
+
+.noborder {
+    outline: none;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.tabela {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.colocacao {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 40px;
+    color:  white;
+    text-shadow: 3px 3px 5px rgb(65, 67, 71);
+}
+
+.pontos {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    color: #732204;
+    font-weight: 500;
+}
+
+.titulo {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 45px;
+    color: #732204;
+    font-weight: 500;
+
+    $min_width: 320px;
+    $max_width: 970px;
+    $min_font: 30px;
+    $max_font: 45px;
+
+    @include fluid-type($min_width, $max_width, $min_font, $max_font);
+}
+
+@media (max-width: 978px) {
+    .titulo {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .imagem {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        padding-bottom: 10px;
+    }
+
+    .right {
+        float: none;
+    }
+}
+
+@media (max-width: 978px) {
+    .centered {
+      padding:0;
+      margin:0;
+    }
+
+    .bottompad {
+        padding-bottom: 15px;
+    }
+}

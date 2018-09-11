@@ -1,0 +1,13 @@
+<div class="whitebg">
+  <div class="text titulo">Ranking dos alunos {{dados.ano}}º ano do {{dados.colegio}}</div>
+  <table class="text">
+    <tr>
+      <th class="item">Nome</th>
+      <th class="pontos">Pontos</th>
+    </tr>
+    <tr class="item" *ngFor="let aluno of dados.alunos; let i = index;" [ngClass]="{'destacado': i+1 == dados.colocacao}">
+      <td class="container item" >{{i+1}}. {{aluno.nome}}</td>
+      <td class="pontos">{{aluno.pontos}}p</td>
+    </tr>
+  </table>
+</div>
