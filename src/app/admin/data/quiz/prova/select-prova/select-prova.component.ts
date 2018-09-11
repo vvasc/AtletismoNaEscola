@@ -1,6 +1,10 @@
+// tslint:disable-next-line:max-line-length
+import { ConfirmationModalComponent } from './../../../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { find, remove } from 'lodash';
+import { MatDialog } from '@angular/material';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-select-prova',
@@ -14,7 +18,10 @@ export class SelectProvaComponent implements OnInit, OnDestroy, OnChanges {
   formProva: FormGroup;
   formQuestoes: FormArray;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+      private fb: FormBuilder,
+      public dialog: MatDialog,
+  ) { }
 
   ngOnInit() {
     this.formProva = this.fb.group({
@@ -52,7 +59,21 @@ export class SelectProvaComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   createProva() {
-
+    const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+      width: '40%',
+      data: {
+        header: 'Aviso!',
+        text: 'Você realmente deseja criar uma prova?',
+      },
+      disableClose: true,
+    });
+    return dialogRef.afterClosed().pipe(
+      tap(res => {
+        if (res === true) {
+          console.log(res);
+        }
+      }),
+    );
   }
 
 }

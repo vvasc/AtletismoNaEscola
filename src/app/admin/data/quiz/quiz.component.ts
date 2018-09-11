@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuizComponent implements OnInit {
   isCollapsed: boolean = true;
-  isCollapsedProva: boolean = false;
+  isCollapsedProva: boolean = true;
   constructor() { }
 
   ngOnInit() {
