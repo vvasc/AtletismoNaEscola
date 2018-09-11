@@ -1,0 +1,22 @@
+
+<div *ngIf="dados.total">
+  <table class="whitebg text">
+    <tr class="item" *ngFor="let item of dados.atividades">
+      <td class="container left">
+        <div class="row"><b>{{item.conteudonumber}}. {{item.title}}</b></div>
+        <div class="row">Aula prática {{item.conteudonumber}}: {{item.points.aulapratica}} pontos</div>
+        <div class="row">Quiz {{item.conteudonumber}}: {{item.points.quiz}} pontos</div>
+      </td>
+      <td class="pontos"><b>{{item.points.quiz + item.points.aulapratica}}p</b></td>
+    </tr>
+
+    <tr>
+      <td class="left total">
+        <div class="row"><b>Total de Pontos:</b></div>
+      </td>
+      <td class="pontos">
+        <b>{{dados.total}}p</b>
+      </td>
+    </tr>
+  </table>      
+</div>

@@ -1,3 +1,4 @@
+import { RankingComponent } from './recordes/ranking/ranking.component';
 import { AlunoComponent } from './aluno.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -12,9 +13,20 @@ const routes: Routes = [
         path: 'recordes',
         component: RecordesComponent,
       },
+      {
+        path: 'recordes/ranking',
+        component: RankingComponent,
+      },
+      {
+        path: '**',
+        redirectTo: 'recordes',
+      },
     ],
   },
-  { path: '**', redirectTo: '' },
+  {
+    path: '**',
+    redirectTo: 'recordes',
+  },
 ];
 
 @NgModule({

@@ -1,1 +1,20 @@
-<H2>RECORDES</H2>
+<div class="centered">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 titulo">Meus Recordes</div>
+            <div class="col-md-6 imagem">
+                <div class="right wrap noborder" [routerLink]="['/home/aluno/recordes/ranking']" >
+                    <img class="icon" src="../../../../assets/medalha_ouro.png">
+                    <div class="container">
+                        <div class="row colocacao">1º LUGAR</div>
+                        <div class="row right pontos">350 PONTOS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabela bottompad">
+        <ngx-tabela-pontuacao [dados]="recordes"></ngx-tabela-pontuacao>    
+    </div>    
+</div>
