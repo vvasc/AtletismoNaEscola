@@ -93,6 +93,9 @@
     font-size: 45px;
     color: #732204;
     font-weight: 500;
+    white-space: nowrap;
+    align-self: flex-end;
+    padding-bottom: 15px;
 
     $min_width: 320px;
     $max_width: 970px;

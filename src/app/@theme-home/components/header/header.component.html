@@ -1,6 +1,4 @@
-<div class="header-container">
-  
-</div>
+<div class="header-container empty"></div>
 
 <div class="header-container first">
   <img src="../../../../assets/atletismo_logo.jpg" class="atletismo">
@@ -15,14 +13,25 @@
   </div>
 </div>
 
-<div class="header-container" *ngIf="logado">
-  <div class="opcoes">
-    <a (click)="recordes()">MEUS RECORDES</a>
-    <a>CONTEÚDO</a>
-    <a>QUIZ</a>
+<div class="header-container opcoes" *ngIf="logado">
+  <a (click)="recordes()">MEUS RECORDES</a>
+  <a>CONTEÚDO</a>
+  <a>QUIZ</a>
+</div>
+
+<div class="header-container offscreen" *ngIf="logado">
+  <div [ngClass]="{'hamburger': true, 'change': this.toggle}" (click)="this.toggle = !this.toggle;">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+  </div>
+  <div class="burger-options" [ngClass]="{'hide': true, 'burger-open': this.toggle}">
+    <p (click)="recordes(); this.toggle = !this.toggle">MEUS RECORDES</p>
+    <p>CONTEÚDO</p>
+    <p>QUIZ</p>
   </div>
 </div>
 
 <div class="header-container last">
-  <nb-action icon="nb-gear" class="toggle-layout" (click)="admin()"></nb-action>
+  <nb-action icon="nb-gear" class="toggle-layout" (click)="admin()" *ngIf="this.logado && this.isAdmin"></nb-action>
 </div>
