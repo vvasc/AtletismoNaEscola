@@ -16,6 +16,18 @@
         </div>
       </div>
       <br>
-      <button type="button" class="btn btn-primary" (click)="createProva()">Criar Prova</button>
+      <div class="row">
+        <div class="col-md-2">
+          <button type="button" class="btn btn-primary" (click)="createProva()">Criar Prova</button>
+        </div>
+        <div class="col-md-2">
+          <ngx-spinner
+            bdColor = "rgba(0,0,0,0)"
+            size = "default"
+            color = "#000000"
+            type = "square-jelly-box"
+          ></ngx-spinner>
+        </div>
+      </div>
     </nb-card-body>
   </nb-card>

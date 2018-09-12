@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class QuizService {
   private QuestaoCollection: AngularFirestoreCollection<any> = this.db.collection('/Questao');
-  // private QuizCollection: AngularFirestoreCollection<any> = this.db.collection('/Quiz');
+  private QuizCollection: AngularFirestoreCollection<any> = this.db.collection('/Quiz');
 
   constructor(private db: AngularFirestore) { }
 
@@ -39,6 +39,14 @@ export class QuizService {
     questao.id = id;
     this.QuestaoCollection.doc(id).set({
       ...questao,
+    });
+  }
+
+  addQuiz(quiz: any) {
+    const id = this.db.createId();
+    quiz.id = id;
+    return this.QuizCollection.doc(id).set({
+       ...quiz,
     });
   }
 

@@ -40,6 +40,7 @@ export class QuestaoComponent implements OnInit {
 
   onSubmit(value: any) {
     this.quizService.addQuestao(value);
+    this.formQuiz.reset();
   }
 
 

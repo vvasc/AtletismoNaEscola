@@ -1,36 +1,30 @@
-// tslint:disable-next-line:max-line-length
-import { ConfirmationModalComponent } from './../../../../../@core/components/confirmation-modal/confirmation-modal.component';
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { find, remove } from 'lodash';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { find, remove } from 'lodash';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { tap } from 'rxjs/operators';
 
+import {
+  ConfirmationModalComponent,
+} from './../../../../../@core/components/confirmation-modal/confirmation-modal.component';
+import { QuizService } from './../../../../../services/quiz.service';
+
+// tslint:disable-next-line:max-line-length
 @Component({
   selector: 'ngx-select-prova',
   templateUrl: './select-prova.component.html',
   styleUrls: ['./select-prova.component.scss'],
 })
-export class SelectProvaComponent implements OnInit, OnDestroy, OnChanges {
+export class SelectProvaComponent implements OnChanges {
   @Input() questao: any = [];
   questaoAnterior: any;
   questoesSelected: any = [];
-  formProva: FormGroup;
-  formQuestoes: FormArray;
 
   constructor(
-      private fb: FormBuilder,
       public dialog: MatDialog,
+      private spinner: NgxSpinnerService,
+      private quizService: QuizService,
   ) { }
-
-  ngOnInit() {
-    this.formProva = this.fb.group({
-      idConteudo: '',
-      Questoes: this.fb.array([]),
-      id: '',
-    });
-    this.formQuestoes = <FormArray>this.formProva.get('formQuestoes');
-  }
 
   ngOnChanges(changes: SimpleChanges) {
     // tslint:disable-next-line:max-line-length
@@ -39,15 +33,8 @@ export class SelectProvaComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  ngOnDestroy() {
-  }
-
   patchValues(questao: any) {
     this.addQuestao(questao);
-  }
-
-  createQuestao(questao) {
-    return new FormControl(questao.id, Validators.required);
   }
 
   addQuestao(questao: any) {
@@ -63,17 +50,24 @@ export class SelectProvaComponent implements OnInit, OnDestroy, OnChanges {
       width: '40%',
       data: {
         header: 'Aviso!',
-        text: 'Você realmente deseja criar uma prova?',
+        text: 'Você deseja criar uma prova?',
       },
       disableClose: true,
     });
-    return dialogRef.afterClosed().pipe(
+    dialogRef.afterClosed().pipe(
       tap(res => {
         if (res === true) {
-          console.log(res);
+          this.spinner.show();
+          this.quizService.addQuiz({
+            idConteudo: 'id',
+            Questoes: [...this.questoesSelected.map(questoes => questoes.id)],
+          });
         }
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 2000);
       }),
-    );
+    ).subscribe();
   }
 
 }
