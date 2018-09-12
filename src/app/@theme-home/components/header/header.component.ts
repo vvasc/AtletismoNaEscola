@@ -12,6 +12,8 @@ import { AnalyticsService } from '../../../@core/utils/analytics.service';
 })
 export class HeaderComponent implements OnInit {
   logado = true;
+  isAdmin = true;
+  toggle = false;
 
   @Input() position = 'normal';
 
