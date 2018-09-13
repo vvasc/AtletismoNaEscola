@@ -14,7 +14,7 @@ const routes: Routes = [
       },
       {
         path: 'quiz',
-        loadChildren: './data/quiz/quiz.module#QuizModule',
+        loadChildren: './quiz/quiz.module#QuizModule',
       },
       {
         path: 'pontuacao',

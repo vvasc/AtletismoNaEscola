@@ -9,12 +9,12 @@ import {
 } from './../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { ProvaModule } from './prova/prova.module';
 import { QuestaoModule } from './questao/questao.module';
-import { QuizRoutingModule } from './quiz-routing.module';
-import { QuizComponent } from './quiz.component';
+import { CreateQuizRoutingModule } from './create-quiz-routing.module';
+import { CreateQuizComponent } from './create-quiz.component';
 
-const QUIZ_COMPONENTS = [QuizComponent];
+const QUIZ_COMPONENTS = [CreateQuizComponent];
 const QUIZ_MODULES = [
-  QuizRoutingModule,
+  CreateQuizRoutingModule,
   ThemeModule,
   QuestaoModule,
   ProvaModule,
@@ -28,4 +28,4 @@ const QUIZ_MODULES = [
   entryComponents: [ConfirmationModalComponent],
   providers: [QuizService],
 })
-export class QuizModule {}
+export class CreateQuizModule {}
