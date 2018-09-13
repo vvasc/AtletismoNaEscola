@@ -1,0 +1,39 @@
+<div class = "row justify-content-center">
+  <div class = "col-3">
+    <p>
+      <button type="button" [ngClass]="isCollapsed ? 'btn btn-warning' : 'btn btn-danger'" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed"
+        nbPopover="Aqui você cria questões para compor seu Quiz (ou Prova)" nbPopoverMode="hint" nbPopoverPlacement="bottom"> 
+        <i *ngIf="isCollapsed" class="fa fa-plus"></i>
+        <i *ngIf="!isCollapsed" class="fa fa-minus"></i>
+         Adicionar Questão
+      </button>
+      
+    </p>
+  </div>
+  <div class = "col-3">
+    <p>
+      <button type="button" [ngClass]="isCollapsedProva ? 'btn btn-warning' : 'btn btn-danger'" (click)="isCollapsedProva = !isCollapsedProva"
+        [attr.aria-expanded]="!isCollapsedProva"
+        nbPopover="Aqui você compõe sua prova com questões criadas" nbPopoverMode="hint" nbPopoverPlacement="bottom">
+        <i *ngIf="isCollapsedProva" class="fa fa-plus"></i>
+        <i *ngIf="!isCollapsedProva" class="fa fa-minus"></i>
+         Adicionar Prova
+      </button>
+    </p>
+  </div>
+</div>
+<div id="collapseQuestao" [ngbCollapse]="isCollapsed">
+  <div class="card">
+    <div class="card-body">
+      <ngx-questao></ngx-questao>
+    </div>
+  </div>
+</div>
+<div id="collapseProva" [ngbCollapse]="isCollapsedProva">
+  <div class="card">
+    <div class="card-body">
+      <ngx-prova></ngx-prova>
+    </div>
+  </div>
+</div>

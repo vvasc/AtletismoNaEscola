@@ -7,6 +7,7 @@ export class TableService {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true, // Para emitir o evento de confirmamento de edicao da linha
     },
     actions: {
       add: false,
@@ -14,30 +15,34 @@ export class TableService {
       delete: false,
     },
   };
-  // evento = {
-  //   columns: {
-  //     categoria: {
-  //       title: 'Categoria',
-  //       type: 'string',
-  //     },
-  //     nome: {
-  //       title: 'Nome',
-  //       type: 'string',
-  //     },
-  //   },
-  // };
+  questao = {
+    columns: {
+      Pergunta: {
+        title: 'Pergunta',
+        type: 'string',
+      },
+      RespostaCorreta: {
+        title: 'Resposta Correta',
+        type: 'string',
+      },
+    },
+  };
 
   constructor() { }
 
+  setEdit(edit = false) {
+    this.basic.actions.edit = edit;
+  }
+
   getColumns(tipo: any) {
-    // let column: any;
-    // switch (tipo) {
-    //   case '': {
-    //     column = this.evento;
-    //     break;
-    //   }
-    // }
-    // return  { ...this.basic, ...column } ;
+    let column: any;
+    switch (tipo) {
+      case 'questao': {
+        column = this.questao;
+        break;
+      }
+    }
+    return  { ...this.basic, ...column } ;
   }
 
   getAddButton() {
