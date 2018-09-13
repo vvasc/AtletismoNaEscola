@@ -3,6 +3,7 @@ import { AlunoComponent } from './aluno.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { RecordesComponent } from './recordes/recordes.component';
+import { ConteudoComponent } from '../../admin/conteudo/conteudo.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: '**',
         redirectTo: 'recordes',
+      },
+      {
+        path: 'conteudo',
+        redirectTo: ConteudoComponent,
       },
     ],
   },
