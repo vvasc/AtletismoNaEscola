@@ -1,11 +1,10 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { DataComponent } from './data.component';
-
+import { CreateQuizComponent } from './create-quiz.component';
 const routes: Routes = [
   {
     path: '',
-    component: DataComponent,
+    component: CreateQuizComponent,
   },
   {
     path: '**',
@@ -17,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DataRoutingModule {}
+export class CreateQuizRoutingModule {}

@@ -1,23 +1,20 @@
-import { TableModule } from './@core/components/table/table.module';
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore } from 'angularfire2/firestore';
 
+import { config } from '../app/config/config';
+import { TableModule } from './@core/components/table/table.module';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AngularFireModule } from 'angularfire2';
-import { config } from '../app/config/config';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -32,6 +29,10 @@ import { config } from '../app/config/config';
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '/' },
+    AngularFirestore,
+    AngularFireAuth,
+  ],
 })
 export class AppModule {}

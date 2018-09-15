@@ -13,6 +13,10 @@ const routes: Routes = [
         component: DataComponent,
       },
       {
+        path: 'quiz',
+        loadChildren: './quiz/quiz.module#QuizModule',
+      },
+      {
         path: 'pontuacao',
         loadChildren: './pontuacao/pontuacao.module#PontuacaoModule',
       },
