@@ -1,9 +1,10 @@
-import { RankingComponent } from './recordes/ranking/ranking.component';
-import { AlunoComponent } from './aluno.component';
-import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { RecordesComponent } from './recordes/recordes.component';
+import { RouterModule, Routes } from '@angular/router';
+
 import { ConteudoComponent } from '../../admin/conteudo/conteudo.component';
+import { AlunoComponent } from './aluno.component';
+import { RankingComponent } from './recordes/ranking/ranking.component';
+import { RecordesComponent } from './recordes/recordes.component';
 
 const routes: Routes = [
   {
@@ -19,13 +20,14 @@ const routes: Routes = [
         component: RankingComponent,
       },
       {
-        path: '**',
-        redirectTo: 'recordes',
-      },
-      {
         path: 'conteudo',
         redirectTo: ConteudoComponent,
       },
+      {
+        path: '**',
+        redirectTo: 'recordes',
+      },
+      
     ],
   },
   {

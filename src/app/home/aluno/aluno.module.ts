@@ -1,10 +1,11 @@
+import { NgModule } from '@angular/core';
+
+import { ThemeModule } from '../../@theme-home/theme.module';
+import { ConteudoModule } from './../../admin/conteudo/conteudo.module';
+import { AlunoRoutingModule } from './aluno-routing.module';
+import { AlunoComponent } from './aluno.component';
 import { RankingModule } from './recordes/ranking/ranking.module';
 import { RecordesModule } from './recordes/recordes.module';
-import { NgModule } from '@angular/core';
-import { AlunoComponent } from './aluno.component';
-import { ThemeModule } from '../../@theme-home/theme.module';
-import { AlunoRoutingModule } from './aluno-routing.module';
-import { ConteudoComponent } from './conteudo/conteudo.component';
 
 
 const ALUNO_COMPONENTS = [AlunoComponent];
@@ -15,8 +16,9 @@ const ALUNO_COMPONENTS = [AlunoComponent];
     ThemeModule,
     RecordesModule,
     RankingModule,
+    ConteudoModule,
   ],
-  declarations: [...ALUNO_COMPONENTS, ConteudoComponent],
+  declarations: [...ALUNO_COMPONENTS],
   exports: [...ALUNO_COMPONENTS],
 })
 export class AlunoModule {}
