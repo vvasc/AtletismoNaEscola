@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizService } from './../../../../services/quiz.service';
-import { Subject, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+
 import { QuizSailsService } from '../../../../services/quiz-sails.service';
 
 @Component({
@@ -15,17 +15,15 @@ export class ProvaComponent implements OnInit {
   QuestaoResolver: any;
 
   constructor(
-    private quizService: QuizService,
     private quizSailsService: QuizSailsService,
   ) { }
 
   ngOnInit() {
     this.QuestoesAsync = this.quizSailsService.getAllQuestoes();
-    this.QuestaoIdAsync = this.quizService.getQuestaoAsync(this.catID$);
   }
 
   resolver(event: any) {
-    this.QuestaoResolver = event ? event[0] : null;
+    this.QuestaoResolver = event;
   }
 
 }

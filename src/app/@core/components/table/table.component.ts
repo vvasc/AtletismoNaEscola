@@ -20,8 +20,6 @@ import { TableService } from '../../../services/table.service';
 
 export class TableComponent implements OnInit, OnDestroy {
   @Input() dataAsync: Observable<any>; // Observable que indica para a busca dos objetos da tabela
-  @Input() dataIdAsync: Observable<any>; // Observable que indica para busca de objeto com id especifico
-  @Input() cat$: Subject<string>; // Subject que indica ID a ser buscado
   @Input() deleteData: any = [];
   @Input() titulo: string = '';
   @Input() columns: string; // Determina colunas mostradas
@@ -48,10 +46,8 @@ export class TableComponent implements OnInit, OnDestroy {
         this.keysSettings.push(key);
       }
     }
-    this.cat$.next('');
     this.dataAsync.pipe(takeUntil(this.unsubscribeData)).subscribe(res => {
       this.dataSync = cloneDeep(res);
-      console.log(this.dataSync);
       this.dataSource = res.map(response => {
         for (const key in response) {
           if (!this.keysSettings.includes(key)) {
@@ -61,13 +57,6 @@ export class TableComponent implements OnInit, OnDestroy {
         return response;
       });
       this.source.load(this.dataSource);
-    });
-    this.dataIdAsync.pipe(takeUntil(this.unsubscribeDataId)).subscribe(response => {
-      console.log(response);
-      this.eventoResolved = response;
-      const emitter = cloneDeep(this.eventoResolved);
-      this.editE.emit(emitter);
-      this.editEvento = true;
     });
   }
 
@@ -80,7 +69,7 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   foundObject(event: any) {
-    this.cat$.next(find(this.dataSync, event.data).id);
+    this.editE.emit(find(this.dataSync, event.data));
   }
 
   emitConfirm(event: any) { // Emite o evento recebido da table com as info do evento escolhido
@@ -97,8 +86,6 @@ export class TableComponent implements OnInit, OnDestroy {
     this.unsubscribeDataId.next();
     this.unsubscribeDataId.complete();
     this.unsubscribeData.complete();
-    this.cat$.next();
-    this.cat$.complete();
   }
 
 }

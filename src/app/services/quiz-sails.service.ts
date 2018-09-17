@@ -1,7 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, switchMap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class QuizSailsService {
@@ -13,13 +11,8 @@ export class QuizSailsService {
     return this.http.get(`http://localhost:1337/Questoes`, { headers: this.getHeaders() });
   }
 
-  getQuestaoAsync(cat$: Subject<number>) {
-    const queryObservable = cat$.pipe(
-      switchMap(cat =>
-        this.http.get(`http://localhost:1337/Questoes/${cat}`, { headers: this.getHeaders() }),
-      ),
-    );
-    return queryObservable;
+  getQuestaoAsync(id: number) {
+    return this.http.get(`http://localhost:1337/Questoes/${id}`, { headers: this.getHeaders() });
   }
 
   getHeaders() {
