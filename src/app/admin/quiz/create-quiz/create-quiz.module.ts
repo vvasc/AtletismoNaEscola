@@ -11,6 +11,7 @@ import { ProvaModule } from './prova/prova.module';
 import { QuestaoModule } from './questao/questao.module';
 import { CreateQuizRoutingModule } from './create-quiz-routing.module';
 import { CreateQuizComponent } from './create-quiz.component';
+import { QuizSailsService } from '../../../services/quiz-sails.service';
 
 const QUIZ_COMPONENTS = [CreateQuizComponent];
 const QUIZ_MODULES = [
@@ -26,6 +27,6 @@ const QUIZ_MODULES = [
   imports: [...QUIZ_MODULES],
   declarations: [...QUIZ_COMPONENTS],
   entryComponents: [ConfirmationModalComponent],
-  providers: [QuizService],
+  providers: [QuizService, QuizSailsService],
 })
 export class CreateQuizModule {}

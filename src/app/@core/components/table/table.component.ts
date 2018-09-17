@@ -51,6 +51,7 @@ export class TableComponent implements OnInit, OnDestroy {
     this.cat$.next('');
     this.dataAsync.pipe(takeUntil(this.unsubscribeData)).subscribe(res => {
       this.dataSync = cloneDeep(res);
+      console.log(this.dataSync);
       this.dataSource = res.map(response => {
         for (const key in response) {
           if (!this.keysSettings.includes(key)) {
@@ -62,6 +63,7 @@ export class TableComponent implements OnInit, OnDestroy {
       this.source.load(this.dataSource);
     });
     this.dataIdAsync.pipe(takeUntil(this.unsubscribeDataId)).subscribe(response => {
+      console.log(response);
       this.eventoResolved = response;
       const emitter = cloneDeep(this.eventoResolved);
       this.editE.emit(emitter);
