@@ -11,7 +11,7 @@ const routes: Routes = [
     component: AlunoComponent,
     children: [
       {
-        path:'quiz',
+        path: 'quiz',
         component: QuizComponent,
       },
       {
