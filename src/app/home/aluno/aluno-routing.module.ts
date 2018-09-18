@@ -20,7 +20,7 @@ const routes: Routes = [
       },
       {
         path: 'conteudo',
-        loadChildren: './aluno/conteudo/conteudo.module#ConteudoModule',
+        loadChildren: 'app/home/aluno/conteudo/conteudo.module#ConteudoModule',
       },
       {
         path: '**',
