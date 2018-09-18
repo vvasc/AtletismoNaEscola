@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ConteudoComponent } from '../../admin/conteudo/conteudo.component';
 import { AlunoComponent } from './aluno.component';
 import { RankingComponent } from './recordes/ranking/ranking.component';
 import { RecordesComponent } from './recordes/recordes.component';
@@ -21,13 +20,13 @@ const routes: Routes = [
       },
       {
         path: 'conteudo',
-        redirectTo: ConteudoComponent,
+        loadChildren: './aluno/conteudo/conteudo.module#ConteudoModule',
       },
       {
         path: '**',
         redirectTo: 'recordes',
       },
-      
+
     ],
   },
   {

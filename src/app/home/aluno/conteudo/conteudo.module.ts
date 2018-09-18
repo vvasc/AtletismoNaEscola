@@ -5,13 +5,13 @@ import { ConteudoComponent } from './conteudo.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
   declarations: [
-    ConteudoComponent
+    ConteudoComponent,
   ],
   exports: [
-    ConteudoComponent
-  ]
+    ConteudoComponent,
+  ],
 })
 export class ConteudoModule { }
