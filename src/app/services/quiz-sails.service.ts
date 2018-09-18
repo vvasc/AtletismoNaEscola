@@ -15,10 +15,15 @@ export class QuizSailsService {
     return this.http.get(`http://localhost:1337/Questoes/${id}`, { headers: this.getHeaders() });
   }
 
+  createQuestao(questao: any) {
+    return this.http.post(`http://localhost:1337/Questoes/`, {...questao}, { headers: this.getHeaders() }).subscribe();
+  }
+
   getHeaders() {
     return new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
       'Accept':       'application/json',
     });
   }
+
 }

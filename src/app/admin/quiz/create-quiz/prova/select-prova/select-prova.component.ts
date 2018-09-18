@@ -4,10 +4,10 @@ import { find, remove } from 'lodash';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { tap } from 'rxjs/operators';
 
+import { QuizSailsService } from '../../../../../services/quiz-sails.service';
 import {
   ConfirmationModalComponent,
 } from './../../../../../@core/components/confirmation-modal/confirmation-modal.component';
-import { QuizService } from './../../../../../services/quiz.service';
 
 // tslint:disable-next-line:max-line-length
 @Component({
@@ -23,7 +23,7 @@ export class SelectProvaComponent implements OnChanges {
   constructor(
       public dialog: MatDialog,
       private spinner: NgxSpinnerService,
-      private quizService: QuizService,
+      private quizService: QuizSailsService,
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -58,10 +58,10 @@ export class SelectProvaComponent implements OnChanges {
       tap(res => {
         if (res === true) {
           this.spinner.show();
-          this.quizService.addQuiz({
-            idConteudo: 'id',
-            Questoes: [...this.questoesSelected.map(questoes => questoes.id)],
-          });
+         // this.quizService.createQuiz({
+           // idConteudo: 'id',
+           // Questoes: [...this.questoesSelected.map(questoes => questoes.id)],
+          // });
         }
         setTimeout(() => {
           this.spinner.hide();
