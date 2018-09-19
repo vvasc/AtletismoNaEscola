@@ -1,9 +1,10 @@
-import { RankingModule } from './recordes/ranking/ranking.module';
-import { RecordesModule } from './recordes/recordes.module';
 import { NgModule } from '@angular/core';
-import { AlunoComponent } from './aluno.component';
+
 import { ThemeModule } from '../../@theme-home/theme.module';
 import { AlunoRoutingModule } from './aluno-routing.module';
+import { AlunoComponent } from './aluno.component';
+import { RankingModule } from './recordes/ranking/ranking.module';
+import { RecordesModule } from './recordes/recordes.module';
 
 
 const ALUNO_COMPONENTS = [AlunoComponent];
