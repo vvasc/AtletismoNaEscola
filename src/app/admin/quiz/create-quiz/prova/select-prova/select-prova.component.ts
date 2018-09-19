@@ -58,10 +58,10 @@ export class SelectProvaComponent implements OnChanges {
       tap(res => {
         if (res === true) {
           this.spinner.show();
-         // this.quizService.createQuiz({
-           // idConteudo: 'id',
-           // Questoes: [...this.questoesSelected.map(questoes => questoes.id)],
-          // });
+          this.quizService.createQuiz({
+            idConteudo: 'id',
+            Questoes: [...this.questoesSelected.map(questoes => questoes.id)],
+          });
         }
         setTimeout(() => {
           this.spinner.hide();

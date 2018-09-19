@@ -3,20 +3,24 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class QuizSailsService {
-  endpoint: 'http://localhost:1337';
+  private endpoint: string = 'http://localhost:1337';
 
   constructor(private http: HttpClient) { }
 
   getAllQuestoes() {
-    return this.http.get(`http://localhost:1337/Questoes`, { headers: this.getHeaders() });
+    return this.http.get(`${this.endpoint}/Questoes`, { headers: this.getHeaders() });
   }
 
-  getQuestaoAsync(id: number) {
-    return this.http.get(`http://localhost:1337/Questoes/${id}`, { headers: this.getHeaders() });
+  getQuestao(id: number) {
+    return this.http.get(`${this.endpoint}/Questoes/${id}`, { headers: this.getHeaders() });
   }
 
   createQuestao(questao: any) {
-    return this.http.post(`http://localhost:1337/Questoes/`, {...questao}, { headers: this.getHeaders() }).subscribe();
+    return this.http.post(`${this.endpoint}/Questoes/`, {...questao}, { headers: this.getHeaders() }).subscribe();
+  }
+
+  createQuiz(quiz: any) {
+    return this.http.post(`${this.endpoint}/Quiz/`, {...quiz}, { headers: this.getHeaders() }).subscribe();
   }
 
   getHeaders() {
