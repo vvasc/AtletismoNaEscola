@@ -1,7 +1,8 @@
-import { RankingComponent } from './recordes/ranking/ranking.component';
-import { AlunoComponent } from './aluno.component';
-import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { AlunoComponent } from './aluno.component';
+import { RankingComponent } from './recordes/ranking/ranking.component';
 import { RecordesComponent } from './recordes/recordes.component';
 
 const routes: Routes = [
@@ -23,9 +24,14 @@ const routes: Routes = [
         component: RankingComponent,
       },
       {
+        path: 'conteudo',
+        loadChildren: 'app/home/aluno/conteudo/conteudo.module#ConteudoModule',
+      },
+      {
         path: '**',
         redirectTo: 'recordes',
       },
+
     ],
   },
   {
