@@ -28,7 +28,7 @@
   <div class="burger-options" [ngClass]="{'hide': true, 'burger-open': this.toggle}">
     <p (click)="recordes(); this.toggle = !this.toggle">MEUS RECORDES</p>
     <p>CONTEÚDO</p>
-    <p>QUIZ</p>
+    <p (click)="quiz(); this.toggle = !this.toggle">QUIZ</p>
   </div>
 </div>
 
