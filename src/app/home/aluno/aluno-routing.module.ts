@@ -11,6 +11,11 @@ const routes: Routes = [
     component: AlunoComponent,
     children: [
       {
+        path: 'quiz',
+        loadChildren: 'app/home/aluno/quiz/quiz.module#QuizModule',
+        // path absoluto para permitir que o webpack diferencie home/aluno/quiz de admin/quiz
+      },
+      {
         path: 'recordes',
         component: RecordesComponent,
       },

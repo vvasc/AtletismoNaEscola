@@ -72,6 +72,10 @@ export class HeaderComponent implements OnInit {
     this.route.navigate(['home/aluno/recordes']);
   }
 
+  quiz() {
+    this.route.navigate(['home/aluno/quiz']);
+  }
+
   conteudo() {
     this.route.navigate(['home/aluno/conteudo']);
   }

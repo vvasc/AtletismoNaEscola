@@ -16,7 +16,7 @@
 <div class="header-container opcoes" *ngIf="logado">
   <a (click)="recordes()">MEUS RECORDES</a>
   <a (click)="conteudo()">CONTEÚDO</a>
-  <a>QUIZ</a>
+  <a (click)="quiz()">QUIZ</a>
 </div>
 
 <div class="header-container offscreen" *ngIf="logado">
@@ -28,7 +28,7 @@
   <div class="burger-options" [ngClass]="{'hide': true, 'burger-open': this.toggle}">
     <p (click)="recordes(); this.toggle = !this.toggle">MEUS RECORDES</p>
     <p (click)="conteudo(); this.toggle = !this.toggle">CONTEÚDO</p>
-    <p>QUIZ</p>
+    <p (click)="quiz(); this.toggle = !this.toggle">QUIZ</p>
   </div>
 </div>
 
