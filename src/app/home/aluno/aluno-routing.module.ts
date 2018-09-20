@@ -3,7 +3,6 @@ import { AlunoComponent } from './aluno.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { RecordesComponent } from './recordes/recordes.component';
-import { QuizComponent } from '../../admin/quiz/quiz.component';
 
 const routes: Routes = [
   {
@@ -12,7 +11,8 @@ const routes: Routes = [
     children: [
       {
         path: 'quiz',
-        component: QuizComponent,
+        loadChildren: 'app/home/aluno/quiz/quiz.module#QuizModule',
+        // path absoluto para permitir que o webpack diferencie home/aluno/quiz de admin/quiz
       },
       {
         path: 'recordes',
