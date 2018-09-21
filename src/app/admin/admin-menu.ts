@@ -40,6 +40,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    title: 'Atividade',
+    icon: 'ion-clipboard',
+    children: [
+      {
+        title: 'Criar Atividade',
+        link: '/admin/atividade/create',
+      },
+      {
+        title: 'Editar Atividade',
+        link: '/admin/atividade/edit',
+      },
+    ],
+  },
+  {
     title: 'Conteúdo',
     icon: 'nb-compose',
     children: [
