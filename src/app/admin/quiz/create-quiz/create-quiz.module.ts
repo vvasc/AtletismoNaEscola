@@ -3,14 +3,14 @@ import { MatDialogModule } from '@angular/material';
 
 import { ConfirmationModalModule } from '../../../@core/components/confirmation-modal/confirmation-modal.module';
 import { ThemeModule } from '../../../@theme-admin/theme.module';
-import { QuizService } from '../../../services/quiz.service';
+import { QuizSailsService } from '../../../services/quiz-sails.service';
 import {
   ConfirmationModalComponent,
 } from './../../../@core/components/confirmation-modal/confirmation-modal.component';
-import { ProvaModule } from './prova/prova.module';
-import { QuestaoModule } from './questao/questao.module';
 import { CreateQuizRoutingModule } from './create-quiz-routing.module';
 import { CreateQuizComponent } from './create-quiz.component';
+import { ProvaModule } from './prova/prova.module';
+import { QuestaoModule } from './questao/questao.module';
 
 const QUIZ_COMPONENTS = [CreateQuizComponent];
 const QUIZ_MODULES = [
@@ -26,6 +26,6 @@ const QUIZ_MODULES = [
   imports: [...QUIZ_MODULES],
   declarations: [...QUIZ_COMPONENTS],
   entryComponents: [ConfirmationModalComponent],
-  providers: [QuizService],
+  providers: [QuizSailsService],
 })
 export class CreateQuizModule {}

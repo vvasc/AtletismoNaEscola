@@ -1,6 +1,7 @@
-import { QuizService } from './../../../../services/quiz.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { QuizSailsService } from '../../../../services/quiz-sails.service';
 
 @Component({
   selector: 'ngx-questao',
@@ -13,7 +14,7 @@ export class QuestaoComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private quizService: QuizService,
+    private quizService: QuizSailsService,
   ) { }
 
   ngOnInit() {
@@ -21,7 +22,7 @@ export class QuestaoComponent implements OnInit {
       Pergunta: ['', Validators.required],
       RespostaCorreta: '',
       Alternativas: this.formBuilder.array([this.createAlternativa(), this.createAlternativa()]),
-      id: '',
+      // id: '',
     });
     this.formAlternativas = <FormArray>this.formQuiz.get('Alternativas');
   }
@@ -39,7 +40,7 @@ export class QuestaoComponent implements OnInit {
   }
 
   onSubmit(value: any) {
-    this.quizService.addQuestao(value);
+    this.quizService.createQuestao(value);
     this.formQuiz.reset();
   }
 

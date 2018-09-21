@@ -23,6 +23,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     AppRoutingModule,
     TableModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(config.fire),
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
