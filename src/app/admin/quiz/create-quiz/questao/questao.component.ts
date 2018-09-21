@@ -41,7 +41,7 @@ export class QuestaoComponent implements OnInit {
 
   onSubmit(value: any) {
     this.quizService.createQuestao(value);
-    // this.formQuiz.reset();
+    this.formQuiz.reset();
   }
 
 
