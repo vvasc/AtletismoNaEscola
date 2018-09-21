@@ -1,15 +1,26 @@
-<div class="row justify-content-md-center">               
-    <div class="col-sm-4">
+<div class="container-fluid fixed">
+  <div class="row white-bg">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4 image">
+      <img class="img-fluid" src="../../../../assets/atletismo_logo_main.png">  
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
+
+  <div class="container offset">               
+    <div class="col-sm-6">
       <nb-card>
         <nb-card-header>Login</nb-card-header>
         <nb-card-body>
           <form class="form-horizontal" [formGroup]="formLogin">
-
+  
             <div class="form-group">
                   <input id="email" type="email" class=form-control formControlName="email" placeholder="Email">
                   <div class="alert alert-danger" *ngIf="!formLogin.controls['email'].valid && formLogin.controls['email'].touched">{{ titleAlert }}</div>
               </div>
-
+  
           <div class="form-group">
                   <input id="password" type="password" class=form-control formControlName="password" placeholder="Senha">
                   <div class="alert alert-danger" *ngIf="!formLogin.controls['password'].valid && formLogin.controls['password'].touched">{{ titleAlert }}</div>
@@ -19,9 +30,10 @@
                 <p class="resetpass"><small>Esqueceu sua senha?</small></p>
                 <button [disabled]="!formLogin.valid"  class="btn btn-hero-success btn-demo">Entrar</button>
               </div>
-
+  
               </form>
         </nb-card-body>
       </nb-card>
     </div>
   </div>
+</div>
