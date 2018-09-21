@@ -29,6 +29,10 @@ const routes: Routes = [
         loadChildren: './aluno-admin/aluno-admin.module#AlunoAdminModule',
       },
       {
+        path: 'atividade',
+        loadChildren: './atividade/atividade.module#AtividadeModule',
+      },
+      {
         path: '**',
         redirectTo: 'main',
       },
