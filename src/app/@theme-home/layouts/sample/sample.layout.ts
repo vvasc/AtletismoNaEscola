@@ -145,7 +145,7 @@ export class SampleLayoutComponent implements OnDestroy {
     });
     this.router.events.subscribe( (event) => { // Pra nao mostrar o header na tela principal
       if (event instanceof NavigationEnd) {
-        if (event.urlAfterRedirects === '/home/main')
+        if (event.urlAfterRedirects === '/home/main' || event.urlAfterRedirects === '/home/login')
           this.isMain = true;
         else
           this.isMain = false;
