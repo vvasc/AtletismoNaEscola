@@ -12,6 +12,7 @@
     background-size: 100%;
     width: 100%;
     height: 100%;
+    background-attachment: fixed;
   }
 
   .fundo-recordes {
@@ -19,13 +20,15 @@
     background-size: 100%;
     width: 100%;
     height: 100%;
+    background-attachment: fixed;
   }
 
   .fundo-conteudo {
     background-image: url('../../../../assets/fundos/fundo_conteudo.png');
-    background-size: 100%;
+    background-size: auto;
     width: 100%;
     height: 100%;
+    background-attachment: fixed;
   }
 
   .sobreposta {
