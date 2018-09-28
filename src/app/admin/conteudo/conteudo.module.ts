@@ -1,3 +1,5 @@
+import { ConteudoService } from './../../services/conteudo-service';
+import { QuizSailsService } from './../../services/quiz-sails.service';
 import { ThemeModule } from './../../@theme-admin/theme.module';
 import { EditConteudoComponent } from './edit-conteudo/edit-conteudo.component';
 import { CreateConteudoComponent } from './create-conteudo/create-conteudo.component';
@@ -18,6 +20,10 @@ import { CKEditorModule } from 'ng2-ckeditor';
     CreateConteudoComponent,
     EditConteudoComponent,
     FormConteudoComponent,
+  ],
+  providers: [
+    QuizSailsService,
+    ConteudoService,
   ],
 })
 export class ConteudoModule { }
