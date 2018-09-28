@@ -1,0 +1,18 @@
+<div [formGroup]="formConteudo">
+  <div class="row">
+    <div class="col-sm-6 form-group" nbPopover="Título usado apenas para diferenciar cada conteúdo no sistema" nbPopoverMode="hint"> 
+      <label>Titulo</label>
+      <input type="text" placeholder="Titulo" class="form-control" formControlName="titulo">
+    </div>
+    <div class="col-sm-6 form-group" nbPopover="Quiz que será associado ao Conteúdo" nbPopoverMode="hint">
+      <label>Quiz</label>
+      <select class="form-control" formControlName="owner">
+        <option value="">Sem Quiz</option>
+        <option *ngFor="let quiz of quizes" [value]="quiz.id">{{quiz.titulo}}</option>
+        <option style="background-color: green;" *ngIf="quizselecionado" [value]="quizselecionado.id">{{quizselecionado.titulo}}</option>
+      </select>
+    </div>
+  </div>
+  <br>
+  <ckeditor formControlName="texto" [config]="{extraPlugins: 'divarea,image2', height: '320', skin: 'moono'}"></ckeditor>
+</div>
