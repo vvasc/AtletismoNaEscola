@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,22 +6,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
   templateUrl: './form-conteudo.component.html',
   styleUrls: ['./form-conteudo.component.scss'],
 })
-export class FormConteudoComponent implements OnInit {
-  @Input()
-  set dados(dados) { // Pra iniciar o form com todos os dados do conteudo, no caso do editConteudo
-    if (this.formConteudo) {
-      let ownerid = ''; // Inicia como nada
-      if (dados.owner) { // Caso tiver quiz associada ja,
-        this.quizselecionado = dados.owner; // Adiciona a quiz já associada
-        ownerid = this.quizselecionado.id;
-      }
-      this.formConteudo.setValue({
-        titulo: dados.titulo,
-        owner: ownerid,
-        texto: dados.texto,
-      });
-    }
-  }
+export class FormConteudoComponent implements OnInit, OnChanges {
+  @Input() dados;
 
   @Input() quizes: Array<any>; // dados para o select de quizes
   @Output() formValue = new EventEmitter();
@@ -44,4 +30,14 @@ export class FormConteudoComponent implements OnInit {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.dados && this.formConteudo) {
+      this.quizselecionado = changes.dados.currentValue.owner;
+      this.formConteudo.setValue({
+        titulo: changes.dados.currentValue.titulo,
+        owner: changes.dados.currentValue.owner.id,
+        texto: changes.dados.currentValue.texto,
+      });
+    }
+  }
 }

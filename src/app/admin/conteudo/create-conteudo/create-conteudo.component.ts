@@ -15,6 +15,7 @@ export class CreateConteudoComponent implements OnInit {
   formConteudo: FormGroup;
   querying: boolean = false; // Usado para desativar o botao de criação durante os http request
   localstorage$: Subject<string>; // Usado para nao ficar atualizando o storage toda hora, só atualiza a cada 1 seg
+  end = 'http://localhost:4200';
 
   constructor(
     private quizService: QuizSailsService,
@@ -24,7 +25,7 @@ export class CreateConteudoComponent implements OnInit {
 
   ngOnInit() {
     this.localstorage$ = new Subject<string>();
-    this.localstorage$.pipe(debounceTime(1000)).subscribe(previewconteudo => {
+    this.localstorage$.pipe(debounceTime(750)).subscribe(previewconteudo => {
       window.localStorage.setItem('texto', previewconteudo); // Escreve o texto para o storage a cada 1 seg
     });
     this.refreshQuizes();
@@ -46,8 +47,7 @@ export class CreateConteudoComponent implements OnInit {
 
   criarConteudo() {
     const formval = this.formConteudo.value;
-    if (formval.owner === '') // Conteudo criado com nenhum quiz associado
-      delete formval.owner; // Owner aceita só id de quiz (numero inteiro positivo) precisamos deleter nesse caso
+    (formval.owner === '') ? delete formval.owner : null;
 
     this.querying = true;
     this.conteudoService.createConteudo(formval).subscribe(res => {
@@ -57,16 +57,13 @@ export class CreateConteudoComponent implements OnInit {
       this.formConteudo.reset();
     }, err => {
       this.querying = false;
-      if (err.error.code === 'E_UNIQUE')
-        this.notificacao.ngxtoaster('Criação Falhou!', 'Já existe conteudo com este título!', false);
-      else
-        this.notificacao.ngxtoaster('Criação Falhou!', 'Erro na conexão!', false);
+      const erromsg = (err.error.code === 'E_UNIQUE') ? 'Já existe conteudo com este título!' : 'Erro na conexão!';
+      this.notificacao.ngxtoaster('Criação Falhou!', erromsg, false);
     });
   }
 
   preview() {
-    window.localStorage.setItem('texto', this.formConteudo.value.texto); // Escreve no storage o texto
-    window.open('http://localhost:4200/#/home/aluno/conteudo/preview', '_blank'); // Abre o preview em outra aba
+    window.open(`${this.end}/#/home/aluno/conteudo/preview`, '_blank'); // Abre o preview em outra aba
   }
 
 }
