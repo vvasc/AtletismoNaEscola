@@ -15,6 +15,10 @@ export class ConteudoService {
     return this.http.get(`${this.endpoint}/Conteudo/`, { headers: this.getHeaders() });
   }
 
+  patchConteudo(id, conteudo) {
+    return this.http.patch(`${this.endpoint}/Conteudo/${id}`, {...conteudo}, { headers: this.getHeaders() });
+  }
+
   getHeaders() {
     return new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',

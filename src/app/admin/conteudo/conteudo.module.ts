@@ -1,3 +1,4 @@
+import { TableModule } from './../../@core/components/table/table.module';
 import { ConteudoService } from './../../services/conteudo-service';
 import { QuizSailsService } from './../../services/quiz-sails.service';
 import { ThemeModule } from './../../@theme-admin/theme.module';
@@ -15,6 +16,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
     ConteudoRoutingModule,
     ThemeModule,
     CKEditorModule,
+    TableModule,
   ],
   declarations: [
     CreateConteudoComponent,
