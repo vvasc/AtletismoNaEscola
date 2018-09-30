@@ -1,13 +1,13 @@
 
-<div *ngIf="dados.total">
+<div>
   <table class="whitebg text">
-    <tr class="item" *ngFor="let item of dados.atividades">
+    <tr class="dado" *ngFor="let dado of dadosAsync | async">
       <td class="container left">
-        <div class="row"><b>{{item.conteudonumber}}. {{item.title}}</b></div>
-        <div class="row">Aula prática {{item.conteudonumber}}: {{item.points.aulapratica}} pontos</div>
-        <div class="row">Quiz {{item.conteudonumber}}: {{item.points.quiz}} pontos</div>
+        <div class="row"><b>{{ dado.atividade.id }}. {{ dado.atividade.titulo }}</b></div>
+        <div class="row">Aula prática {{ dado.atividade.id }}: {{ dado.pontuacaoAula }} pontos</div>
+        <div class="row">Quiz {{ dado.atividade.id }}: {{ dado.pontuacaoQuiz }} pontos</div>
       </td>
-      <td class="pontos"><b>{{item.points.quiz + item.points.aulapratica}}p</b></td>
+      <td class="pontos"><b>{{ dado.pontuacaoAula + dado.pontuacaoQuiz }}p</b></td>
     </tr>
 
     <tr>
@@ -15,7 +15,7 @@
         <div class="row"><b>Total de Pontos:</b></div>
       </td>
       <td class="pontos">
-        <b>{{dados.total}}p</b>
+        <b>{{ total }}p</b>
       </td>
     </tr>
   </table>      

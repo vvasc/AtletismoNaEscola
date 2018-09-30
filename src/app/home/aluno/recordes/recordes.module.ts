@@ -3,6 +3,7 @@ import { TabelaPontuacaoModule } from './tabela-pontuacao/tabela-pontuacao.modul
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecordesComponent } from './recordes.component';
+import { PontuacaoService } from './../../../services/pontuacao.service';
 
 @NgModule({
   imports: [
@@ -11,5 +12,6 @@ import { RecordesComponent } from './recordes.component';
     RouterModule,
   ],
   declarations: [RecordesComponent],
+  providers: [PontuacaoService],
 })
 export class RecordesModule { }
