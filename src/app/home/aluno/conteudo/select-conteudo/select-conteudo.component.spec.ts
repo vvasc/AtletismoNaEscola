@@ -8,7 +8,7 @@ describe('SelectConteudoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectConteudoComponent ]
+      declarations: [ SelectConteudoComponent ],
     })
     .compileComponents();
   }));

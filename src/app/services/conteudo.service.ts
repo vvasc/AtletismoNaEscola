@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ConteudoService {
@@ -7,8 +7,12 @@ export class ConteudoService {
 
   constructor(private http: HttpClient) { }
 
-  getConteudo() {
+  getAllConteudo() {
     return this.http.get(`${this.endpoint}`, { headers: this.getHeaders() });
+  }
+
+  getConteudo(id: number) {
+    return this.http.get(`${this.endpoint}/${id}`, { headers: this.getHeaders() });
   }
 
   getHeaders() {

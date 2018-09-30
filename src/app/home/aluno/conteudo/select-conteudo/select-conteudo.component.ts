@@ -1,25 +1,31 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
+
+import { ConteudoService } from '../../../../services/conteudo.service';
 
 @Component({
   selector: 'ngx-select-conteudo',
   templateUrl: './select-conteudo.component.html',
-  styleUrls: ['./select-conteudo.component.scss']
+  styleUrls: ['./select-conteudo.component.scss'],
 })
 export class SelectConteudoComponent implements OnInit {
-  @Input() conteudo:any = [];
+  text: string = '';
+  id: number;
 
-  constructor() { }
+  constructor(
+    private conteudoService: ConteudoService,
+    private activatedRoute: ActivatedRoute, // permite acessar o id em vigor na rota
+    protected sanitizer: DomSanitizer,
+  ) { }
 
-  /*
-  ngOnChanges(changes: SimpleChanges) {
-    // tslint:disable-next-line:max-line-length
-    if ('conteudo') {
-      this.conteudo ? console.log(this.conteudo.texto): null;
-    }
-  }
-  */
   ngOnInit() {
-    
+    this.activatedRoute.params.subscribe(params => {
+      this.id = params['id'];
+      this.conteudoService.getConteudo(this.id).subscribe(conteudo => {
+        this.text = conteudo['texto'];
+      });
+    });
   }
 
 }

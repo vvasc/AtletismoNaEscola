@@ -19,7 +19,7 @@ export class ConteudoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.ConteudoAsync = this.conteudoService.getConteudo();
+    this.ConteudoAsync = this.conteudoService.getAllConteudo();
   }
 
   resolver(event: any) {
