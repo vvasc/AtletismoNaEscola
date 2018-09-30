@@ -9,11 +9,12 @@ import { map } from 'rxjs/operators';
 })
 export class TabelaPontuacaoComponent implements OnInit {
   @Input() dadosAsync: Observable<any>;
+  dadosCalculadosAsync: Observable<any>;
   total: number;
   constructor() { }
 
   ngOnInit() {
-    this.dadosAsync.pipe(
+    this.dadosCalculadosAsync = this.dadosAsync.pipe(
       map(dados => {
         this.total = dados.reduce((total, current) => {
           return total + current.pontuacaoAula + current.pontuacaoQuiz;

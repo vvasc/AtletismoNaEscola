@@ -1,5 +1,6 @@
 import { PontuacaoService } from './../../../services/pontuacao.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-recordes',
