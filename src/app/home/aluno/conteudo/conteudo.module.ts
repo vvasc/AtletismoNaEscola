@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { ConteudoComponent } from './conteudo.component';
 import { ConteudoRoutingModule } from './/conteudo-routing.module';
+import { PreviewConteudoComponent } from './preview-conteudo/preview-conteudo.component';
 
 @NgModule({
   imports: [
@@ -10,6 +11,7 @@ import { ConteudoRoutingModule } from './/conteudo-routing.module';
     ConteudoRoutingModule,
   ],
   declarations: [
+    PreviewConteudoComponent,
     ConteudoComponent,
   ],
   exports: [

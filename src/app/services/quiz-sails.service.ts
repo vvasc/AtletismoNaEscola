@@ -23,6 +23,10 @@ export class QuizSailsService {
     return this.http.post(`${this.endpoint}/Quiz/`, {...quiz}, { headers: this.getHeaders() }).subscribe();
   }
 
+  getQuizesLivres() {
+    return this.http.get(`${this.endpoint}/Quizes-livres/`, { headers: this.getHeaders() });
+  }
+
   getHeaders() {
     return new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',

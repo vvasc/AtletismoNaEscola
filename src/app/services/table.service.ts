@@ -27,6 +27,18 @@ export class TableService {
       },
     },
   };
+  editconteudo = {
+    columns: {
+      titulo: {
+        title: 'Título Conteúdo',
+        type: 'string',
+      },
+      tituloquiz: {
+        title: 'Titulo Quiz',
+        type: 'string',
+      },
+    },
+  };
 
   constructor() { }
 
@@ -39,6 +51,10 @@ export class TableService {
     switch (tipo) {
       case 'questao': {
         column = this.questao;
+        break;
+      }
+      case 'editconteudo': {
+        column = this.editconteudo;
         break;
       }
     }

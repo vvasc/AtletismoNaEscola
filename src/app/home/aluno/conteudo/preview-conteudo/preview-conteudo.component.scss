@@ -1,0 +1,16 @@
+.center-div {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 20%;
+    padding-right: 20%;
+    height: 100%;
+    width: 100%;
+}
+
+@media (max-width: 978px) {
+    .center-div {
+        padding:0;
+        margin:0;
+    }
+}

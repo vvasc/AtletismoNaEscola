@@ -1,3 +1,23 @@
-<p>
-  edit-conteudo works!
-</p>
+<ngx-table
+  [dataAsync]="conteudosObs"
+  (editE)="select($event)"
+  titulo="Conteúdos"
+  columns='editconteudo'>
+</ngx-table>
+
+<nb-card>
+  <nb-card-header>
+    Editar Conteúdo
+  </nb-card-header>
+  <nb-card-body>
+    <ngx-form-conteudo [dados]="selecionado" [quizes]="quizes" (formValue)="getForm($event)"></ngx-form-conteudo>
+    <br>
+    <div class="form-group">
+      <button class="btn btn-primary" [disabled]="!formConteudo?.valid || querying" (click)="editConteudo()">EDITAR CONTEÚDO</button>
+      <button [disabled]="!formConteudo?.value.texto" type="button" class="btn btn-hero-info btn-with-icon" style="float: right;" (click)="preview()">
+        <i class="nb-info"></i>
+        <span style="padding-left: 10px;" nbPopover="Veja como vai ficar o conteúdo, o conteudo atualiza em tempo real" nbPopoverMode="hint">Preview</span>
+      </button>
+    </div>
+  </nb-card-body>
+</nb-card>
