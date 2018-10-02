@@ -1,3 +1,7 @@
-<p>
-  conteudo works!
-</p>
+<ngx-table
+  [dataAsync]="ConteudoAsync"
+  (editE)="resolver($event)"
+  titulo="Conteúdo"
+  columns='conteudo'
+>
+</ngx-table>
