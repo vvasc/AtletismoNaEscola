@@ -9,23 +9,26 @@
 
   .fundo-main {
     background-image: url('../../../../assets/fundos/fundo_login.png');
-    background-size: 1450px;
+    background-size: 100%;
     width: 100%;
     height: 100%;
+    background-attachment: fixed;
   }
 
   .fundo-recordes {
     background-image: url('../../../../assets/fundos/fundo_recordes.png');
-    background-size: 1450px;
+    background-size: 100%;
     width: 100%;
     height: 100%;
+    background-attachment: fixed;
   }
 
   .fundo-conteudo {
     background-image: url('../../../../assets/fundos/fundo_conteudo.png');
-    background-size: 1450px;
+    background-size: auto;
     width: 100%;
     height: 100%;
+    background-attachment: fixed;
   }
 
   .sobreposta {

@@ -8,6 +8,34 @@
     overflow: visible;
   }
 
+  .white-bg {
+      top: 0;
+      background-color: white;
+      padding-top: 1%;
+      padding-bottom: 1%;
+  }
+  
+  .fixed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+
+  .offset {
+    padding-top: 7%;
+    margin-bottom: 12%;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+  }
+
   .input-group {
     margin-bottom: 1rem;
   }
