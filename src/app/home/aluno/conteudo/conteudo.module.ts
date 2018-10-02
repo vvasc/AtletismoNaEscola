@@ -6,6 +6,7 @@ import { ConteudoService } from '../../../services/conteudo.service';
 import { ConteudoRoutingModule } from './/conteudo-routing.module';
 import { ConteudoComponent } from './conteudo.component';
 import { SelectConteudoComponent } from './select-conteudo/select-conteudo.component';
+import { PreviewConteudoComponent } from './preview-conteudo/preview-conteudo.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { SelectConteudoComponent } from './select-conteudo/select-conteudo.compo
     TableModule,
   ],
   declarations: [
+    PreviewConteudoComponent,
     ConteudoComponent,
     SelectConteudoComponent,
   ],
