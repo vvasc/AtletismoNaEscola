@@ -1,5 +1,9 @@
+import { AuthService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+
 @Component({
   selector: 'ngx-login',
   templateUrl: './login.component.html',
@@ -11,6 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -20,4 +26,15 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  get f() { return this.formLogin.controls; }
+
+  onSubmit() {
+    this.authService.login(this.f.obj.value)
+      .subscribe(
+        response => {
+          this.router.navigate(['/aluno']);
+                },
+                error => {
+                });
+  }
 }
