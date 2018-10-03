@@ -9,7 +9,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class FormPontuacaoComponent implements OnInit, OnChanges {
   @Input() atividade; // Recebe a atividade, no create pontuacao
   @Input() aluno; // Recebe o aluno, no create pontuacao
-  @Input() pontuação; // Recebe a pontuacao, no caso da edit-pontuacao
+  @Input() pontuacao; // Recebe a pontuacao, no caso da edit-pontuacao
   @Output() formValue = new EventEmitter(); // Emite o valor do forms
   formPontuacao: FormGroup;
 
@@ -40,12 +40,13 @@ export class FormPontuacaoComponent implements OnInit, OnChanges {
       this.formPontuacao.controls['aluno'].setValue(changes.aluno.currentValue.id);
     }
     if (changes.pontuacao && changes.pontuacao.currentValue) { // Se trocou a pontuacao, seta os campos correspondentes
-      this.nomeAluno = changes.pontuacao.aluno.fullName;
-      this.tituloAtividade = changes.pontuacao.atividade.titulo;
+      const newval = changes.pontuacao.currentValue;
+      this.nomeAluno = newval.aluno.fullName;
+      this.tituloAtividade = newval.atividade.titulo;
       this.formPontuacao.setValue({
-        aluno: changes.pontuacao.aluno.id,
-        atividade: changes.pontuacao.atividade.id,
-        pontuacaoAula: changes.pontuacao.pontuacaoAula,
+        aluno: newval.aluno.id,
+        atividade: newval.atividade.id,
+        pontuacaoAula: newval.pontuacaoAula,
       });
     }
   }
