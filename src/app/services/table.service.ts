@@ -47,6 +47,54 @@ export class TableService {
       },
     },
   };
+  alunos = {
+    columns: {
+      fullName: {
+        title: 'Nome Completo',
+        type: 'string',
+      },
+      escola: {
+        title: 'Colégio',
+        type: 'string',
+      },
+      ano: {
+        title: 'Ano',
+        type: 'string',
+      },
+    },
+  };
+  pontuacoes = {
+    columns: {
+      nomealuno: {
+        title: 'Nome do Aluno',
+        type: 'string',
+      },
+      anoaluno: {
+        title: 'Ano',
+        type: 'string',
+      },
+      atividadetitulo: {
+        title: 'Atividade',
+        type: 'string',
+      },
+    },
+  };
+  atividades = {
+    columns: {
+      titulo: {
+        title: 'Título Atividade',
+        type: 'string',
+      },
+      titulopratica: {
+        title: 'Título Atividade Prática',
+        type: 'string',
+      },
+      tituloquiz: {
+        title: 'Título Quiz',
+        type: 'string',
+      },
+    },
+  };
 
   constructor() { }
 
@@ -67,6 +115,18 @@ export class TableService {
       }
       case 'editconteudo': {
         column = this.editconteudo;
+        break;
+      }
+      case 'alunos': {
+        column = this.alunos;
+        break;
+      }
+      case 'pontuacoes': {
+        column = this.pontuacoes;
+        break;
+      }
+      case 'atividades': {
+        column = this.atividades;
         break;
       }
     }
