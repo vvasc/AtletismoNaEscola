@@ -1,3 +1,14 @@
-<p>
-  form-pontuacao works!
-</p>
+<div class="row">
+  <div class="col-sm-4 form-group"> 
+    <label>Aluno</label>
+    <input type="text" class="form-control" disabled [(ngModel)]="nomeAluno">
+  </div>
+  <div class="col-sm-4 form-group">
+    <label>Atividade</label>
+    <input type="text" class="form-control" disabled [(ngModel)]="tituloAtividade">
+  </div>
+  <div [formGroup]="formPontuacao" class="col-sm-4 form-group"> 
+    <label>Pontuação</label>
+    <input type="text" class="form-control" formControlName="pontuacaoAula">
+  </div>
+</div>
