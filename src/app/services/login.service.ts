@@ -7,11 +7,11 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(obj: any) {
-    return this.http.post(`${this.endpoint}/login/${obj}`, { headers: this.getHeaders() });
+    return this.http.post(`${this.endpoint}/login/`, {...obj}, { headers: this.getHeaders() });
   }
 
   signup(obj: any) {
-    return this.http.post(`${this.endpoint}/signup/${obj}`, { headers: this.getHeaders() }).subscribe();
+    return this.http.post(`${this.endpoint}/signup/`, {...obj}, { headers: this.getHeaders() });
   }
   getHeaders() {
     return new HttpHeaders({

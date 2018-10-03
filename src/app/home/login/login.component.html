@@ -14,11 +14,11 @@
       <nb-card>
         <nb-card-header>Login</nb-card-header>
         <nb-card-body>
-          <form class="form-horizontal" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+          <form class="form-horizontal" [formGroup]="formLogin" (ngSubmit)="onSubmit(formLogin.value)">
   
             <div class="form-group">
-                  <input id="email" type="email" class=form-control formControlName="email" placeholder="Email">
-                  <div class="alert alert-danger" *ngIf="!formLogin.controls['email'].valid && formLogin.controls['email'].touched">{{ titleAlert }}</div>
+                  <input id="emailAddress" type="email" class=form-control formControlName="emailAddress" placeholder="Email">
+                  <div class="alert alert-danger" *ngIf="!formLogin.controls['emailAddress'].valid && formLogin.controls['emailAddress'].touched">{{ titleAlert }}</div>
               </div>
   
           <div class="form-group">
@@ -28,7 +28,7 @@
               
               <div class="text-center">
                 <p class="resetpass"><small>Esqueceu sua senha?</small></p>
-                <button [disabled]="!formLogin.valid"  class="btn btn-hero-success btn-demo">Entrar</button>
+                <button [disabled]="!formLogin.valid"  type="submit" class="btn btn-hero-success btn-demo">Entrar</button>
               </div>
   
               </form>

@@ -28,8 +28,8 @@ export class SelectProvaComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     // tslint:disable-next-line:max-line-length
-    if ('questao' in changes && changes.questao.currentValue !== changes.questao.previousValue && changes.questao.previousValue) {
-      changes.questao.previousValue.id !== changes.questao.currentValue.id ? this.patchValues(changes.questao.currentValue) : null;
+    if ('questao' in changes && changes.questao.currentValue !== changes.questao.previousValue) {
+      !changes.questao.previousValue || changes.questao.previousValue.id !== changes.questao.currentValue.id ? this.patchValues(changes.questao.currentValue) : null;
     }
   }
 

@@ -1,3 +1,4 @@
+import { ThemeModule } from './../../@theme/theme.module';
 import { AtividadeRoutingModule } from './atividade-routing.module';
 import { EditAtividadeComponent } from './edit-atividade/edit-atividade.component';
 import { CreateAtividadeComponent } from './create-atividade/create-atividade.component';
@@ -8,6 +9,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     AtividadeRoutingModule,
+    ThemeModule,
   ],
   declarations: [
     CreateAtividadeComponent,
