@@ -1,5 +1,5 @@
 import { NotificacaoService } from './../../../services/notificacao.service';
-import { ConteudoService } from './../../../services/conteudo-service';
+import { ConteudoService } from './../../../services/conteudo.service';
 import { FormGroup } from '@angular/forms';
 import { QuizSailsService } from './../../../services/quiz-sails.service';
 import { Component, OnInit } from '@angular/core';

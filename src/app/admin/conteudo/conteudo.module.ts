@@ -1,5 +1,5 @@
 import { TableModule } from './../../@core/components/table/table.module';
-import { ConteudoService } from './../../services/conteudo-service';
+import { ConteudoService } from './../../services/conteudo.service';
 import { QuizSailsService } from './../../services/quiz-sails.service';
 import { ThemeModule } from './../../@theme-admin/theme.module';
 import { EditConteudoComponent } from './edit-conteudo/edit-conteudo.component';
