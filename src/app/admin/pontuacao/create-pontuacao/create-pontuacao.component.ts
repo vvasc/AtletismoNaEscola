@@ -31,7 +31,7 @@ export class CreatePontuacaoComponent implements OnInit {
     this.atividadesObs = this.atividadeservice.getAllAtividades().pipe(
       // Pega todas as atividades para passar para a tabela
       map((atividades: any) => { // refatorando objeto para ser usado na table
-        atividades.forEach(element => {
+        atividades.map(element => {
           element.titulopratica = element.provaPratica[0].titulo;
           element.tituloquiz = element.quiz[0].titulo;
         });
@@ -57,7 +57,6 @@ export class CreatePontuacaoComponent implements OnInit {
     this.pontuacaoservice.createPontuacao(this.formPontuacao.value).subscribe(sucesso => {
       this.querying = false;
       this.notificacao.ngxtoaster('SUCESSO!', 'Pontuação criada com sucesso!', true);
-      this.formPontuacao.reset();
     }, err  => {
       this.querying = false;
       const errmsg = (err.status === 400) ?

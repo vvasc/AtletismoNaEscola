@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
@@ -30,7 +30,7 @@ export class FormPontuacaoComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes) {
+  ngOnChanges(changes: SimpleChanges) {
     if (changes.atividade && changes.atividade.currentValue) { // Se trocou a atividade, seta os campos correspondentes
       this.tituloAtividade = changes.atividade.currentValue.titulo;
       this.formPontuacao.controls['atividade'].setValue(changes.atividade.currentValue.id);

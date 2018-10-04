@@ -21,7 +21,7 @@ export class EditPontuacaoComponent implements OnInit {
   ngOnInit() {
     this.pontuacaoObs = this.pontuacaoservice.getAllPontuacao().pipe(
       map((pontuacoes: any) => {
-        pontuacoes.forEach(pontuacao => { // refatorando objeto para ser usado na table
+        pontuacoes.map(pontuacao => { // refatorando objeto para ser usado na table
           pontuacao.nomealuno = pontuacao.aluno.fullName;
           pontuacao.anoaluno = pontuacao.aluno.ano;
           pontuacao.atividadetitulo = pontuacao.atividade.titulo;
