@@ -1,6 +1,8 @@
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { NotificacaoService } from './../../services/notificacao.service';
 import { AuthService } from './../../services/login.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   formLogin: FormGroup;
   titleAlert = 'Campo inválido!';
 
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private notificacao: NotificacaoService,
+    private unsubscribe: Subject<void> = new Subject,
   ) { }
 
   ngOnInit() {
@@ -30,14 +33,19 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit(formValue: any) {
-    this.authService.login(formValue)
+    this.authService.login(formValue).pipe(takeUntil(this.unsubscribe))
       .subscribe(
         response => {
           this.notificacao.ngxtoaster('Sucesso', 'Login efetuado com sucesso!', true);
           this.router.navigate(['/home/aluno']);
-                },
+        },
         error => {
           this.notificacao.ngxtoaster('Erro', 'Usuário ou senha inválidos!', false);
-                });
+        });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }
