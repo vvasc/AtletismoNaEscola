@@ -13,7 +13,7 @@ export class AdminComponent implements OnInit {
     superadmin: SUPERADMIN_MENU_ITEMS,
     diretor: DIRETOR_MENU_ITEMS,
   };
-  menu; // Menu escolhido
+  menu = PROFESSOR_MENU_ITEMS; // Menu escolhido
   userinfo: any;
 
   constructor(private authservice: AuthService) { }
