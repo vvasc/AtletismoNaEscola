@@ -3,7 +3,7 @@ import { debounceTime, map } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { QuizSailsService } from './../../../services/quiz-sails.service';
 import { Component, OnInit } from '@angular/core';
-import { ConteudoService } from '../../../services/conteudo-service';
+import { ConteudoService } from '../../../services/conteudo.service';
 import { Observable, Subject } from 'rxjs';
 
 @Component({
