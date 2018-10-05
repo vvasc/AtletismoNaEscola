@@ -1,3 +1,27 @@
-<p>
-  create-pontuacao works!
-</p>
+<ngx-table
+  [dataAsync]="alunosObs"
+  titulo="Selecão de Aluno"
+  columns="alunos"
+  (editE)="selectAluno($event)"
+></ngx-table>
+
+<ngx-table
+  [dataAsync]="atividadesObs"
+  titulo="Selecão de Atividade"
+  columns="atividades"
+  (editE)="selectAtividade($event)"
+></ngx-table>
+
+<nb-card>
+  <nb-card-header>
+    Criar Pontuação
+  </nb-card-header>
+  <nb-card-body>
+    <ngx-form-pontuacao
+      [atividade]="atividadeEscolhida"
+      [aluno]="alunoEscolhido"
+      (formValue)="resolveForm($event)"
+    ></ngx-form-pontuacao>
+    <button class="btn btn-primary" [disabled]="!formPontuacao?.valid || querying" (click)="criarPontuacao()">CRIAR PONTUAÇÃO</button>
+  </nb-card-body>
+</nb-card>

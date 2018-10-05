@@ -7,7 +7,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    protected localstorageasync: LocalStorage,
+    protected localStorage: LocalStorage,
   ) { }
 
   login(obj: any) {
@@ -17,18 +17,23 @@ export class AuthService {
   signup(obj: any) {
     return this.http.post(`${this.endpoint}/signup/`, {...obj}, { headers: this.getHeaders() });
   }
+
+  Logged(obj: any) {
+    this.localStorage.setItemSubscribe('user', obj);
+  }
+
+  isLogged() {
+    return this.localStorage.getItem('user');
+  }
+
+  logout() {
+    this.localStorage.clear();
+  }
+
   getHeaders() {
     return new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
       'Accept':       'application/json',
     });
-  }
-
-  setUserInfo(info) {
-    this.localstorageasync.setItemSubscribe('user', info);
-  }
-
-  getUserInfo() {
-    return this.localstorageasync.getItem('user');
   }
 }

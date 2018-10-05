@@ -1,4 +1,3 @@
-import { AuthService } from './../../services/login.service';
 import { NgModule } from '@angular/core';
 
 import { ThemeModule } from '../../@theme-home/theme.module';
@@ -11,6 +10,6 @@ const REGISTER_COMPONENTS = [RegisterComponent];
 @NgModule({
   imports: [RegisterRoutingModule, ThemeModule],
   declarations: [...REGISTER_COMPONENTS],
-  providers: [AuthService],
+  providers: [],
 })
 export class RegisterModule {}

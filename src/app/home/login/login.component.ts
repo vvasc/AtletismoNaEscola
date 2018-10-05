@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit, OnDestroy {
   formLogin: FormGroup;
   titleAlert = 'Campo inválido!';
-  unsubscribe: Subject<void>;
+  unsubscribe: Subject<void> = new Subject();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,10 +36,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit(formValue: any) {
     this.authService.login(formValue).pipe(takeUntil(this.unsubscribe))
       .subscribe(
-        (response: any) => {
-          this.authService.setUserInfo(response);
+        (user: any) => {
+          this.authService.Logged(user);
           this.notificacao.ngxtoaster('Sucesso', 'Login efetuado com sucesso!', true);
-          (response.role === 'aluno') ? this.router.navigate(['/home/aluno']) : this.router.navigate(['admin/main']);
+          (user.role === 'aluno') ? this.router.navigate(['/home/aluno']) : this.router.navigate(['/admin/main']);
         },
         error => {
           this.notificacao.ngxtoaster('Erro', 'Usuário ou senha inválidos!', false);

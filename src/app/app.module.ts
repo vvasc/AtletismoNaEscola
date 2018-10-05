@@ -11,6 +11,9 @@ import { ThemeModule } from './@theme/theme.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthService } from './services/login.service';
+import { AdminGuard } from './guards/admin-guard';
+import { AlunoGuard } from './guards/aluno-guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +29,6 @@ import { ToastrModule } from 'ngx-toastr';
       progressBar: true,
     }),
     TableModule,
-    HttpClientModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
@@ -35,6 +37,9 @@ import { ToastrModule } from 'ngx-toastr';
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
     NotificacaoService,
+    AuthService,
+    AdminGuard,
+    AlunoGuard,
   ],
 })
 export class AppModule {}

@@ -8,11 +8,19 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
+import { AdminGuard } from './guards/admin-guard';
 
 const routes: Routes = [
-  { path: 'home', loadChildren: 'app/home/home.module#HomeModule' },
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
-  { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule' },
+  {
+    path: 'home',
+    loadChildren: 'app/home/home.module#HomeModule',
+  },
+  {
+    path: 'admin',
+    loadChildren: 'app/admin/admin.module#AdminModule',
+    canActivate: [AdminGuard],
+  },
   {
     path: 'auth',
     component: NbAuthComponent,
