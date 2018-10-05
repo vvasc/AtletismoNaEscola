@@ -12,7 +12,8 @@ export class AlunoGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.authService.isLogged().pipe(map(user => {
-      return user && (user.role === 'aluno');
+      // tslint:disable-next-line:max-line-length
+      return user && (user.role === 'aluno') || (user.role === 'superadmin' || user.role === 'diretor' || user.role === 'professor');
     }));
   }
 
