@@ -16,7 +16,7 @@ export class PontuacaoService {
   }
 
   createPontuacao(pontuacao: any) {
-    return this.http.post(`${this.endpoint}/Pontuacao/`, {...pontuacao}, { headers: this.getHeaders() }).subscribe();
+    return this.http.post(`${this.endpoint}/Pontuacao/`, {...pontuacao}, { headers: this.getHeaders() });
   }
 
   getHeaders() {
