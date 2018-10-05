@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.unsubscribe = new Subject();
     this.formLogin = this.formBuilder.group({
       emailAddress: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required]),

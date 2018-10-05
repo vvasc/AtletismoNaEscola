@@ -10,10 +10,12 @@ import { Observable } from 'rxjs';
 export class RecordesComponent implements OnInit {
   pontuacao: Observable<any>;
 
-  constructor(private pontuacaoService: PontuacaoService) { }
+  constructor(
+    private pontuacaoService: PontuacaoService,
+  ) { }
 
   ngOnInit() {
-    this.pontuacao = this.pontuacaoService.getAllPontuacao();
+    this.pontuacao = this.pontuacaoService.getPontuacaoAluno();
   }
 
 }
