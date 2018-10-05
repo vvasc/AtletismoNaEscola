@@ -12,6 +12,5 @@ const ADMIN_COMPONENTS = [AdminComponent];
 @NgModule({
   imports: [AdminRoutingModule, ThemeModule, DataModule, RouterModule],
   declarations: [...ADMIN_COMPONENTS],
-  providers: [AuthService],
 })
 export class AdminModule {}

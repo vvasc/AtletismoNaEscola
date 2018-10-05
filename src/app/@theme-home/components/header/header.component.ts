@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/login.service';
 import { Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -23,14 +24,19 @@ export class HeaderComponent implements OnInit {
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private userService: UserService,
+              private authservice: AuthService,
               private analyticsService: AnalyticsService,
               private route: Router) {
   }
 
   ngOnInit() {
-    this.userService.getUsers()
-      .subscribe((users: any) => this.user = users.nick);
+    this.authservice.isLogged().subscribe(info => {
+      this.user = info;
+    });
+  }
+
+  logout() {
+    this.authservice.logout();
   }
 
   toggleSidebar(): boolean {

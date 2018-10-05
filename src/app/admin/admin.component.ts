@@ -19,7 +19,7 @@ export class AdminComponent implements OnInit {
   constructor(private authservice: AuthService) { }
 
   ngOnInit() { // Escolhe o menu do admin para mostrar dependendo do cargo do admin
-    this.authservice.getUserInfo().subscribe( data => {
+    this.authservice.isLogged().subscribe( data => {
       this.userinfo = data;
       this.menu = this.ADMIN_MENUS[this.userinfo.role];
     });
