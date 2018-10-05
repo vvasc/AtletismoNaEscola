@@ -15,13 +15,13 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit, OnDestroy {
   formLogin: FormGroup;
   titleAlert = 'Campo inválido!';
+  unsubscribe: Subject<void> = new Subject();
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
     private notificacao: NotificacaoService,
-    private unsubscribe: Subject<void> = new Subject,
   ) { }
 
   ngOnInit() {
@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.login(formValue).pipe(takeUntil(this.unsubscribe))
       .subscribe(
         response => {
+          this.authService.Logged(response);
           this.notificacao.ngxtoaster('Sucesso', 'Login efetuado com sucesso!', true);
           this.router.navigate(['/home/aluno']);
         },
