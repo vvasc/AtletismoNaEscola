@@ -35,10 +35,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit(formValue: any) {
     this.authService.login(formValue).pipe(takeUntil(this.unsubscribe))
       .subscribe(
-        response => {
-          this.authService.Logged(response);
+        (user: any) => {
+          this.authService.Logged(user);
           this.notificacao.ngxtoaster('Sucesso', 'Login efetuado com sucesso!', true);
-          this.router.navigate(['/home/aluno']);
+          (user.role === 'aluno') ? this.router.navigate(['/home/aluno']) : this.router.navigate(['/admin/main']);
         },
         error => {
           this.notificacao.ngxtoaster('Erro', 'Usuário ou senha inválidos!', false);

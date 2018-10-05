@@ -9,14 +9,12 @@ import {
   NbResetPasswordComponent,
 } from '@nebular/auth';
 import { AdminGuard } from './guards/admin-guard';
-import { AlunoGuard } from './guards/aluno-guard';
 
 const routes: Routes = [
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
   {
     path: 'home',
     loadChildren: 'app/home/home.module#HomeModule',
-    canActivate: [AlunoGuard],
   },
   {
     path: 'admin',

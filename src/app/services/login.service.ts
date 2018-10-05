@@ -20,7 +20,7 @@ export class AuthService {
   }
 
   Logged(obj: any) {
-    this.localStorage.setItemSubscribe('user', { user: obj });
+    this.localStorage.setItemSubscribe('user', obj);
   }
 
   isLogged() {

@@ -1,4 +1,3 @@
-import { AuthService } from './../../services/login.service';
 import { NgModule } from '@angular/core';
 
 import { ThemeModule } from '../../@theme-home/theme.module';
@@ -10,6 +9,6 @@ const LOGIN_COMPONENTS = [LoginComponent];
 @NgModule({
   imports: [LoginRoutingModule, ThemeModule],
   declarations: [...LOGIN_COMPONENTS],
-  providers: [AuthService],
+  providers: [],
 })
 export class LoginModule {}
