@@ -63,6 +63,6 @@ export class HeaderComponent implements OnInit {
   }
 
   home() {
-    this.route.navigate(['/home']);
+    this.route.navigate(['/home/aluno']);
   }
 }

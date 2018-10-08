@@ -29,10 +29,11 @@
     <p (click)="recordes(); this.toggle = !this.toggle">MEUS RECORDES</p>
     <p (click)="conteudo(); this.toggle = !this.toggle">CONTEÚDO</p>
     <p (click)="quiz(); this.toggle = !this.toggle">QUIZ</p>
+    <p (click)="logout(); this.toggle = !this.toggle">SAIR</p>
   </div>
 </div>
 
 <div class="header-container last">
-  <nb-action icon="nb-gear" class="toggle-layout" (click)="admin()" *ngIf="user && user.role != 'aluno'"></nb-action>
+  <nb-action icon="nb-gear" class="toggle-layout" style="padding-right: 15px;" (click)="admin()" *ngIf="user && user.role != 'aluno'"></nb-action>
   <Button class="btn btn-hero-secondary" (click)="logout()" *ngIf="user">SAIR</Button>
 </div>
