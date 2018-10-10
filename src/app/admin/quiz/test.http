@@ -1,0 +1,6 @@
+GET http://localhost:1337/Account
+
+###
+
+POST https://localhost:1337/Accounts
+Content-Type: application/json

@@ -12,6 +12,7 @@ import { EditAtividadeComponent } from './edit-atividade/edit-atividade.componen
 import { FormAtividadeComponent } from './form-atividade/form-atividade.component';
 import { QuizSailsService } from '../../services/quiz-sails.service';
 import { AtividadeService } from '../../services/atividade.service';
+import { ProvaService } from '../../services/prova.service';
 
 @NgModule({
   imports: [

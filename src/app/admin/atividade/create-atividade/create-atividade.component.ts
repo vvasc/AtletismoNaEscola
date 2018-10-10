@@ -24,10 +24,18 @@ export class CreateAtividadeComponent implements OnInit {
 
   ngOnInit() {
     this.carregaQuizes();
+    this.carregaProvas();
   }
 
   carregaQuizes() {
     this.quizesAsync = this.quizService.getQuizesLivresAtividade().pipe(catchError((error: any) => {
+      this.notificacao.ngxtoaster('Quizes', 'Não foi possível carregar os quizes! Recarregue a página!', false);
+      return error;
+    }));
+  }
+
+  carregaProvas() {
+    this.provasAsync = this.provaService.getAllProvas().pipe(catchError((error: any) => {
       this.notificacao.ngxtoaster('Quizes', 'Não foi possível carregar os quizes! Recarregue a página!', false);
       return error;
     }));
