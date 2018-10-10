@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-form-atividade',
@@ -7,22 +8,22 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./form-atividade.component.scss'],
 })
 export class FormAtividadeComponent implements OnInit {
-  @Input() quizes: Array<any>;
-  @Input() provas: Array<any>;
+  @Input() quizes: Observable<any>;
+  @Input() provas: any;
   @Output() formValue = new EventEmitter();
-  formConteudo: FormGroup;
+  formAtividade: FormGroup;
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.formConteudo = this.formBuilder.group({
+    this.formAtividade = this.formBuilder.group({
       titulo: ['', Validators.required],
       quiz: ['', Validators.required],
       provaPratica: ['', Validators.required],
     });
 
-    this.formConteudo.valueChanges.subscribe(form => {
-      this.formValue.emit(this.formConteudo);
+    this.formAtividade.valueChanges.subscribe(form => {
+      this.formValue.emit(this.formAtividade);
     });
   }
 

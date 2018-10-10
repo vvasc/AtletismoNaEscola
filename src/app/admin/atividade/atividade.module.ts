@@ -5,6 +5,8 @@ import { CreateAtividadeComponent } from './create-atividade/create-atividade.co
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormAtividadeComponent } from './form-atividade/form-atividade.component';
+import { QuizSailsService } from '../../services/quiz-sails.service';
+import { AtividadeService } from '../../services/atividade.service';
 
 @NgModule({
   imports: [
@@ -16,6 +18,10 @@ import { FormAtividadeComponent } from './form-atividade/form-atividade.componen
     CreateAtividadeComponent,
     EditAtividadeComponent,
     FormAtividadeComponent,
+  ],
+  providers: [
+    QuizSailsService,
+    AtividadeService,
   ],
 })
 export class AtividadeModule { }

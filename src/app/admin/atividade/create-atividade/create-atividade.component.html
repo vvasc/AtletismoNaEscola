@@ -1,3 +1,12 @@
-<p>
-  create-atividade works!
-</p>
+<nb-card>
+  <nb-card-header>
+    Criar Atividade
+  </nb-card-header>
+  <nb-card-body>
+    <ngx-form-atividade [quizes]="quizesAsync" (formValue)="getForm($event)"></ngx-form-atividade>
+    <br>
+    <div class="form-group">
+      <button class="btn btn-primary" [disabled]="!formConteudo?.valid || querying" (click)="criarAtividade()">CRIAR ATIVIDADE</button>
+    </div>
+  </nb-card-body>
+</nb-card>
