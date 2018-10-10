@@ -3,7 +3,7 @@
     Criar Atividade
   </nb-card-header>
   <nb-card-body>
-    <ngx-form-atividade [quizes]="quizesAsync" (formValue)="getForm($event)"></ngx-form-atividade>
+    <ngx-form-atividade [provas]="provasAsync" [quizes]="quizesAsync" (formValue)="getForm($event)"></ngx-form-atividade>
     <br>
     <div class="form-group">
       <button class="btn btn-primary" [disabled]="!formConteudo?.valid || querying" (click)="criarAtividade()">CRIAR ATIVIDADE</button>

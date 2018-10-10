@@ -19,7 +19,7 @@
 			<label>Prova Prática</label>
 			<select class="form-control" formControlName="provaPratica">
 				<option value=""></option>
-				<option *ngFor="let prova of provas" [value]="prova.id">{{ prova.titulo }}</option>
+				<option *ngFor="let prova of provas | async" [value]="prova.id">{{ prova.titulo }}</option>
 			</select>
 		</div>
 	</div>

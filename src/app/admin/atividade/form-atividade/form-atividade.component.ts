@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class FormAtividadeComponent implements OnInit {
   @Input() quizes: Observable<any>;
-  @Input() provas: any;
+  @Input() provas: Observable<any>;
   @Output() formValue = new EventEmitter();
   formAtividade: FormGroup;
 

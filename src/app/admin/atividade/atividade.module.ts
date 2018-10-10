@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormAtividadeComponent } from './form-atividade/form-atividade.component';
 import { QuizSailsService } from '../../services/quiz-sails.service';
 import { AtividadeService } from '../../services/atividade.service';
+import { ProvaService } from '../../services/prova.service';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { AtividadeService } from '../../services/atividade.service';
   providers: [
     QuizSailsService,
     AtividadeService,
+    ProvaService,
   ],
 })
 export class AtividadeModule { }
