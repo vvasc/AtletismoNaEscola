@@ -33,7 +33,6 @@ export class CreateAtividadeComponent implements OnInit {
     }));
   }
 
-
   getForm(form) {
     this.formAtividade = form;
   }
