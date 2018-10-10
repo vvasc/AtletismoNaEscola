@@ -4,6 +4,7 @@ import { EditAtividadeComponent } from './edit-atividade/edit-atividade.componen
 import { CreateAtividadeComponent } from './create-atividade/create-atividade.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormAtividadeComponent } from './form-atividade/form-atividade.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
   declarations: [
     CreateAtividadeComponent,
     EditAtividadeComponent,
+    FormAtividadeComponent,
   ],
 })
 export class AtividadeModule { }
