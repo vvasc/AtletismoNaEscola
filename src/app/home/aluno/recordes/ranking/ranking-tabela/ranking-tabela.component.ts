@@ -1,4 +1,3 @@
-import { AuthService } from './../../../../../services/login.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -8,14 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RankingTabelaComponent implements OnInit {
   @Input() dados;
-  user;
+  @Input() user;
 
-  constructor(private auth: AuthService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.auth.isLogged().subscribe(info => {
-      this.user = info;
-    });
   }
 
 }
