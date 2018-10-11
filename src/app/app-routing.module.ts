@@ -8,7 +8,7 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
-import { AdminGuard } from './guards/admin-guard';
+// import { AdminGuard } from './guards/admin-guard';
 
 const routes: Routes = [
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: 'app/admin/admin.module#AdminModule',
-    canActivate: [AdminGuard],
+    // canActivate: [AdminGuard],
   },
   {
     path: 'auth',
