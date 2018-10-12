@@ -8,7 +8,7 @@ describe('FormAtividadeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormAtividadeComponent ]
+      declarations: [ FormAtividadeComponent ],
     })
     .compileComponents();
   }));
