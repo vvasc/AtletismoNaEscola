@@ -1,7 +1,7 @@
 import { AuthService } from './../../../../services/login.service';
 import { PontuacaoService } from './../../../../services/pontuacao.service';
 import { Component, OnInit } from '@angular/core';
-import { mergeMap } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'ngx-ranking',
@@ -10,7 +10,7 @@ import { mergeMap } from 'rxjs/operators';
 })
 export class RankingComponent implements OnInit {
   userinfo;
-  rankingtabelaObs;
+  rankingtabela;
   medalha;
   colocacao ;
 
@@ -20,28 +20,25 @@ export class RankingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authService.isLogged().pipe(
-      mergeMap(user => { // Pra nao dar 2 subscribe
+    combineLatest([this.pontuacaoservice.getPontuacaoColegio(), this.authService.isLogged()])
+      .subscribe(([pontuacoesColegio, user]) => {
         this.userinfo = user;
-        this.rankingtabelaObs = this.pontuacaoservice.getPontuacaoColegio();
-        return this.rankingtabelaObs;
-      }),
-    ).subscribe((pontuacoesColegio: Array<any>) => {
-      // Pega as pontuacoes do colegio ordenados por total de pontos,do maior para o menor
-      pontuacoesColegio.map((element, index) => {
-        if (element.id === this.userinfo.id) {
-          if (index === 0)
-            this.medalha = '../../../../assets/medalha_ouro.png';
-          else if (index === 1)
-            this.medalha = '../../../../assets/medalha_prata.png';
-          else if (index === 2)
-            this.medalha = '../../../../assets/medalha_bronze.png';
-          else
-            this.medalha = null;
-          this.colocacao = index + 1;
-        }
+        this.rankingtabela = pontuacoesColegio;
+        // Pega as pontuacoes do colegio ordenados por total de pontos,do maior para o menor
+        pontuacoesColegio.map((element, index) => {
+          if (element.id === user.id) {
+            if (index === 0)
+              this.medalha = '../../../../assets/medalha_ouro.png';
+            else if (index === 1)
+              this.medalha = '../../../../assets/medalha_prata.png';
+            else if (index === 2)
+              this.medalha = '../../../../assets/medalha_bronze.png';
+            else
+              this.medalha = null;
+            this.colocacao = index + 1;
+          }
+        });
       });
-    });
   }
 
 }

@@ -5,7 +5,7 @@
       <th class="item">Nome</th>
       <th class="pontos">Pontos</th>
     </tr>
-    <tr class="item" *ngFor="let aluno of dados | async; let i = index;" [ngClass]="{'destacado': aluno.id == user.id}">
+    <tr class="item" *ngFor="let aluno of dados; let i = index;" [ngClass]="{'destacado': aluno.id == user.id}">
       <td class="container item" >{{i+1}}. {{aluno?.fullName}}</td>
       <td class="pontos">{{aluno?.totalpontos}}p</td>
     </tr>

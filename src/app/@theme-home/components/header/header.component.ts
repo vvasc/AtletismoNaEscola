@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
 
   @Input() position = 'normal';
 
-  user: any;
+  userAsync: any;
 
   userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
@@ -29,9 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authservice.isLogged().subscribe(info => {
-      this.user = info;
-    });
+    this.userAsync = this.authservice.isLogged();
   }
 
   logout() {

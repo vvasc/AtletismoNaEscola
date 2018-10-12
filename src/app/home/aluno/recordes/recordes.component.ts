@@ -1,8 +1,7 @@
-import { mergeMap } from 'rxjs/operators';
 import { AuthService } from './../../../services/login.service';
 import { PontuacaoService } from './../../../services/pontuacao.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'ngx-recordes',
@@ -10,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./recordes.component.scss'],
 })
 export class RecordesComponent implements OnInit {
-  pontuacaoAlunoObs: Observable<any>;
+  pontuacaoAluno;
   userinfo;
   colocacao;
   medalha;
@@ -21,16 +20,16 @@ export class RecordesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.pontuacaoAlunoObs = this.pontuacaoService.getPontuacaoAluno();
-    this.authService.isLogged().pipe(
-      mergeMap(user => { // Pra nao dar 2 subscribe
-        this.userinfo = user;
-        return this.pontuacaoService.getPontuacaoColegio();
-      }),
-    ).subscribe((pontuacoesColegio: Array<any>) => {
+    combineLatest([
+      this.pontuacaoService.getPontuacaoAluno(),
+      this.authService.isLogged(),
+      this.pontuacaoService.getPontuacaoColegio(),
+    ]).subscribe(([pontuacoesAluno, user, pontuacoesColegio]) => {
+      this.userinfo = user;
+      this.pontuacaoAluno = pontuacoesAluno;
       // Pega as pontuacoes do colegio ordenados por total de pontos,do maior para o menor
       pontuacoesColegio.map((element, index) => {
-        if (element.id === this.userinfo.id) {
+        if (element.id === user.id) {
           if (index === 0) {
             this.medalha = '../../../../assets/medalha_ouro.png';
             this.colocacao = 1;
