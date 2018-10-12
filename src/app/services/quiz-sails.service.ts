@@ -55,6 +55,10 @@ export class QuizSailsService {
     return { headers: this.getHeaders(), withCredentials: true};
   }
 
+  getAllQuizes() {
+    return this.http.get(`${this.endpoint}/Quiz/`, { headers: this.getHeaders() });
+  }
+
   getHeaders() {
     return new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
