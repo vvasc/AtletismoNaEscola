@@ -1,6 +1,7 @@
+import { AuthService } from './../../../services/login.service';
 import { PontuacaoService } from './../../../services/pontuacao.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'ngx-recordes',
@@ -8,12 +9,42 @@ import { Observable } from 'rxjs';
   styleUrls: ['./recordes.component.scss'],
 })
 export class RecordesComponent implements OnInit {
-  pontuacao: Observable<any>;
+  pontuacaoAluno;
+  userinfo;
+  colocacao;
+  medalha;
 
-  constructor(private pontuacaoService: PontuacaoService) { }
+  constructor(
+    private pontuacaoService: PontuacaoService,
+    private authService: AuthService,
+  ) { }
 
   ngOnInit() {
-    this.pontuacao = this.pontuacaoService.getAllPontuacao();
+    combineLatest([
+      this.pontuacaoService.getPontuacaoAluno(),
+      this.authService.isLogged(),
+      this.pontuacaoService.getPontuacaoColegio(),
+    ]).subscribe(([pontuacoesAluno, user, pontuacoesColegio]) => {
+      this.userinfo = user;
+      this.pontuacaoAluno = pontuacoesAluno;
+      // Pega as pontuacoes do colegio ordenados por total de pontos,do maior para o menor
+      pontuacoesColegio.map((element, index) => {
+        if (element.id === user.id) {
+          if (index === 0) {
+            this.medalha = '../../../../assets/medalha_ouro.png';
+            this.colocacao = 1;
+          } else if (index === 1) {
+            this.medalha = '../../../../assets/medalha_prata.png';
+            this.colocacao = 2;
+          } else if (index === 2) {
+            this.medalha = '../../../../assets/medalha_bronze.png';
+            this.colocacao = 3;
+          } else {
+            this.medalha = null;
+            this.colocacao = index + 1;
+          }
+        }
+      });
+    });
   }
-
 }

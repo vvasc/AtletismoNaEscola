@@ -1,37 +1,41 @@
-<div class="header-container empty"></div>
+<ng-container *ngIf="userAsync | async as userinfo">
+    <div class="header-container empty"></div>
 
-<div class="header-container first">
-  <img src="../../../../assets/atletismo_logo.jpg" class="atletismo">
-</div>
-
-<div class="header-container" *ngIf="logado">
-  <img src="../../../../assets/usuario.jpg" class="rounded foto">
-  <div class="container userinfo">
-    <div class="row">Maria Luiza R. de Grande</div>
-    <div class="row">5º ano</div>
-    <div class="row">Colégio Geração Raízes</div>
-  </div>
-</div>
-
-<div class="header-container opcoes" *ngIf="logado">
-  <a (click)="recordes()">MEUS RECORDES</a>
-  <a (click)="conteudo()">CONTEÚDO</a>
-  <a (click)="quiz()">QUIZ</a>
-</div>
-
-<div class="header-container offscreen" *ngIf="logado">
-  <div [ngClass]="{'hamburger': true, 'change': this.toggle}" (click)="this.toggle = !this.toggle;">
-    <div class="bar1"></div>
-    <div class="bar2"></div>
-    <div class="bar3"></div>
-  </div>
-  <div class="burger-options" [ngClass]="{'hide': true, 'burger-open': this.toggle}">
-    <p (click)="recordes(); this.toggle = !this.toggle">MEUS RECORDES</p>
-    <p (click)="conteudo(); this.toggle = !this.toggle">CONTEÚDO</p>
-    <p (click)="quiz(); this.toggle = !this.toggle">QUIZ</p>
-  </div>
-</div>
-
-<div class="header-container last">
-  <nb-action icon="nb-gear" class="toggle-layout" (click)="admin()" *ngIf="this.logado && this.isAdmin"></nb-action>
-</div>
+    <div class="header-container first">
+      <img src="../../../../assets/atletismo_logo.jpg" class="atletismo">
+    </div>
+    
+    <div class="header-container" *ngIf="userinfo">
+      <img src="../../../../assets/usuario.jpg" class="rounded foto">
+      <div class="container userinfo">
+        <div class="row">{{userinfo.fullName}}</div>
+        <div class="row">{{userinfo.ano}}º ano</div>
+        <div class="row">{{userinfo.escola}}</div>
+      </div>
+    </div>
+    
+    <div class="header-container opcoes" *ngIf="userinfo">
+      <a (click)="recordes()">MEUS RECORDES</a>
+      <a (click)="conteudo()">CONTEÚDO</a>
+      <a (click)="quiz()">QUIZ</a>
+    </div>
+    
+    <div class="header-container offscreen" *ngIf="userinfo">
+      <div [ngClass]="{'hamburger': true, 'change': this.toggle}" (click)="this.toggle = !this.toggle;">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      <div class="burger-options" [ngClass]="{'hide': true, 'burger-open': this.toggle}">
+        <p (click)="recordes(); this.toggle = !this.toggle">MEUS RECORDES</p>
+        <p (click)="conteudo(); this.toggle = !this.toggle">CONTEÚDO</p>
+        <p (click)="quiz(); this.toggle = !this.toggle">QUIZ</p>
+        <p (click)="logout(); this.toggle = !this.toggle">SAIR</p>
+      </div>
+    </div>
+    
+    <div class="header-container last">
+      <nb-action icon="nb-gear" class="toggle-layout" style="padding-right: 15px;" (click)="admin()" *ngIf="userinfo?.role != 'aluno'"></nb-action>
+      <Button class="btn btn-hero-secondary" *ngIf="userinfo" (click)="logout()">SAIR</Button>  
+    </div>    
+  </ng-container>

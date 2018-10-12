@@ -1,4 +1,7 @@
+import { AuthService } from './../../../../services/login.service';
+import { PontuacaoService } from './../../../../services/pontuacao.service';
 import { Component, OnInit } from '@angular/core';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'ngx-ranking',
@@ -6,67 +9,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ranking.component.scss'],
 })
 export class RankingComponent implements OnInit {
-  ranking = {
-    ano: 5,
-    colegio: 'Colegio Geração Raízes',
-    colocacao: 1,
-    alunos: [
-      {
-        nome: 'Maria Luiza R. de Grande',
-        pontos: 350,
-      },
-      {
-        nome: 'Afonso Andrade',
-        pontos: 110,
-      },
-      {
-        nome: 'Ze Li',
-        pontos: 100,
-      },
-      {
-        nome: 'Maria Fera',
-        pontos: 87,
-      },
-      {
-        nome: 'Fernanda Roni',
-        pontos: 80,
-      },
-      {
-        nome: 'Roberto Silva',
-        pontos: 78,
-      },
-      {
-        nome: 'Joselito da Silva',
-        pontos: 67,
-      },
-      {
-        nome: 'Alonso Alvez',
-        pontos: 66,
-      },
-      {
-        nome: 'Carla Loma',
-        pontos: 65,
-      },
-      {
-        nome: 'Ricardo Ribeiro',
-        pontos: 65,
-      },
-      {
-        nome: 'Frederico Nascimento',
-        pontos: 55,
-      },
-      {
-        nome: 'Lucas Nascimento',
-        pontos: 30,
-      },
-    ],
-  };
+  userinfo;
+  rankingtabela;
+  medalha;
+  colocacao ;
 
-
-
-  constructor() { }
+  constructor(
+    private pontuacaoservice: PontuacaoService,
+    private authService: AuthService,
+  ) { }
 
   ngOnInit() {
+    combineLatest([this.pontuacaoservice.getPontuacaoColegio(), this.authService.isLogged()])
+      .subscribe(([pontuacoesColegio, user]) => {
+        this.userinfo = user;
+        this.rankingtabela = pontuacoesColegio;
+        // Pega as pontuacoes do colegio ordenados por total de pontos,do maior para o menor
+        pontuacoesColegio.map((element, index) => {
+          if (element.id === user.id) {
+            if (index === 0)
+              this.medalha = '../../../../assets/medalha_ouro.png';
+            else if (index === 1)
+              this.medalha = '../../../../assets/medalha_prata.png';
+            else if (index === 2)
+              this.medalha = '../../../../assets/medalha_bronze.png';
+            else
+              this.medalha = null;
+            this.colocacao = index + 1;
+          }
+        });
+      });
   }
 
 }

@@ -2,7 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { MainComponent } from './main/main.component';
-import { AlunoGuard } from '../guards/aluno-guard';
+// import { AlunoGuard } from '../guards/aluno-guard';
 
 const routes: Routes = [
   {
@@ -24,7 +24,7 @@ const routes: Routes = [
       {
         path: 'aluno',
         loadChildren: './aluno/aluno.module#AlunoModule',
-        canActivate: [AlunoGuard],
+        // canActivate: [AlunoGuard],
       },
       {
         path: '**',
