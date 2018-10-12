@@ -11,6 +11,7 @@
 			<select class="form-control" formControlName="quiz">
 				<option value=""></option>
 				<option *ngFor="let quiz of quizes | async" [value]="quiz.id">{{ quiz.titulo }}</option>
+				<option style="background-color: green;" *ngIf="highlighted" [value]="highlighted.id">{{highlighted.titulo}}</option>
 			</select>
 		</div>
 	</div>

@@ -65,7 +65,7 @@ export class EditConteudoComponent implements OnInit {
 
   refreshQuizes() {
     this.quizes = [];
-    this.quizService.getQuizesLivres().subscribe(dados => {
+    this.quizService.getQuizesLivresConteudo().subscribe(dados => {
       this.quizes = dados;
     }, err => {
       this.notificacao.ngxtoaster('Quizes', 'Não foi possível carregar os quizes! Recarregue a página!', false);

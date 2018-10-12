@@ -39,6 +39,10 @@ export class EditAtividadeComponent implements OnInit {
 
   refreshAtividade() {
     this.atividadesObs = this.atividadeService.getAllAtividades().pipe(
+      catchError(err => {
+        this.notificacao.ngxtoaster('ERRO!', 'Falha na conexão!', false);
+        return err;
+      }),
       map((atividades: any) => {
         atividades.forEach(atividade => {
           // Refatorando objeto pra ser usado na table
@@ -48,13 +52,10 @@ export class EditAtividadeComponent implements OnInit {
         return atividades;
       }),
     );
-    this.atividadesObs.subscribe(null, err => {
-      this.notificacao.ngxtoaster('ERRO!', 'Falha na conexão!', false);
-    });
   }
 
   refreshQuizes() {
-    this.quizesAsync = this.quizService.getAllQuizes().pipe(catchError((error: any) => {
+    this.quizesAsync = this.quizService.getQuizesLivresAtividade().pipe(catchError((error: any) => {
       this.notificacao.ngxtoaster('Quizes', 'Não foi possível carregar os quizes! Recarregue a página!', false);
       return error;
     }));
@@ -74,6 +75,7 @@ export class EditAtividadeComponent implements OnInit {
     this.atividadeService.patchAtividade(this.selecionado.id, formval).subscribe(succ => {
       this.notificacao.ngxtoaster('Sucesso!', 'Atividade editada com sucesso!', true);
       this.refreshAtividade();
+      this.refreshQuizes();
       this.formAtividade.reset();
     }, err => {
       const errmsg = (err.error.code === 'E_UNIQUE') ? 'Já existe atividade com este título!' : 'Falha na conexão!';
