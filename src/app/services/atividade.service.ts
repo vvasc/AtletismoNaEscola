@@ -11,6 +11,10 @@ export class AtividadeService {
         return this.http.get(`${this.endpoint}/Atividade`, { headers: this.getHeaders() });
     }
 
+    patchAtividade(id, atividade) {
+        return this.http.patch(`${this.endpoint}/Atividade/${id}`, {...atividade}, { headers: this.getHeaders() });
+    }
+
     createAtividade(atividade) {
         return this.http.post(`${this.endpoint}/Atividade`, {...atividade}, { headers: this.getHeaders() });
     }

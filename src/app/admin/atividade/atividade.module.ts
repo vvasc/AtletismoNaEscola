@@ -8,12 +8,14 @@ import { FormAtividadeComponent } from './form-atividade/form-atividade.componen
 import { QuizSailsService } from '../../services/quiz-sails.service';
 import { AtividadeService } from '../../services/atividade.service';
 import { ProvaService } from '../../services/prova.service';
+import { TableModule } from '../../@core/components/table/table.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AtividadeRoutingModule,
     ThemeModule,
+    TableModule,
   ],
   declarations: [
     CreateAtividadeComponent,
