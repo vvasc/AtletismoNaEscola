@@ -1,13 +1,13 @@
-<div class="centered">
+|<div class="centered">
     <div class="container">
         <div class="row">
             <div class="col-md-6 titulo">Meus Recordes</div>
             <div class="col-md-6 imagem">
                 <div class="right wrap noborder" [routerLink]="['/home/aluno/recordes/ranking']" >
-                    <img class="icon" src="../../../../assets/medalha_ouro.png">
+                    <img *ngIf="medalha" class="icon" [src]="medalha">
                     <div class="container">
-                        <div class="row colocacao">1º LUGAR</div>
-                        <div class="row right pontos">350 PONTOS</div>
+                        <div class="row colocacao">{{ colocacao }}º LUGAR</div>
+                        <div class="row right pontos">{{ userinfo?.totalpontos }} PONTOS</div>
                     </div>
                 </div>
             </div>
@@ -15,6 +15,6 @@
     </div>
 
     <div class="tabela bottompad">
-        <ngx-tabela-pontuacao [dadosAsync]="pontuacao"></ngx-tabela-pontuacao>    
-    </div>    
+        <ngx-tabela-pontuacao [dados]="pontuacaoAluno" [total]="userinfo?.totalpontos"></ngx-tabela-pontuacao>    
+    </div>
 </div>

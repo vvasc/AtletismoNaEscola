@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray, CdkDragExit } from '@angular/cdk/drag-drop';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { find, remove } from 'lodash';
@@ -41,8 +42,12 @@ export class SelectProvaComponent implements OnChanges {
     !find(this.questoesSelected, ['Pergunta', questao.Pergunta]) ? this.questoesSelected.push(questao) : null;
   }
 
-  remove(questao: any) {
-    remove(this.questoesSelected, ['Pergunta', questao.Pergunta]);
+  remove(event: CdkDragExit<any>) {
+    remove(this.questoesSelected, ['Pergunta', event.item.data.Pergunta]);
+  }
+
+  removeAll() {
+    this.questoesSelected = [];
   }
 
   createProva() {
@@ -70,4 +75,12 @@ export class SelectProvaComponent implements OnChanges {
     ).subscribe();
   }
 
+  dropped(event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+      this.questoesSelected,
+      event.previousIndex,
+      event.currentIndex,
+    );
+  }
 }
+

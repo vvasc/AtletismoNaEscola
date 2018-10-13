@@ -1,14 +1,13 @@
 <div class="container">
   <div class="wrap bottompad">
-    <img class="img-responsive col-xs-12" src="../../../../assets/medalha_ouro.png">
+    <img *ngIf="medalha" class="img-responsive col-xs-12 medalha" [src]="medalha">
     <div class="container">
-        <div class="row colocacao">1º LUGAR</div>
-        <div class="row right pontos">350 PONTOS</div>
+      <div class="row colocacao">{{ colocacao }}º LUGAR</div>
+      <div class="row right pontos">{{ userinfo?.totalpontos }} PONTOS</div>
     </div>
   </div>
 
   <div class="centered bottompad">
-    <ngx-ranking-tabela [dados]="ranking"></ngx-ranking-tabela>
+    <ngx-ranking-tabela [dados]="rankingtabela" [user]="userinfo"></ngx-ranking-tabela>
   </div>
-  
 </div>

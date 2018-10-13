@@ -19,6 +19,14 @@ export class PontuacaoService {
     return this.http.post(`${this.endpoint}/Pontuacao/`, {...pontuacao}, { headers: this.getHeaders() });
   }
 
+  getPontuacaoAluno() {
+    return this.http.get(`${this.endpoint}/Pontuacao-aluno/`, { headers: this.getHeaders() , withCredentials: true });
+  }
+
+  getPontuacaoColegio() {
+    return this.http.get(`${this.endpoint}/Pontuacao-colegio/`, { headers: this.getHeaders() , withCredentials: true });
+  }
+
   getHeaders() {
     return new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',

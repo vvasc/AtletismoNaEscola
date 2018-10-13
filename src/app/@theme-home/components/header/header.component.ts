@@ -1,8 +1,8 @@
+import { AuthService } from './../../../services/login.service';
 import { Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
-import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 
 @Component({
@@ -17,20 +17,23 @@ export class HeaderComponent implements OnInit {
 
   @Input() position = 'normal';
 
-  user: any;
+  userAsync: any;
 
   userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private userService: UserService,
+              private authservice: AuthService,
               private analyticsService: AnalyticsService,
               private route: Router) {
   }
 
   ngOnInit() {
-    this.userService.getUsers()
-      .subscribe((users: any) => this.user = users.nick);
+    this.userAsync = this.authservice.isLogged();
+  }
+
+  logout() {
+    this.authservice.logout();
   }
 
   toggleSidebar(): boolean {
