@@ -53,7 +53,7 @@ export class TableService {
         title: 'Nome Completo',
         type: 'string',
       },
-      escola: {
+      nomeEscola: {
         title: 'Colégio',
         type: 'string',
       },

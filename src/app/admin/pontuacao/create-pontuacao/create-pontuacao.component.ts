@@ -27,12 +27,18 @@ export class CreatePontuacaoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.alunosObs = this.accountservice.getAllAccounts(); // Pega todos os alunos para passar para a tabela
+    this.alunosObs = this.accountservice.getAllAccounts().pipe(
+      map((accounts: any) => {
+        accounts.map(conta => {
+          conta.nomeEscola = conta.escola.nome;
+        });
+        return accounts;
+      }),
+    ); // Pega todos os alunos para passar para a tabela
     this.atividadesObs = this.atividadeservice.getAllAtividades().pipe(
       // Pega todas as atividades para passar para a tabela
       map((atividades: any) => { // refatorando objeto para ser usado na table
         atividades.map(element => {
-          element.titulopratica = element.provaPratica[0].titulo;
           element.tituloquiz = element.quiz[0].titulo;
         });
         return atividades;
