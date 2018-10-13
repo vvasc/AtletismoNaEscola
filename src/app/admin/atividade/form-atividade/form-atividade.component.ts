@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
 export class FormAtividadeComponent implements OnInit, OnChanges {
   @Input() selecionado;
   @Input() quizes: Observable<any>;
-  @Input() provas: Observable<any>;
   @Output() formValue = new EventEmitter();
   formAtividade: FormGroup;
   highlighted;
@@ -41,7 +40,7 @@ export class FormAtividadeComponent implements OnInit, OnChanges {
       this.formAtividade.setValue({
         titulo: data.titulo,
         quiz: quizid,
-        provaPratica: data.provaPratica[0].id,
+        provaPratica: data.provaPratica,
       });
     }
   }

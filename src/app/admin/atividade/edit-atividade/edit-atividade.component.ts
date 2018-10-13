@@ -3,7 +3,6 @@ import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AtividadeService } from '../../../services/atividade.service';
 import { QuizSailsService } from '../../../services/quiz-sails.service';
-import { ProvaService } from '../../../services/prova.service';
 import { NotificacaoService } from '../../../services/notificacao.service';
 import { catchError, map } from 'rxjs/operators';
 
@@ -16,21 +15,18 @@ export class EditAtividadeComponent implements OnInit {
   formAtividade: FormGroup;
   selecionado;
   quizesAsync: Observable<any>;
-  provasAsync: Observable<any>;
   atividadesObs: Observable<any>;
   querying: boolean = false;
 
   constructor(
     private atividadeService: AtividadeService,
     private quizService: QuizSailsService,
-    private provaService: ProvaService,
     private notificacao: NotificacaoService,
   ) { }
 
   ngOnInit() {
     this.refreshAtividade();
     this.refreshQuizes();
-    this.refreshProvas();
   }
 
   getForm(form) {
@@ -47,7 +43,6 @@ export class EditAtividadeComponent implements OnInit {
         atividades.forEach(atividade => {
           // Refatorando objeto pra ser usado na table
           (atividade.quiz) ? atividade['tituloquiz'] = atividade.quiz[0].titulo : null;
-          (atividade.provaPratica) ? atividade['titulopratica'] = atividade.provaPratica[0].titulo : null;
         });
         return atividades;
       }),
@@ -57,13 +52,6 @@ export class EditAtividadeComponent implements OnInit {
   refreshQuizes() {
     this.quizesAsync = this.quizService.getQuizesLivresAtividade().pipe(catchError((error: any) => {
       this.notificacao.ngxtoaster('Quizes', 'Não foi possível carregar os quizes! Recarregue a página!', false);
-      return error;
-    }));
-  }
-
-  refreshProvas() {
-    this.provasAsync = this.provaService.getAllProvas().pipe(catchError((error: any) => {
-      this.notificacao.ngxtoaster('Provas', 'Não foi possível carregar as provas! Recarregue a página!', false);
       return error;
     }));
   }

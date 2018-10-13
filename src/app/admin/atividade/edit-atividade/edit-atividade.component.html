@@ -10,7 +10,7 @@
     Editar Atividade
   </nb-card-header>
   <nb-card-body>
-    <ngx-form-atividade [selecionado]="selecionado" [provas]="provasAsync" [quizes]="quizesAsync" (formValue)="getForm($event)"></ngx-form-atividade>
+    <ngx-form-atividade [selecionado]="selecionado" [quizes]="quizesAsync" (formValue)="getForm($event)"></ngx-form-atividade>
     <br>
     <div class="form-group">
       <button class="btn btn-primary" [disabled]="!formAtividade?.valid || querying" (click)="editAtividade()">EDITAR ATIVIDADE</button>

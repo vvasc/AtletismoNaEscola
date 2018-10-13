@@ -5,7 +5,6 @@ import { NotificacaoService } from '../../../services/notificacao.service';
 import { AtividadeService } from '../../../services/atividade.service';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ProvaService } from '../../../services/prova.service';
 
 @Component({
   selector: 'ngx-create-atividade',
@@ -14,20 +13,17 @@ import { ProvaService } from '../../../services/prova.service';
 })
 export class CreateAtividadeComponent implements OnInit {
   quizesAsync: Observable<any>;
-  provasAsync: Observable<any>;
   formAtividade: FormGroup;
   querying: boolean = false;
 
   constructor(
     private atividadeService: AtividadeService,
     private quizService: QuizSailsService,
-    private provaService: ProvaService,
     private notificacao: NotificacaoService,
   ) { }
 
   ngOnInit() {
     this.carregaQuizes();
-    this.carregaProvas();
   }
 
   carregaQuizes() {
@@ -37,12 +33,6 @@ export class CreateAtividadeComponent implements OnInit {
     }));
   }
 
-  carregaProvas() {
-    this.provasAsync = this.provaService.getAllProvas().pipe(catchError((error: any) => {
-      this.notificacao.ngxtoaster('Quizes', 'Não foi possível carregar os quizes! Recarregue a página!', false);
-      return error;
-    }));
-  }
 
   getForm(form) {
     this.formAtividade = form;

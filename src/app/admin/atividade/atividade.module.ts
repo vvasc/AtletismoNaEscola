@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { FormAtividadeComponent } from './form-atividade/form-atividade.component';
 import { QuizSailsService } from '../../services/quiz-sails.service';
 import { AtividadeService } from '../../services/atividade.service';
-import { ProvaService } from '../../services/prova.service';
 import { TableModule } from '../../@core/components/table/table.module';
 
 @NgModule({
@@ -25,7 +24,6 @@ import { TableModule } from '../../@core/components/table/table.module';
   providers: [
     QuizSailsService,
     AtividadeService,
-    ProvaService,
   ],
 })
 export class AtividadeModule { }

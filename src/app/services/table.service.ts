@@ -85,7 +85,7 @@ export class TableService {
         title: 'Título Atividade',
         type: 'string',
       },
-      titulopratica: {
+      provaPratica: {
         title: 'Título Atividade Prática',
         type: 'string',
       },
