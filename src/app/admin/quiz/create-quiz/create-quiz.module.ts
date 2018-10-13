@@ -3,7 +3,6 @@ import { MatDialogModule } from '@angular/material';
 
 import { ConfirmationModalModule } from '../../../@core/components/confirmation-modal/confirmation-modal.module';
 import { ThemeModule } from '../../../@theme-admin/theme.module';
-import { QuizSailsService } from '../../../services/quiz-sails.service';
 import {
   ConfirmationModalComponent,
 } from './../../../@core/components/confirmation-modal/confirmation-modal.component';
@@ -26,6 +25,6 @@ const QUIZ_MODULES = [
   imports: [...QUIZ_MODULES],
   declarations: [...QUIZ_COMPONENTS],
   entryComponents: [ConfirmationModalComponent],
-  providers: [QuizSailsService],
+  providers: [],
 })
 export class CreateQuizModule {}
