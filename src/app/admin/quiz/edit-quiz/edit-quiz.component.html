@@ -1,0 +1,13 @@
+<ngx-table
+  [dataAsync]="quizAsync"
+  titulo="Quizes Criados"
+  columns="quizes"
+  (editE)="selectProva($event)"
+></ngx-table>
+<nb-card>
+  <nb-card-body>
+    <ngx-customize-prova
+    [quizSelected]="provaSelected">
+    </ngx-customize-prova>
+  </nb-card-body>
+</nb-card>

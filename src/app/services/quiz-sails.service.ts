@@ -27,6 +27,10 @@ export class QuizSailsService {
     return this.http.get(`${this.endpoint}/Quizes-livres/`, { headers: this.getHeaders() });
   }
 
+  getAllQuiz() {
+    return this.http.get(`${this.endpoint}/Quiz/`, { headers: this.getHeaders() });
+  }
+
   getHeaders() {
     return new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
