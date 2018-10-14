@@ -1,5 +1,6 @@
+import { cloneDeep } from 'lodash';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Component, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, OnInit, EventEmitter, Output } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -27,7 +28,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
         {{quizSelected.conteudo[0].titulo}}
         </div>
         <ng-template #naoHaConteudo>
-        Não há conteúdo associado à esta prova
+        Não há conteúdo associado à esta prova, vá em conteúdo e para associar o quiz
         </ng-template>
       </nb-card-body>
       </nb-card>
@@ -72,9 +73,12 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 export class CustomizeProvaComponent implements OnChanges, OnInit {
   @Input() quizSelected: any = null;
+  @Output() QuizE = new EventEmitter();
   formAtividade: FormGroup;
   questoesSelected: any;
   showQuestoes: any;
+  conteudoID: any;
+  atividadeID: any;
 
   constructor(private fb: FormBuilder) { }
 
@@ -92,12 +96,31 @@ export class CustomizeProvaComponent implements OnChanges, OnInit {
   }
 
   patchDrangDrop(quizSelected: any) {
+    console.log(quizSelected);
     this.formAtividade.patchValue(quizSelected);
     this.showQuestoes = ('questoes' in quizSelected) ? quizSelected.questoes : null;
+    this.conteudoID = ('conteudo' in quizSelected) && ( quizSelected.conteudo.length )
+      ? quizSelected.conteudo[0].id : null;
+    this.atividadeID = ('ownerAtividade' in quizSelected) && ( quizSelected.ownerAtividade !== null )
+      ? quizSelected.ownerAtividade.id : null;
   }
 
   createProva() {
-
+    const quiz = cloneDeep(this.quizSelected);
+    ('questoes' in quiz) ? delete quiz.questoes : null;
+    ('titulo' in quiz) ? delete quiz.titulo : null;
+    ('conteudo' in quiz) ? delete quiz.titulo : null;
+    ('ownerAtividade' in quiz) ? delete quiz.titulo : null;
+    this.QuizE.emit({
+      titulo: this.formAtividade.get('titulo').value,
+      ...quiz,
+      questoes: [ ...this.showQuestoes.map(questoes => questoes.id)],
+      conteudo: this.conteudoID,
+      ownerAtividade: this.atividadeID,
+    });
+    this.formAtividade.reset();
+    this.showQuestoes = null;
+    this.quizSelected = null;
   }
 
   dropped(event: CdkDragDrop<string[]>) {

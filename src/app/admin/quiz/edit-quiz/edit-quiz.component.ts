@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class EditQuizComponent implements OnInit {
   quizAsync: Observable<any>;
   provaSelected: any;
+  update: any = [];
 
   constructor(private quizService: QuizSailsService) { }
 
@@ -19,5 +20,12 @@ export class EditQuizComponent implements OnInit {
 
   selectProva(event: any) {
     this.provaSelected = event;
+  }
+
+  resolveQuiz(event: any) {
+    console.log(event);
+    this.quizService.patchQuiz(event.id, event).subscribe(response => {
+      this.quizService.getQuiz(event.id).subscribe(quizes => this.update = quizes);
+    });
   }
 }
