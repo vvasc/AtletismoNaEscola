@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { cloneDeep, find } from 'lodash';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { cloneDeep, find, remove } from 'lodash';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { takeUntil } from 'rxjs/operators';
+
 import { TableService } from '../../../services/table.service';
 
 
@@ -18,12 +19,13 @@ import { TableService } from '../../../services/table.service';
   `],
 })
 
-export class TableComponent implements OnInit, OnDestroy {
+export class TableComponent implements OnInit, OnDestroy, OnChanges {
   @Input() dataAsync: Observable<any>; // Observable que indica para a busca dos objetos da tabela
   @Input() deleteData: any = [];
   @Input() titulo: string = '';
   @Input() columns: string; // Determina colunas mostradas
   @Input() edit: boolean = false; // Ativa ou desativa a edicao
+  @Input() update: any = null; // Use para dar update na table
   @Output() editE = new EventEmitter(); // Objeto com id especifico emitido para ser tratado no component pai
   @Output() editConfirm = new EventEmitter(); // Retorna objeto com informacoes sobre a linha editada
   private unsubscribeData: Subject<void> = new Subject();
@@ -39,6 +41,47 @@ export class TableComponent implements OnInit, OnDestroy {
   constructor(private tableService: TableService) { }
 
   ngOnInit() {
+    this.initializeComponent();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if ('update' in changes && changes.update.currentValue !== changes.update.previousValue) {
+      // tslint:disable-next-line:max-line-length
+      !changes.update.previousValue || changes.update.previousValue.id !== changes.update.currentValue.id ? this.reInitialize(changes.update.currentValue) : null;
+    }
+  }
+
+  initializeData(data: any) {
+    this.dataSync = cloneDeep(data);
+    return this.dataSource = data.map(response => {
+      for (const key in response) {
+        if (!this.keysSettings.includes(key)) {
+          delete response[key];
+        }
+      }
+      return response;
+    });
+  }
+
+  updateData(data: any) {
+    const clone = cloneDeep(data);
+    for (const key in clone) {
+      if (!this.keysSettings.includes(key)) {
+        delete clone[key];
+      }
+    }
+    return clone;
+  }
+
+  reInitialize(update: any)  {
+    if (find(this.dataSource, ['id', update.id])) {
+      remove(this.dataSync, ['id', update.id]);
+      this.dataSync.push(update);
+      this.source.update(find(this.dataSource, ['id', update.id]), this.updateData(update));
+    }
+  }
+
+  initializeComponent() {
     this.tableService.setEdit(this.edit);
     this.settings = this.tableService.getColumns(this.columns);
     for (const key in this.settings.columns) {
@@ -47,16 +90,7 @@ export class TableComponent implements OnInit, OnDestroy {
       }
     }
     this.dataAsync.pipe(takeUntil(this.unsubscribeData)).subscribe(res => {
-      this.dataSync = cloneDeep(res);
-      this.dataSource = res.map(response => {
-        for (const key in response) {
-          if (!this.keysSettings.includes(key)) {
-            delete response[key];
-          }
-        }
-        return response;
-      });
-      this.source.load(this.dataSource);
+      this.source.load(this.initializeData(res));
     });
   }
 
@@ -69,7 +103,7 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   foundObject(event: any) {
-    this.editE.emit(find(this.dataSync, event.data));
+    this.editE.emit(find(this.dataSync, ['id', event.data.id]));
   }
 
   emitConfirm(event: any) { // Emite o evento recebido da table com as info do evento escolhido
@@ -80,6 +114,8 @@ export class TableComponent implements OnInit, OnDestroy {
     };
     this.editConfirm.emit(resp); // Emite o evento para ser tratado no pai
   }
+
+
 
   ngOnDestroy() {
     this.unsubscribeData.next();

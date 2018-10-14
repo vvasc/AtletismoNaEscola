@@ -101,6 +101,10 @@ export class TableService {
         title: 'Título Quiz',
         type: 'string',
       },
+      id: {
+        title: 'Identificação',
+        type: 'string',
+      },
     },
   };
 

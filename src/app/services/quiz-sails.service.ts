@@ -32,11 +32,11 @@ export class QuizSailsService {
   }
 
   patchQuiz(id: number|string, quiz: any) {
-    return this.http.patch(`${this.endpoint}/quiz/${id}`, {...quiz}, { headers: this.getHeaders() });
+    return this.http.patch(`${this.endpoint}/Quiz/${id}`, {...quiz}, { headers: this.getHeaders() });
   }
 
   getQuiz(id: number|string) {
-    return this.http.get(`${this.endpoint}/quiz/${id}`, { headers: this.getHeaders() });
+    return this.http.get(`${this.endpoint}/Quiz/${id}`, { headers: this.getHeaders() });
   }
 
   getHeaders() {

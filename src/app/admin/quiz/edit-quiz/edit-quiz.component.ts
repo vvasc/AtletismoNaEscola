@@ -23,7 +23,6 @@ export class EditQuizComponent implements OnInit {
   }
 
   resolveQuiz(event: any) {
-    console.log(event);
     this.quizService.patchQuiz(event.id, event).subscribe(response => {
       this.quizService.getQuiz(event.id).subscribe(quizes => this.update = quizes);
     });

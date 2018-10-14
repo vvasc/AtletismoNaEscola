@@ -96,7 +96,6 @@ export class CustomizeProvaComponent implements OnChanges, OnInit {
   }
 
   patchDrangDrop(quizSelected: any) {
-    console.log(quizSelected);
     this.formAtividade.patchValue(quizSelected);
     this.showQuestoes = ('questoes' in quizSelected) ? quizSelected.questoes : null;
     this.conteudoID = ('conteudo' in quizSelected) && ( quizSelected.conteudo.length )
