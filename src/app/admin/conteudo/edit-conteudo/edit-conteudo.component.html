@@ -13,10 +13,23 @@
     <ngx-form-conteudo [dados]="selecionado" [quizes]="quizes" (formValue)="getForm($event)"></ngx-form-conteudo>
     <br>
     <div class="form-group">
-      <button class="btn btn-primary" [disabled]="!formConteudo?.valid || querying" (click)="editConteudo()">EDITAR CONTEÚDO</button>
+      <button class="btn btn-primary btn-with-icon" [disabled]="!formConteudo?.valid || querying" (click)="editConteudo()">
+        <i class="nb-edit"></i>
+        EDITAR CONTEÚDO
+      </button>
+      <button class="btn btn-danger btn-with-icon delete" [disabled]="!formConteudo?.valid || querying" (click)="deleteConteudo()">
+        <i class="nb-trash"></i>
+        DELETAR CONTEÚDO
+      </button>
+      <ngx-spinner
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#000000"
+        type = "square-jelly-box"
+      ></ngx-spinner>
       <button [disabled]="!formConteudo?.value.texto" type="button" class="btn btn-hero-info btn-with-icon" style="float: right;" (click)="preview()">
         <i class="nb-info"></i>
-        <span style="padding-left: 10px;" nbPopover="Veja como vai ficar o conteúdo, o conteudo atualiza em tempo real" nbPopoverMode="hint">Preview</span>
+        <span style="padding-left: 10px;" nbPopover="Veja como vai ficar o conteúdo, o conteudo atualiza em tempo real" nbPopoverMode="hint">PREVIEW</span>
       </button>
     </div>
   </nb-card-body>

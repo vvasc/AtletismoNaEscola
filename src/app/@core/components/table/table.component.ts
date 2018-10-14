@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { cloneDeep, find } from 'lodash';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Subject } from 'rxjs';
@@ -18,7 +18,7 @@ import { TableService } from '../../../services/table.service';
   `],
 })
 
-export class TableComponent implements OnInit, OnDestroy {
+export class TableComponent implements OnInit, OnDestroy, OnChanges {
   @Input() dataAsync: Observable<any>; // Observable que indica para a busca dos objetos da tabela
   @Input() deleteData: any = [];
   @Input() titulo: string = '';
@@ -46,18 +46,24 @@ export class TableComponent implements OnInit, OnDestroy {
         this.keysSettings.push(key);
       }
     }
-    this.dataAsync.pipe(takeUntil(this.unsubscribeData)).subscribe(res => {
-      this.dataSync = cloneDeep(res);
-      this.dataSource = res.map(response => {
-        for (const key in response) {
-          if (!this.keysSettings.includes(key)) {
-            delete response[key];
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.dataAsync) {
+      this.unsubscribeData.next(); // unsubscribe na observable anterior
+      this.dataAsync.pipe(takeUntil(this.unsubscribeData)).subscribe(res => {
+        this.dataSync = cloneDeep(res);
+        this.dataSource = res.map(response => {
+          for (const key in response) {
+            if (!this.keysSettings.includes(key)) {
+              delete response[key];
+            }
           }
-        }
-        return response;
+          return response;
+        });
+        this.source.load(this.dataSource);
       });
-      this.source.load(this.dataSource);
-    });
+    }
   }
 
   onDelete(event): void {
