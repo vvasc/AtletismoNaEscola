@@ -27,6 +27,22 @@ export class QuizSailsService {
     return this.http.get(`${this.endpoint}/Quizes-livres/`, { headers: this.getHeaders() });
   }
 
+  getAllQuiz() {
+    return this.http.get(`${this.endpoint}/Quiz/`, { headers: this.getHeaders() });
+  }
+
+  patchQuiz(id: number|string, quiz: any) {
+    return this.http.patch(`${this.endpoint}/Quiz/${id}`, {...quiz}, { headers: this.getHeaders() });
+  }
+
+  getQuiz(id: number|string) {
+    return this.http.get(`${this.endpoint}/Quiz/${id}`, { headers: this.getHeaders() });
+  }
+
+  deleteQuiz(id: number|string) {
+    return this.http.delete(`${this.endpoint}/Quiz/${id}`, { headers: this.getHeaders() });
+  }
+
   getHeaders() {
     return new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',

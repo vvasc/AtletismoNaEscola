@@ -1,0 +1,17 @@
+<ngx-table
+  [dataAsync]="quizAsync"
+  [update]="update"
+  [remove]="remove"
+  titulo="Quizes Criados"
+  columns="quizes"
+  (editE)="selectProva($event)"
+></ngx-table>
+<nb-card>
+  <nb-card-body>
+    <ngx-customize-prova
+    [quizSelected]="provaSelected"
+    (QuizE)="resolveQuiz($event)"
+    (deleteQuiz)="deleteQuiz($event)">
+    </ngx-customize-prova>
+  </nb-card-body>
+</nb-card>
