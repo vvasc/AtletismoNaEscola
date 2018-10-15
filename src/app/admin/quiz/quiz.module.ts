@@ -1,14 +1,14 @@
-import { QuizRoutingModule } from './quiz-routing';
-import { CreateQuizModule } from './create-quiz/create-quiz.module';
+import { QuizSailsService } from './../../services/quiz-sails.service';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { QuizRoutingModule } from './quiz-routing';
 import { QuizComponent } from './quiz.component';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
-  imports: [CommonModule, QuizRoutingModule, CreateQuizModule],
+  imports: [CommonModule, QuizRoutingModule],
   exports: [],
   declarations: [QuizComponent],
-  providers: [],
+  providers: [QuizSailsService],
 })
 export class QuizModule { }

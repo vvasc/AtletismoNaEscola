@@ -1,6 +1,5 @@
-import { CreateQuizComponent } from './create-quiz/create-quiz.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { QuizComponent } from './quiz.component';
 
@@ -11,7 +10,11 @@ const routes: Routes = [
     children: [
       {
         path: 'create',
-        component: CreateQuizComponent,
+        loadChildren: './create-quiz/create-quiz.module#CreateQuizModule',
+      },
+      {
+        path: 'edit',
+        loadChildren: './edit-quiz/edit-quiz.module#EditQuizModule',
       },
     ],
   },
