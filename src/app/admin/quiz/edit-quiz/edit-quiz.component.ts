@@ -11,6 +11,7 @@ export class EditQuizComponent implements OnInit {
   quizAsync: Observable<any>;
   provaSelected: any;
   update: any = [];
+  remove: number|string = null;
 
   constructor(private quizService: QuizSailsService) { }
 
@@ -22,9 +23,14 @@ export class EditQuizComponent implements OnInit {
     this.provaSelected = event;
   }
 
+  deleteQuiz(event: any) {
+    this.quizService.deleteQuiz(event).subscribe();
+    this.remove = event;
+  }
+
   resolveQuiz(event: any) {
     this.quizService.patchQuiz(event.id, event).subscribe(response => {
-      this.quizService.getQuiz(event.id).subscribe(quizes => this.update = quizes);
+      this.update = response;
     });
   }
 }

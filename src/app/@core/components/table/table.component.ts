@@ -26,6 +26,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   @Input() columns: string; // Determina colunas mostradas
   @Input() edit: boolean = false; // Ativa ou desativa a edicao
   @Input() update: any = null; // Use para dar update na table
+  @Input() remove: number|string = null; // Use para id que deseja remover
   @Output() editE = new EventEmitter(); // Objeto com id especifico emitido para ser tratado no component pai
   @Output() editConfirm = new EventEmitter(); // Retorna objeto com informacoes sobre a linha editada
   private unsubscribeData: Subject<void> = new Subject();
@@ -48,6 +49,10 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
     if ('update' in changes && changes.update.currentValue !== changes.update.previousValue) {
       // tslint:disable-next-line:max-line-length
       !changes.update.previousValue || changes.update.previousValue.id !== changes.update.currentValue.id ? this.reInitialize(changes.update.currentValue) : null;
+    }
+    if ('remove' in changes && changes.remove.currentValue !== changes.remove.previousValue) {
+      // tslint:disable-next-line:max-line-length
+      !changes.remove.previousValue || changes.remove.previousValue.id !== changes.remove.currentValue.id ? this.removeElement(changes.remove.currentValue) : null;
     }
   }
 
@@ -103,7 +108,11 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   foundObject(event: any) {
-    this.editE.emit(find(this.dataSync, ['id', event.data.id]));
+    this.editE.emit(find(this.dataSync, event.data));
+  }
+
+  removeElement(id) {
+    this.source.remove(find(this.dataSource, ['id', id]));
   }
 
   emitConfirm(event: any) { // Emite o evento recebido da table com as info do evento escolhido

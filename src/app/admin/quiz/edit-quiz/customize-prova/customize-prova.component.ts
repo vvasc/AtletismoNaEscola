@@ -1,7 +1,6 @@
-import { cloneDeep } from 'lodash';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Component, Input, OnChanges, SimpleChanges, OnInit, EventEmitter, Output } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ngx-customize-prova',
@@ -67,6 +66,9 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
     <div class="col-md-2">
       <button type="button" class="btn btn-primary" (click)="createProva()">Editar Prova</button>
     </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-danger" (click)="deleteProva()">Apagar Prova</button>
+    </div>
   </div>
   `,
 })
@@ -74,11 +76,10 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class CustomizeProvaComponent implements OnChanges, OnInit {
   @Input() quizSelected: any = null;
   @Output() QuizE = new EventEmitter();
+  @Output() deleteQuiz = new EventEmitter();
   formAtividade: FormGroup;
   questoesSelected: any;
   showQuestoes: any;
-  conteudoID: any;
-  atividadeID: any;
 
   constructor(private fb: FormBuilder) { }
 
@@ -98,25 +99,21 @@ export class CustomizeProvaComponent implements OnChanges, OnInit {
   patchDrangDrop(quizSelected: any) {
     this.formAtividade.patchValue(quizSelected);
     this.showQuestoes = ('questoes' in quizSelected) ? quizSelected.questoes : null;
-    this.conteudoID = ('conteudo' in quizSelected) && ( quizSelected.conteudo.length )
-      ? quizSelected.conteudo[0].id : null;
-    this.atividadeID = ('ownerAtividade' in quizSelected) && ( quizSelected.ownerAtividade !== null )
-      ? quizSelected.ownerAtividade.id : null;
   }
 
   createProva() {
-    const quiz = cloneDeep(this.quizSelected);
-    ('questoes' in quiz) ? delete quiz.questoes : null;
-    ('titulo' in quiz) ? delete quiz.titulo : null;
-    ('conteudo' in quiz) ? delete quiz.titulo : null;
-    ('ownerAtividade' in quiz) ? delete quiz.titulo : null;
     this.QuizE.emit({
       titulo: this.formAtividade.get('titulo').value,
-      ...quiz,
+      id: this.quizSelected.id,
       questoes: [ ...this.showQuestoes.map(questoes => questoes.id)],
-      conteudo: this.conteudoID,
-      ownerAtividade: this.atividadeID,
     });
+    this.formAtividade.reset();
+    this.showQuestoes = null;
+    this.quizSelected = null;
+  }
+
+  deleteProva() {
+    this.deleteQuiz.emit(this.quizSelected.id);
     this.formAtividade.reset();
     this.showQuestoes = null;
     this.quizSelected = null;
