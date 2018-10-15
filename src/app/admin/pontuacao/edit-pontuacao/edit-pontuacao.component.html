@@ -10,6 +10,11 @@
     Editar Pontuação
   </nb-card-header>
   <nb-card-body>
-    
+    <ngx-form-pontuacao></ngx-form-pontuacao>
+    <br>
+    <div class="form-group">
+      <button class="btn btn-primary" [disabled]="!formPontucao?.valid || querying" (click)="editPontuacao()">EDITAR PONTUAÇÃO</button>
+    </div>
+
   </nb-card-body>
 </nb-card>

@@ -27,6 +27,10 @@ export class PontuacaoService {
     return this.http.get(`${this.endpoint}/Pontuacao-colegio/`, { headers: this.getHeaders() , withCredentials: true });
   }
 
+  patchPontuacao(id, pontuacao) {
+    return this.http.patch(`${this.endpoint}/Pontuacao/${id}`, {...pontuacao}, { headers: this.getHeaders() });
+  }
+
   getHeaders() {
     return new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',

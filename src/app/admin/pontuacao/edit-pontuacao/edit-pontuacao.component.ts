@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PontuacaoService } from '../../../services/pontuacao.service';
@@ -11,11 +12,15 @@ import { map } from 'rxjs/operators';
 })
 export class EditPontuacaoComponent implements OnInit {
   pontuacaoselecionada;
+  formPontuacao: FormGroup;
+  selecionado;
   pontuacaoObs: Observable<any>;
+  querying: boolean = false;
 
   constructor(
     private pontuacaoservice: PontuacaoService,
     private notificaoservice: NotificacaoService,
+    private notificacao: NotificacaoService,
   ) { }
 
   ngOnInit() {
@@ -36,6 +41,34 @@ export class EditPontuacaoComponent implements OnInit {
 
   selectPontuacao(event) {
     this.pontuacaoselecionada = event;
+  }
+
+  editPontuacao(event) {
+    const formval = this.formPontuacao.value;
+    (formval.owner === '') ? formval.owner = null : null;
+    this.pontuacaoservice.patchPontuacao(this.selecionado.id, formval).subscribe(succ => {
+      this.notificacao.ngxtoaster('Sucesso!', 'Pontuação Editada com Sucesso!', true);
+      this.refreshPontuacao();
+      this.formPontuacao.reset();
+    }, err => {
+      const errmsg = (err.error.code === 'E_UNIQUE') ? '' : 'Falha na conexão!';
+      this.notificacao.ngxtoaster('ERRO!', errmsg, false);
+    });
+  }
+
+  refreshPontuacao() {
+    this.pontuacaoObs = this.pontuacaoservice.getAllPontuacao().pipe(
+      map((pontuacoes: any) => {
+        pontuacoes.forEach(pontuacao => {
+          // Refatorando objeto pra ser usado na table
+          (pontuacao.owner) ? pontuacao['pontuacao'] = pontuacao.owner.titulo : null;
+        });
+        return pontuacoes;
+      }),
+    );
+    this.pontuacaoObs.subscribe(null, err => {
+      this.notificacao.ngxtoaster('ERRO!', 'Falha na conexão!', false);
+    });
   }
 
 }
