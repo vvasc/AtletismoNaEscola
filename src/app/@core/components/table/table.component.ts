@@ -52,7 +52,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
     }
     if ('remove' in changes && changes.remove.currentValue !== changes.remove.previousValue) {
       // tslint:disable-next-line:max-line-length
-      !changes.remove.previousValue || changes.remove.previousValue.id !== changes.remove.currentValue.id ? this.removeElement(changes.remove.currentValue) : null;
+      !changes.remove.previousValue || changes.remove.previousValue !== changes.remove.currentValue ? this.removeElement(changes.remove.currentValue) : null;
     }
   }
 
