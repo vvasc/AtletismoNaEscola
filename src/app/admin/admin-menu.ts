@@ -166,7 +166,16 @@ export const SUPERADMIN_MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Colégio',
     icon: 'fa fa-bank',
-    link: '/admin/colegio/',
+    children: [
+      {
+        title: 'Adicionar Colégio',
+        link: '/admin/colegio/create',
+      },
+      {
+        title: 'Editar Colégio',
+        link: '/admin/colegio/edit',
+      },
+    ],
   },
   {
     title: 'Professor',

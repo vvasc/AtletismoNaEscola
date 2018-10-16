@@ -95,6 +95,18 @@ export class TableService {
       },
     },
   };
+  colegio = {
+    columns: {
+      nome: {
+        title: 'Nome',
+        type: 'string',
+      },
+      endereco: {
+        title: 'Endereço',
+        type: 'string',
+      },
+    },
+  };
 
   constructor() { }
 
@@ -127,6 +139,10 @@ export class TableService {
       }
       case 'atividades': {
         column = this.atividades;
+        break;
+      }
+      case 'colegio': {
+        column = this.colegio;
         break;
       }
     }
