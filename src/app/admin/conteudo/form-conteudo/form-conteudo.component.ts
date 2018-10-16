@@ -31,17 +31,23 @@ export class FormConteudoComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.dados && this.formConteudo) {
+    if ('dados' in changes && this.formConteudo) {
+      let titulo = '';
+      let texto = '';
       let ownerid = '';
       this.quizselecionado = null;
-      if (changes.dados.currentValue.owner) {
-        this.quizselecionado = changes.dados.currentValue.owner;
-        ownerid = changes.dados.currentValue.owner.id;
+      if (changes.dados.currentValue) {
+        titulo = changes.dados.currentValue.titulo;
+        texto = changes.dados.currentValue.texto;
+        if (changes.dados.currentValue.owner) {
+          this.quizselecionado = changes.dados.currentValue.owner;
+          ownerid = changes.dados.currentValue.owner.id;
+        }
       }
       this.formConteudo.setValue({
-        titulo: changes.dados.currentValue.titulo,
+        titulo: titulo,
         owner: ownerid,
-        texto: changes.dados.currentValue.texto,
+        texto: texto,
       });
     }
   }

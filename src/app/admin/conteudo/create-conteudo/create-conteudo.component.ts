@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { NotificacaoService } from './../../../services/notificacao.service';
 import { ConteudoService } from './../../../services/conteudo.service';
 import { FormGroup } from '@angular/forms';
@@ -21,6 +22,7 @@ export class CreateConteudoComponent implements OnInit {
     private quizService: QuizSailsService,
     private conteudoService: ConteudoService,
     private notificacao: NotificacaoService,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit() {
@@ -50,16 +52,25 @@ export class CreateConteudoComponent implements OnInit {
     (formval.owner === '') ? delete formval.owner : null;
 
     this.querying = true;
+    this.spinner.show();
     this.conteudoService.createConteudo(formval).subscribe(res => {
+      this.spinnerTimeout();
       this.querying = false;
       this.notificacao.ngxtoaster('Conteúdo', 'Criado com Sucesso!', true);
       this.refreshQuizes(); // Renova a lista dos quizes livres
       this.formConteudo.reset();
     }, err => {
+      this.spinnerTimeout();
       this.querying = false;
       const erromsg = (err.error.code === 'E_UNIQUE') ? 'Já existe conteudo com este título!' : 'Erro na conexão!';
       this.notificacao.ngxtoaster('Criação Falhou!', erromsg, false);
     });
+  }
+
+  spinnerTimeout() {
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
   }
 
   preview() {

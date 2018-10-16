@@ -8,7 +8,7 @@ export class ConteudoService {
   constructor(private http: HttpClient) { }
 
   createConteudo(conteudo: any) {
-    return this.http.post(`${this.endpoint}/Conteudo/`, {...conteudo}, { headers: this.getHeaders() });
+    return this.http.post(`${this.endpoint}/Conteudo/`, {...conteudo}, this.getOptions() );
   }
 
   getAllConteudo() {
@@ -16,11 +16,19 @@ export class ConteudoService {
   }
 
   patchConteudo(id, conteudo) {
-    return this.http.patch(`${this.endpoint}/Conteudo/${id}`, {...conteudo}, { headers: this.getHeaders() });
+    return this.http.patch(`${this.endpoint}/Conteudo/${id}`, {...conteudo}, this.getOptions());
   }
 
   getConteudo(id: number) {
     return this.http.get(`${this.endpoint}/Conteudo/${id}`, { headers: this.getHeaders() });
+  }
+
+  deleteConteudo(id: number) {
+    return this.http.delete(`${this.endpoint}/Conteudo/${id}`, this.getOptions() );
+  }
+
+  getOptions() {
+    return { headers: this.getHeaders(), withCredentials: true};
   }
 
   getHeaders() {
