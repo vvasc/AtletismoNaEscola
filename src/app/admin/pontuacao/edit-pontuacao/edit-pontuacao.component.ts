@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { PontuacaoService } from '../../../services/pontuacao.service';
 import { NotificacaoService } from '../../../services/notificacao.service';
 import { map } from 'rxjs/operators';
@@ -16,6 +16,7 @@ export class EditPontuacaoComponent implements OnInit {
   selecionado;
   pontuacaoObs: Observable<any>;
   querying: boolean = false;
+  localstorage$: Subject<string>;
 
   constructor(
     private pontuacaoservice: PontuacaoService,
@@ -70,5 +71,11 @@ export class EditPontuacaoComponent implements OnInit {
       this.notificacao.ngxtoaster('ERRO!', 'Falha na conexão!', false);
     });
   }
+
+  getForm(form) {
+    this.formPontuacao = form;
+    this.localstorage$.next(this.formPontuacao.value.texto);
+  }
+
 
 }
