@@ -16,6 +16,7 @@ export class EditColegioComponent implements OnInit {
   colegioResolver: any;
   formColegio: FormGroup;
   disabled = true;
+  update: any = [];
 
   constructor(
     private colegioService: ColegioService,
@@ -38,8 +39,8 @@ export class EditColegioComponent implements OnInit {
 
   onSubmit() {
     this.colegioService.patchColegio(this.colegioResolver.id, this.formColegio.value).subscribe(res => {
+      this.update = res;
       this.notificacao.ngxtoaster('Colégio', 'Editado com Sucesso!', true);
-      this.getAll();
       this.formColegio.reset();
     }, err => {
       this.notificacao.ngxtoaster('Edição Falhou!', 'Erro na conexão!', false);

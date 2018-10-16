@@ -107,6 +107,18 @@ export class TableService {
       },
     },
   };
+  quizes = {
+    columns: {
+      titulo: {
+        title: 'Título Quiz',
+        type: 'string',
+      },
+      id: {
+        title: 'Identificação',
+        type: 'string',
+      },
+    },
+  };
 
   constructor() { }
 
@@ -143,6 +155,10 @@ export class TableService {
       }
       case 'colegio': {
         column = this.colegio;
+        break;
+      }
+      case 'quizes': {
+        column = this.quizes;
         break;
       }
     }

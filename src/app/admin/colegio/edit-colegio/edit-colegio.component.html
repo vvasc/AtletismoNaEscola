@@ -1,5 +1,6 @@
 <ngx-table
   [dataAsync]="colegioAsync"
+  [update]="update"
   (editE)="resolver($event)"
   titulo="Colégios"
   columns='colegio'>
