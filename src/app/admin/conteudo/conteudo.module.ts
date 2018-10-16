@@ -1,3 +1,7 @@
+import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
+import { MatDialogModule } from '@angular/material';
+import { ConfirmationModalComponent } from './../../@core/components/confirmation-modal/confirmation-modal.component';
+import { ConfirmationModalModule } from './../../@core/components/confirmation-modal/confirmation-modal.module';
 import { TableModule } from './../../@core/components/table/table.module';
 import { ConteudoService } from './../../services/conteudo.service';
 import { QuizSailsService } from './../../services/quiz-sails.service';
@@ -17,15 +21,22 @@ import { CKEditorModule } from 'ng2-ckeditor';
     ThemeModule,
     CKEditorModule,
     TableModule,
+    ConfirmationModalModule,
+    MatDialogModule,
+    NgxSpinnerModule,
   ],
   declarations: [
     CreateConteudoComponent,
     EditConteudoComponent,
     FormConteudoComponent,
   ],
+  entryComponents: [
+    ConfirmationModalComponent,
+  ],
   providers: [
     QuizSailsService,
     ConteudoService,
+    NgxSpinnerService,
   ],
 })
 export class ConteudoModule { }
