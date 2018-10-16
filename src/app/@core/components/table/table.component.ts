@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { cloneDeep, find, remove } from 'lodash';
+import { find } from 'lodash';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
@@ -30,14 +30,9 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   @Output() editE = new EventEmitter(); // Objeto com id especifico emitido para ser tratado no component pai
   @Output() editConfirm = new EventEmitter(); // Retorna objeto com informacoes sobre a linha editada
   private unsubscribeData: Subject<void> = new Subject();
-  private unsubscribeDataId: Subject<void> = new Subject();
-  keysSettings: any = [];
   dataSource: any = [];
-  dataSync: any;
   source: LocalDataSource = new LocalDataSource();
   settings: any = [];
-  editEvento: boolean = false;
-  eventoResolved: any = [];
 
   constructor(private tableService: TableService) { }
 
@@ -46,9 +41,9 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if ('update' in changes && changes.update.currentValue !== changes.update.previousValue) {
+    if ('update' in changes) { // Só estara presente em changes se foi alterado
       // tslint:disable-next-line:max-line-length
-      !changes.update.previousValue || changes.update.previousValue.id !== changes.update.currentValue.id ? this.reInitialize(changes.update.currentValue) : null;
+      !changes.update.firstChange ? this.reInitialize(changes.update.currentValue) : null;
     }
     if ('remove' in changes && changes.remove.currentValue !== changes.remove.previousValue) {
       // tslint:disable-next-line:max-line-length
@@ -56,47 +51,18 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  initializeData(data: any) {
-    this.dataSync = cloneDeep(data);
-    return this.dataSource = data.map(response => {
-      for (const key in response) {
-        if (!this.keysSettings.includes(key)) {
-          delete response[key];
-        }
-      }
-      return response;
-    });
-  }
-
-  updateData(data: any) {
-    const clone = cloneDeep(data);
-    for (const key in clone) {
-      if (!this.keysSettings.includes(key)) {
-        delete clone[key];
-      }
-    }
-    return clone;
-  }
-
   reInitialize(update: any)  {
     if (find(this.dataSource, ['id', update.id])) {
-      remove(this.dataSync, ['id', update.id]);
-      this.dataSync.push(update);
-      this.source.update(find(this.dataSource, ['id', update.id]), this.updateData(update));
+      this.source.update(find(this.dataSource, ['id', update.id]), update);
     }
   }
 
   initializeComponent() {
     this.tableService.setEdit(this.edit);
     this.settings = this.tableService.getColumns(this.columns);
-    for (const key in this.settings.columns) {
-      if (this.settings.columns[key]) {
-        this.keysSettings.push(key);
-      }
-    }
-
     this.dataAsync.pipe(takeUntil(this.unsubscribeData)).subscribe(res => {
-      this.source.load(this.initializeData(res));
+      this.dataSource = res;
+      this.source.load(res);
     });
   }
 
@@ -109,7 +75,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   foundObject(event: any) {
-    this.editE.emit(find(this.dataSync, event.data));
+    this.editE.emit(event.data);
   }
 
   removeElement(id) {
@@ -117,20 +83,11 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   emitConfirm(event: any) { // Emite o evento recebido da table com as info do evento escolhido
-    const eventData = find(this.dataSync, event.data); // Informacoes necessarias do evento
-    const resp = {
-      event, // Dados sobre a edicao
-      eventData,
-    };
-    this.editConfirm.emit(resp); // Emite o evento para ser tratado no pai
+    this.editConfirm.emit(event.data); // Emite o evento para ser tratado no pai
   }
-
-
 
   ngOnDestroy() {
     this.unsubscribeData.next();
-    this.unsubscribeDataId.next();
-    this.unsubscribeDataId.complete();
     this.unsubscribeData.complete();
   }
 

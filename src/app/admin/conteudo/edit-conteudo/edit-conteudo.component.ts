@@ -24,6 +24,8 @@ export class EditConteudoComponent implements OnInit {
   querying: boolean = false;
   end = 'http://localhost:4200';
   localstorage$: Subject<string>; // Usado para nao ficar atualizando o storage toda hora, só atualiza a cada 1 seg
+  update;
+  delete;
 
   constructor(
     private quizService: QuizSailsService,
@@ -57,9 +59,10 @@ export class EditConteudoComponent implements OnInit {
           this.spinner.show();
           this.conteudoService.deleteConteudo(this.selecionado.id)
           .subscribe((succ) => {
+            this.delete = this.selecionado.id;
+            this.selecionado = null;
             this.SpinnerTimeout();
             this.refreshQuizes();
-            this.refreshConteudo();
             this.formConteudo.reset();
             this.notificacao.ngxtoaster('Conteúdo', 'Conteúdo Deletado!', true);
           }, (err) => {
@@ -76,10 +79,11 @@ export class EditConteudoComponent implements OnInit {
     const formval = this.formConteudo.value;
     (formval.owner === '') ? formval.owner = null : null;
     this.conteudoService.patchConteudo(this.selecionado.id, formval).subscribe(succ => {
+      this.selecionado = null;
+      this.update = succ;
       this.SpinnerTimeout();
       this.notificacao.ngxtoaster('Sucesso!', 'Conteúdo Editado com Sucesso!', true);
       this.refreshQuizes();
-      this.refreshConteudo();
       this.formConteudo.reset();
     }, err => {
       this.SpinnerTimeout();
