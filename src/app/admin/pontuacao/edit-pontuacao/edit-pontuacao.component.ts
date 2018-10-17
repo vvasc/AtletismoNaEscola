@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { PontuacaoService } from '../../../services/pontuacao.service';
 import { NotificacaoService } from '../../../services/notificacao.service';
 import { map } from 'rxjs/operators';
@@ -13,10 +13,8 @@ import { map } from 'rxjs/operators';
 export class EditPontuacaoComponent implements OnInit {
   pontuacaoselecionada;
   formPontuacao: FormGroup;
-  selecionado;
   pontuacaoObs: Observable<any>;
   querying: boolean = false;
-  localstorage$: Subject<string>;
 
   constructor(
     private pontuacaoservice: PontuacaoService,
@@ -47,7 +45,7 @@ export class EditPontuacaoComponent implements OnInit {
   editPontuacao(event) {
     const formval = this.formPontuacao.value;
     (formval.owner === '') ? formval.owner = null : null;
-    this.pontuacaoservice.patchPontuacao(this.selecionado.id, formval).subscribe(succ => {
+    this.pontuacaoservice.patchPontuacao(this.pontuacaoselecionada.id, formval).subscribe(succ => {
       this.notificacao.ngxtoaster('Sucesso!', 'Pontuação Editada com Sucesso!', true);
       this.refreshPontuacao();
       this.formPontuacao.reset();
@@ -74,7 +72,6 @@ export class EditPontuacaoComponent implements OnInit {
 
   getForm(form) {
     this.formPontuacao = form;
-    this.localstorage$.next(this.formPontuacao.value.texto);
   }
 
 

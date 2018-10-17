@@ -10,10 +10,10 @@
     Editar Pontuação
   </nb-card-header>
   <nb-card-body>
-    <ngx-form-pontuacao [pontuacao]='selecionado' (formValue)="getForm($event)"></ngx-form-pontuacao>
+    <ngx-form-pontuacao [pontuacao]='pontuacaoselecionada' (formValue)="getForm($event)"></ngx-form-pontuacao>
     <br>
     <div class="form-group">
-      <button class="btn btn-primary" [disabled]="!formPontucao?.valid || querying" (click)="editPontuacao()">EDITAR PONTUAÇÃO</button>
+      <button class="btn btn-primary" [disabled]="!formPontuacao?.valid || querying" (click)="editPontuacao()">EDITAR PONTUAÇÃO</button>
     </div>
 
   </nb-card-body>
