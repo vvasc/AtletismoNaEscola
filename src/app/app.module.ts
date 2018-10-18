@@ -1,6 +1,7 @@
+import { AuthInterceptor } from './services/auth.interceptor';
 import { NotificacaoService } from './services/notificacao.service';
 import { APP_BASE_HREF } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +37,7 @@ import { AlunoGuard } from './guards/aluno-guard';
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     NotificacaoService,
     AuthService,
     AdminGuard,
