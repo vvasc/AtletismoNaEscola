@@ -19,6 +19,10 @@ export class PontuacaoService {
     return this.http.post(`${this.endpoint}/Pontuacao/`, {...pontuacao}, this.getOptions() );
   }
 
+  deletarPontuacao(id: number) {
+    return this.http.delete(`${this.endpoint}/Pontuacao/${id}`, this.getOptions() );
+  }
+
   getPontuacaoAluno() {
     return this.http.get(`${this.endpoint}/Pontuacao-aluno/`, this.getOptions() );
   }
