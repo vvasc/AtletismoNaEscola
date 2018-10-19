@@ -53,21 +53,6 @@ export class EditPontuacaoComponent implements OnInit {
     });
   }
 
-  refreshPontuacao() {
-    this.pontuacaoObs = this.pontuacaoservice.getAllPontuacao().pipe(
-      map((pontuacoes: any) => {
-        pontuacoes.forEach(pontuacao => {
-          // Refatorando objeto pra ser usado na table
-          (pontuacao.owner) ? pontuacao['pontuacao'] = pontuacao.owner.titulo : null;
-        });
-        return pontuacoes;
-      }),
-    );
-    this.pontuacaoObs.subscribe(null, err => {
-      this.notificacao.ngxtoaster('ERRO!', 'Falha na conexão!', false);
-    });
-  }
-
   getForm(form) {
     this.formPontuacao = form;
   }
