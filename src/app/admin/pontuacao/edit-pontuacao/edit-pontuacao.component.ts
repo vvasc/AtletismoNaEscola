@@ -44,7 +44,6 @@ export class EditPontuacaoComponent implements OnInit {
 
   editPontuacao(event) {
     const formval = this.formPontuacao.value;
-    (formval.owner === '') ? formval.owner = null : null;
     this.pontuacaoservice.patchPontuacao(this.pontuacaoselecionada.id, formval).subscribe(succ => {
       this.notificacao.ngxtoaster('Sucesso!', 'Pontuação Editada com Sucesso!', true);
       this.formPontuacao.reset();
@@ -74,7 +73,13 @@ export class EditPontuacaoComponent implements OnInit {
   }
 
   deletar(event) {
-    this.pontuacaoservice.deletarPontuacao(this.pontuacaoselecionada.id);
+    this.pontuacaoservice.deletarPontuacao(this.pontuacaoselecionada.id).subscribe(succ => {
+      this.notificacao.ngxtoaster('Sucesso!', 'Pontuação deletada com Sucesso!', true);
+      this.formPontuacao.reset();
+    }, err => {
+      const errmsg = (err.error.code === 'E_UNIQUE') ? '' : 'Falha na conexão!';
+      this.notificacao.ngxtoaster('ERRO!', errmsg, false);
+    });
   }
 
 }

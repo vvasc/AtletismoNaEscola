@@ -14,7 +14,10 @@
     <br>
     <div class="form-group">
       <button class="btn btn-primary"  [disabled]="!formPontuacao?.valid || querying" (click)="editPontuacao()">EDITAR PONTUAÇÃO</button>
-      <button  class="btn btn-primary red" [disabled]="!formPontuacao?.valid || querying" (click)="deletar()">DELETAR</button>
+      <span style="padding-left: 10px;"> 
+        <button  class="btn btn-primary red" [disabled]="!formPontuacao?.valid || querying" (click)="deletar()">DELETAR</button>
+      </span>
+      
     </div>
 
   </nb-card-body>
