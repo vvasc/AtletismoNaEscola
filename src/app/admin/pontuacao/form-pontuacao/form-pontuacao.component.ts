@@ -31,7 +31,8 @@ export class FormPontuacaoComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.atividade && changes.atividade.currentValue) { // Se trocou a atividade, seta os campos correspondentes
+    // tslint:disable-next-line:max-line-length
+    if ('atividade' in changes && changes.atividade.currentValue) { // Se trocou a atividade, seta os campos correspondentes
       this.tituloAtividade = changes.atividade.currentValue.titulo;
       this.formPontuacao.controls['atividade'].setValue(changes.atividade.currentValue.id);
     }

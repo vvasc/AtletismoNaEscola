@@ -29,7 +29,7 @@ export class FormColegioComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.dados && this.formColegio) {
+    if ('dados' in changes && this.formColegio) {
       this.formColegio.setValue({
         nome: changes.dados.currentValue.nome,
         endereco: changes.dados.currentValue.endereco,
