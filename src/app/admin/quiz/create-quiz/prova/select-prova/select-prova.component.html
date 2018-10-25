@@ -1,5 +1,16 @@
 <nb-card>
     <nb-card-header>Questões Selecionadas</nb-card-header>
+    <div class="row">
+      <div class="col-md-12">
+        <form [formGroup]="formTitulo">
+          <div class="form-group">
+            <div class="input-group">
+              <input formControlName="titulo" placeholder="titulo" id="titulo" class="form-control" type="text">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
     <nb-card-body>
       <cdk-drop (dropped)="dropped($event)">
         <div class="row">

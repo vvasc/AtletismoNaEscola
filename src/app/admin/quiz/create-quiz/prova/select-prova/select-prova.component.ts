@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray, CdkDragExit } from '@angular/cdk/drag-drop';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { find, remove } from 'lodash';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -9,6 +9,8 @@ import { QuizSailsService } from '../../../../../services/quiz-sails.service';
 import {
   ConfirmationModalComponent,
 } from './../../../../../@core/components/confirmation-modal/confirmation-modal.component';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NotificacaoService } from '../../../../../services/notificacao.service';
 
 // tslint:disable-next-line:max-line-length
 @Component({
@@ -16,15 +18,18 @@ import {
   templateUrl: './select-prova.component.html',
   styleUrls: ['./select-prova.component.scss'],
 })
-export class SelectProvaComponent implements OnChanges {
+export class SelectProvaComponent implements OnChanges, OnInit {
   @Input() questao: any = [];
   questaoAnterior: any;
   questoesSelected: any = [];
+  formTitulo: FormGroup;
 
   constructor(
       public dialog: MatDialog,
       private spinner: NgxSpinnerService,
       private quizService: QuizSailsService,
+      private formBuilder: FormBuilder,
+      private notificacaoService: NotificacaoService,
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -32,6 +37,12 @@ export class SelectProvaComponent implements OnChanges {
     if ('questao' in changes && changes.questao.currentValue !== changes.questao.previousValue) {
       !changes.questao.previousValue || changes.questao.previousValue.id !== changes.questao.currentValue.id ? this.patchValues(changes.questao.currentValue) : null;
     }
+  }
+
+  ngOnInit() {
+    this.formTitulo = this.formBuilder.group({
+      titulo: ['', Validators.required],
+    });
   }
 
   patchValues(questao: any) {
@@ -51,6 +62,10 @@ export class SelectProvaComponent implements OnChanges {
   }
 
   createProva() {
+    if (this.formTitulo.invalid) {
+      this.notificacaoService.ngxtoaster('Erro', 'Erro no Preenchimento', false);
+      return;
+    }
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
       width: '40%',
       data: {
@@ -64,11 +79,14 @@ export class SelectProvaComponent implements OnChanges {
         if (res === true) {
           this.spinner.show();
           this.quizService.createQuiz({
+            titulo: this.formTitulo.value.titulo,
             questoes: [...this.questoesSelected.map(questoes => questoes.id)],
           });
         }
         setTimeout(() => {
           this.spinner.hide();
+          this.formTitulo.reset();
+          this.questoesSelected = [];
         }, 2000);
       }),
     ).subscribe();
