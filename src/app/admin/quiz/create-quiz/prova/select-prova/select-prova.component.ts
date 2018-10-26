@@ -71,6 +71,7 @@ export class SelectProvaComponent implements OnChanges, OnInit {
       data: {
         header: 'Aviso!',
         text: 'Você deseja criar uma prova?',
+        warning: false,
       },
       disableClose: true,
     });

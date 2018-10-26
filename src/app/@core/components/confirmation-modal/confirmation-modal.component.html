@@ -8,12 +8,17 @@
             </div>
             <br>
             <br>
-            <div class="row justify-content-center">
+            <div *ngIf="!data.warning; else warning" class="row justify-content-center">
                 <div class="col-12 text-center">
                     <button class="btn btn-hero-danger btn-demo " (click)="exit(false)">Não</button>
                     <button class="btn btn-hero-success btn-demo" (click)="exit(true)">Sim</button>
                 </div>
             </div>
+            <ng-template #warning>
+                <div class="col-12 text-center">
+                    <button class="btn btn-hero-danger btn-demo " (click)="exit(false)">Ok</button>
+                </div>
+            </ng-template>
         </div>
     </div>
 </div>
