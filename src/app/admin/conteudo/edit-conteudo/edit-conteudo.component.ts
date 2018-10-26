@@ -50,6 +50,7 @@ export class EditConteudoComponent implements OnInit {
       data: {
         header: 'Aviso!',
         text: 'Você realmente deseja deletar esse conteudo?',
+        warning: false,
       },
       disableClose: true,
     });
