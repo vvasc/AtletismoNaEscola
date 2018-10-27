@@ -2,7 +2,7 @@
   columns="colegio"
   titulo="Selecionar Escola"
   [dataAsync]="escolas"
-  (editE)="selectEscola($event)"
+  (editE)="selectEscola($event); scroll(form);"
 ></ngx-table>
 
 <nb-card>
@@ -11,8 +11,7 @@
   </nb-card-header>
   <nb-card-body>
     <ngx-form-conta [escola]="selectedEscola" (formValue)="resolveForm($event)"></ngx-form-conta>
-    <br>
-
+    <br #form>
     <div class="form-group">
       <button class="btn btn-primary btn-with-icon" [disabled]="!formProfessor?.valid || querying" (click)="criarProfessor()">
         <i class="nb-plus"></i>

@@ -34,6 +34,10 @@ export class CreateProfessorComponent implements OnInit {
     this.formProfessor = event;
   }
 
+  scroll(el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+
   criarProfessor() {
     const formval = this.formProfessor.value;
     const ACCOUNT = {

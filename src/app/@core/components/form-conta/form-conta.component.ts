@@ -11,6 +11,7 @@ export class FormContaComponent implements OnInit, OnChanges {
   @Input() escola; // Escola selecionada
   @Output() formValue = new EventEmitter();
   @Input() conta; // Dados para serem preenchidos da conta
+  @Input() edit: boolean = false; // True se for o componente de edit, desabilita o required da senha
 
   constructor(private fb: FormBuilder) { }
 
@@ -21,10 +22,11 @@ export class FormContaComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    const val = (this.edit) ? [] : [Validators.required];
     this.formConta = this.fb.group({
       emailAddress: ['', [Validators.required, Validators.email, Validators.maxLength(200)]],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
+      password: ['', ...val],
+      confirmPassword: ['', ...val],
       fullName: ['', [Validators.required, Validators.maxLength(120)]],
       escola: ['', [Validators.required, Validators.pattern('[0-9]')]],
       nomeEscola: [{value: '', disabled: true}],
@@ -46,7 +48,14 @@ export class FormContaComponent implements OnInit, OnChanges {
     }
     if ('conta' in changes && this.formConta && !changes.conta.firstChange) {
       const conta = changes.conta.currentValue;
-      
+      if (conta != null) {
+        this.formConta.controls['emailAddress'].setValue(conta.emailAddress);
+        this.formConta.controls['fullName'].setValue(conta.fullName);
+        this.formConta.controls['escola'].setValue(conta.escola.id);
+        this.formConta.controls['ano'].setValue(conta.ano);
+        this.formConta.controls['nomeEscola'].setValue(conta.escola.nome);
+      } else
+        this.formConta.reset();
     }
   }
 

@@ -7,6 +7,18 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
+  deleteAccount(id: number) {
+    return this.http.delete(`${this.endpoint}/account/${id}`, this.getOptions() );
+  }
+
+  patchAccount(id, account) {
+    return this.http.patch(`${this.endpoint}/account/${id}`, {...account}, this.getOptions());
+  }
+
+  getProfessores() {
+    return this.http.get(`${this.endpoint}/professores`, this.getOptions() );
+  }
+
   getAllAccounts() {
     return this.http.get(`${this.endpoint}/Account`, this.getOptions() );
   }

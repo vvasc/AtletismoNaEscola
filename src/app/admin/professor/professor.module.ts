@@ -1,3 +1,6 @@
+import { ConfirmationModalComponent } from './../../@core/components/confirmation-modal/confirmation-modal.component';
+import { MatDialogModule } from '@angular/material';
+import { ConfirmationModalModule } from './../../@core/components/confirmation-modal/confirmation-modal.module';
 import { AccountService } from './../../services/account.service';
 import { FormContaComponent } from './../../@core/components/form-conta/form-conta.component';
 import { ColegioService } from './../../services/colegio.service';
@@ -16,6 +19,8 @@ import { NotificacaoService } from '../../services/notificacao.service';
     CommonModule,
     ThemeModule,
     ProfessorRoutingModule,
+    ConfirmationModalModule,
+    MatDialogModule,
     TableModule,
     NgxSpinnerModule,
   ],
@@ -23,6 +28,9 @@ import { NotificacaoService } from '../../services/notificacao.service';
     CreateProfessorComponent,
     EditProfessorComponent,
     FormContaComponent,
+  ],
+  entryComponents: [
+    ConfirmationModalComponent,
   ],
   providers: [
     ColegioService,
