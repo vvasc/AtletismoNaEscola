@@ -2,7 +2,7 @@ import { AuthService } from './login.service';
 import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
-import { of } from 'rxjs';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
             catchError( (err, obs) => { // Pega o erro do HTTP Response
                 if (err.error && err.error === 'USUÁRIO NÃO RECONHECIDO')
                     this.authservice.logout();
-                return of(); // Observable vazia pra parar execuação
+                return throwError(err); // Observable vazia pra parar execuação
             }),
         );
     }

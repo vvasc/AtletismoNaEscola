@@ -78,8 +78,9 @@ export class EditConteudoComponent implements OnInit {
     this.spinner.show();
     const formval = this.formConteudo.value;
     (formval.owner === '') ? formval.owner = null : null;
-    this.conteudoService.patchConteudo(this.selecionado.id, formval).subscribe(succ => {
+    this.conteudoService.patchConteudo(this.selecionado.id, formval).subscribe((succ: any) => {
       this.selecionado = null;
+      succ['tituloquiz'] = (succ.owner) ? succ.owner.titulo : '';
       this.update = succ;
       this.SpinnerTimeout();
       this.notificacao.ngxtoaster('Sucesso!', 'Conteúdo Editado com Sucesso!', true);

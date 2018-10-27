@@ -31,17 +31,18 @@ export class FormAtividadeComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.selecionado && this.formAtividade) {
       const data = changes.selecionado.currentValue;
-      let quizid = '';
+      let id = '';
       this.highlighted = null;
-      if (data.quiz[0]) {
-        this.highlighted = data.quiz[0];
-        quizid = data.quiz[0].id;
-      }
-      this.formAtividade.setValue({
-        titulo: data.titulo,
-        quiz: quizid,
-        provaPratica: data.provaPratica,
-      });
+      if (data) {
+        [this.highlighted] = data.quiz;
+        [{id}] = data.quiz; // Pega o ID
+        this.formAtividade.setValue({
+          titulo: data.titulo,
+          quiz: id,
+          provaPratica: data.provaPratica,
+        });
+      } else
+        this.formAtividade.reset();
     }
   }
 
