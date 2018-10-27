@@ -47,6 +47,10 @@ export class QuizSailsService {
     return this.http.delete(`${this.endpoint}/Quiz/${id}`, this.getOptions());
   }
 
+  quizNaoRespondido() {
+    return this.http.get(`${this.endpoint}/quiz-nao-respondido`, this.getOptions());
+  }
+
   getOptions() {
     return { headers: this.getHeaders(), withCredentials: true};
   }
