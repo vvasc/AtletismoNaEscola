@@ -1,6 +1,7 @@
 <ngx-table
   [dataAsync]="colegioAsync"
   [update]="update"
+  [remove]="delete"
   (editE)="resolver($event)"
   titulo="Colégios"
   columns='colegio'>
@@ -9,6 +10,21 @@
   <nb-card-header>Editar Colégio</nb-card-header>
   <nb-card-body>
     <ngx-form-colegio [dados]="colegioResolver" (formValue)="getForm($event)"></ngx-form-colegio>
-    <button class="btn btn-primary" [disabled]="disabled" (click)="onSubmit()"> Concluir </button>
+    <div class="form-group">
+      <button class="btn btn-primary btn-with-icon" [disabled]="!formColegio?.valid || querying" (click)="onSubmit()">
+        <i class="nb-edit"></i>
+        EDITAR COLÉGIO
+      </button>
+      <button style="margin-left: 20px;" class="btn btn-danger btn-with-icon delete" [disabled]="!formColegio?.valid || querying" (click)="deleteColegio()">
+        <i class="nb-trash"></i>
+        DELETAR COLÉGIO
+      </button>
+      <ngx-spinner
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#000000"
+        type = "square-jelly-box"
+      ></ngx-spinner>
+    </div>
   </nb-card-body>
 </nb-card>

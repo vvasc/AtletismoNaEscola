@@ -7,6 +7,10 @@ export class ColegioService {
 
   constructor(private http: HttpClient) { }
 
+  deleteColegio(id) {
+    return this.http.delete(`${this.endpoint}/colegio/${id}`, this.getOptions() );
+  }
+
   createColegio(colegio: any) {
     return this.http.post(`${this.endpoint}/Colegio/`, {...colegio}, this.getOptions() );
   }
