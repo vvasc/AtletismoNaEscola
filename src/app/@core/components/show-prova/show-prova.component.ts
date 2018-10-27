@@ -17,7 +17,7 @@ export class ShowProvaComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-  ) { } 
+  ) { }
 
   ngOnInit() {
   }
