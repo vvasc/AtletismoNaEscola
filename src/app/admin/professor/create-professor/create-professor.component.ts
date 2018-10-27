@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/login.service';
 import { AccountService } from './../../../services/account.service';
 import { Component, OnInit } from '@angular/core';
 import { ColegioService } from '../../../services/colegio.service';
@@ -14,16 +15,24 @@ export class CreateProfessorComponent implements OnInit {
   selectedEscola;
   formProfessor;
   querying = false;
+  user;
 
   constructor(
     private colegioService: ColegioService,
     private spinner: NgxSpinnerService,
     private notificacao: NotificacaoService,
     private accountService: AccountService,
+    private authservice: AuthService,
   ) { }
 
   ngOnInit() {
-    this.escolas = this.colegioService.getAllColegio();
+    this.authservice.isLogged().subscribe(user => {
+      this.user = user;
+      if (user.role === 'superadmin')
+        this.escolas = this.colegioService.getAllColegio();
+      else
+        this.selectedEscola = user.escola;
+    });
   }
 
   selectEscola(escola) {
@@ -55,8 +64,16 @@ export class CreateProfessorComponent implements OnInit {
       this.querying = false;
       this.spinnerTimeout();
       this.notificacao.ngxtoaster('Professor', 'Criado com Sucesso!', true);
-      this.formProfessor.reset();
-      this.selectedEscola = null;
+      if (this.user.role === 'diretor') {
+        this.formProfessor.controls['emailAddress'].reset();
+        this.formProfessor.controls['password'].reset();
+        this.formProfessor.controls['confirmPassword'].reset();
+        this.formProfessor.controls['ano'].reset();
+        this.formProfessor.controls['fullName'].reset();
+      } else {
+        this.formProfessor.reset();
+        this.selectedEscola = null;
+      }
     }, err => {
       this.querying = false;
       this.spinnerTimeout();

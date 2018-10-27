@@ -76,7 +76,7 @@ export class EditProfessorComponent implements OnInit {
       escola: formval.escola,
       ano: formval.ano,
     };
-    if (formval.password !== '')
+    if (formval.password !== null && formval.password !== '') // Caso ele tiver editado a senha
       ACCOUNT['password'] = formval.password;
 
     this.querying = true;
@@ -89,6 +89,7 @@ export class EditProfessorComponent implements OnInit {
       this.notificacao.ngxtoaster('Professor', 'Editado com Sucesso!', true);
       this.formProfessor.reset();
       this.selectedEscola = null;
+      this.selectedProfessor = null;
     }, err => {
       this.querying = false;
       this.spinnerTimeout();
