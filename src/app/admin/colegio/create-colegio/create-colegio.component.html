@@ -1,0 +1,7 @@
+<nb-card>
+  <nb-card-header>Adicionar Colégio</nb-card-header>
+  <nb-card-body>
+    <ngx-form-colegio (formValue)="getForm($event)"></ngx-form-colegio>
+    <button class="btn btn-primary" [disabled]="disabled" (click)="onSubmit()"> Adicionar </button>
+  </nb-card-body>
+</nb-card>

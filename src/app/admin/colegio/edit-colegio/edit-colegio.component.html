@@ -1,0 +1,14 @@
+<ngx-table
+  [dataAsync]="colegioAsync"
+  [update]="update"
+  (editE)="resolver($event)"
+  titulo="Colégios"
+  columns='colegio'>
+</ngx-table>
+<nb-card>
+  <nb-card-header>Editar Colégio</nb-card-header>
+  <nb-card-body>
+    <ngx-form-colegio [dados]="colegioResolver" (formValue)="getForm($event)"></ngx-form-colegio>
+    <button class="btn btn-primary" [disabled]="disabled" (click)="onSubmit()"> Concluir </button>
+  </nb-card-body>
+</nb-card>

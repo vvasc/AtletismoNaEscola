@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PontuacaoService } from '../../../services/pontuacao.service';
@@ -11,11 +12,14 @@ import { map } from 'rxjs/operators';
 })
 export class EditPontuacaoComponent implements OnInit {
   pontuacaoselecionada;
+  formPontuacao: FormGroup;
   pontuacaoObs: Observable<any>;
+  querying: boolean = false;
 
   constructor(
     private pontuacaoservice: PontuacaoService,
     private notificaoservice: NotificacaoService,
+    private notificacao: NotificacaoService,
   ) { }
 
   ngOnInit() {
@@ -36,6 +40,31 @@ export class EditPontuacaoComponent implements OnInit {
 
   selectPontuacao(event) {
     this.pontuacaoselecionada = event;
+  }
+
+  editPontuacao(event) {
+    const formval = this.formPontuacao.value;
+    this.pontuacaoservice.patchPontuacao(this.pontuacaoselecionada.id, formval).subscribe(succ => {
+      this.notificacao.ngxtoaster('Sucesso!', 'Pontuação Editada com Sucesso!', true);
+      this.formPontuacao.reset();
+    }, err => {
+      const errmsg = (err.error.code === 'E_UNIQUE') ? '' : 'Falha na conexão!';
+      this.notificacao.ngxtoaster('ERRO!', errmsg, false);
+    });
+  }
+
+  getForm(form) {
+    this.formPontuacao = form;
+  }
+
+  deletar(event) {
+    this.pontuacaoservice.deletarPontuacao(this.pontuacaoselecionada.id).subscribe(succ => {
+      this.notificacao.ngxtoaster('Sucesso!', 'Pontuação deletada com Sucesso!', true);
+      this.formPontuacao.reset();
+    }, err => {
+      const errmsg = (err.error.code === 'E_UNIQUE') ? '' : 'Falha na conexão!';
+      this.notificacao.ngxtoaster('ERRO!', errmsg, false);
+    });
   }
 
 }

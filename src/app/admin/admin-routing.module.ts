@@ -33,6 +33,10 @@ const routes: Routes = [
         loadChildren: './atividade/atividade.module#AtividadeModule',
       },
       {
+        path: 'colegio',
+        loadChildren: './colegio/colegio.module#ColegioModule',
+      },
+      {
         path: '**',
         redirectTo: 'main',
       },

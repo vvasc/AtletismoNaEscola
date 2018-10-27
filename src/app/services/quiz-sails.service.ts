@@ -8,19 +8,19 @@ export class QuizSailsService {
   constructor(private http: HttpClient) { }
 
   getAllQuestoes() {
-    return this.http.get(`${this.endpoint}/Questoes`, { headers: this.getHeaders() });
+    return this.http.get(`${this.endpoint}/Questoes`, this.getOptions());
   }
 
   getQuestao(id: number) {
-    return this.http.get(`${this.endpoint}/Questoes/${id}`, { headers: this.getHeaders() });
+    return this.http.get(`${this.endpoint}/Questoes/${id}`, this.getOptions());
   }
 
   createQuestao(questao: any) {
-    return this.http.post(`${this.endpoint}/Questoes/`, {...questao}, { headers: this.getHeaders() }).subscribe();
+    return this.http.post(`${this.endpoint}/Questoes/`, {...questao}, this.getOptions()).subscribe();
   }
 
   createQuiz(quiz: any) {
-    return this.http.post(`${this.endpoint}/Quiz/`, {...quiz}, { headers: this.getHeaders() }).subscribe();
+    return this.http.post(`${this.endpoint}/Quiz/`, {...quiz}, this.getOptions()).subscribe();
   }
 
   getQuizesLivresConteudo() {
@@ -31,8 +31,28 @@ export class QuizSailsService {
     return this.http.get(`${this.endpoint}/Quizes-livres-atividade/`, { headers: this.getHeaders() });
   }
 
-  getAllQuizes() {
-    return this.http.get(`${this.endpoint}/Quiz/`, { headers: this.getHeaders() });
+  getAllQuiz() {
+    return this.http.get(`${this.endpoint}/Quiz/`, this.getOptions());
+  }
+
+  patchQuiz(id: number|string, quiz: any) {
+    return this.http.patch(`${this.endpoint}/Quiz/${id}`, {...quiz}, this.getOptions());
+  }
+
+  getQuiz(id: number|string) {
+    return this.http.get(`${this.endpoint}/Quiz/${id}`, this.getOptions());
+  }
+
+  deleteQuiz(id: number|string) {
+    return this.http.delete(`${this.endpoint}/Quiz/${id}`, this.getOptions());
+  }
+
+  quizNaoRespondido() {
+    return this.http.get(`${this.endpoint}/quiz-nao-respondido`, this.getOptions());
+  }
+
+  getOptions() {
+    return { headers: this.getHeaders(), withCredentials: true};
   }
 
   getHeaders() {

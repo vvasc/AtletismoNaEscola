@@ -16,15 +16,27 @@ export class PontuacaoService {
   }
 
   createPontuacao(pontuacao: any) {
-    return this.http.post(`${this.endpoint}/Pontuacao/`, {...pontuacao}, { headers: this.getHeaders() });
+    return this.http.post(`${this.endpoint}/Pontuacao/`, {...pontuacao}, this.getOptions() );
+  }
+
+  deletarPontuacao(id: number) {
+    return this.http.delete(`${this.endpoint}/Pontuacao/${id}`, this.getOptions() );
   }
 
   getPontuacaoAluno() {
-    return this.http.get(`${this.endpoint}/Pontuacao-aluno/`, { headers: this.getHeaders() , withCredentials: true });
+    return this.http.get(`${this.endpoint}/Pontuacao-aluno/`, this.getOptions() );
   }
 
   getPontuacaoColegio() {
-    return this.http.get(`${this.endpoint}/Pontuacao-colegio/`, { headers: this.getHeaders() , withCredentials: true });
+    return this.http.get(`${this.endpoint}/Pontuacao-colegio/`, this.getOptions() );
+  }
+
+  patchPontuacao(id, pontuacao) {
+    return this.http.patch(`${this.endpoint}/Pontuacao/${id}`, {...pontuacao}, this.getOptions() );
+  }
+
+  getOptions() {
+    return { headers: this.getHeaders() , withCredentials: true };
   }
 
   getHeaders() {
