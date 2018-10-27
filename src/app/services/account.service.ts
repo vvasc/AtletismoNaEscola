@@ -8,7 +8,15 @@ export class AccountService {
   constructor(private http: HttpClient) { }
 
   getAllAccounts() {
-    return this.http.get(`${this.endpoint}/Account`, { headers: this.getHeaders() });
+    return this.http.get(`${this.endpoint}/Account`, this.getOptions() );
+  }
+
+  createAccount(account) {
+    return this.http.post(`${this.endpoint}/Account`, {...account} , this.getOptions() );
+  }
+
+  getOptions() {
+    return { headers: this.getHeaders(), withCredentials: true};
   }
 
   getHeaders() {
