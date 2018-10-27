@@ -35,6 +35,10 @@ export class PontuacaoService {
     return this.http.patch(`${this.endpoint}/Pontuacao/${id}`, {...pontuacao}, this.getOptions() );
   }
 
+  createPontuacaoQuiz(respostas: any)  {
+    return this.http.post(`${this.endpoint}/pontuacao-quiz/`, {...respostas}, this.getOptions() );
+  }
+
   getOptions() {
     return { headers: this.getHeaders() , withCredentials: true };
   }
