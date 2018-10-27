@@ -1,3 +1,34 @@
-<p>
-  edit-atividade works!
-</p>
+<ngx-table
+  [dataAsync]="atividadesObs"
+  (editE)="select($event)"
+  titulo="Atividades"
+  [update]="update"
+  [remove]="delete"
+  columns='atividades'>
+</ngx-table>
+
+<nb-card>
+  <nb-card-header>
+    Editar Atividade
+  </nb-card-header>
+  <nb-card-body>
+    <ngx-form-atividade [selecionado]="selecionado" [quizes]="quizesAsync" (formValue)="getForm($event)"></ngx-form-atividade>
+    <br>
+    <div class="form-group">
+      <button class="btn btn-primary btn-with-icon" [disabled]="!formAtividade?.valid || querying" (click)="editAtividade()">
+        <i class="nb-edit"></i>
+        EDITAR ATIVIDADE
+      </button>
+      <button style="margin-left: 20px;" class="btn btn-danger btn-with-icon" [disabled]="!formAtividade?.valid || querying" (click)="deleteAtividade()">
+        <i class="nb-trash"></i>
+        DELETAR ATIVIDADE
+      </button>
+      <ngx-spinner
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#000000"
+        type = "square-jelly-box"
+      ></ngx-spinner>
+    </div>
+  </nb-card-body>
+</nb-card>

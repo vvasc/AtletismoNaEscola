@@ -1,19 +1,41 @@
+import { ConfirmationModalModule } from './../../@core/components/confirmation-modal/confirmation-modal.module';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+
+import { TableModule } from '../../@core/components/table/table.module';
+import { AtividadeService } from '../../services/atividade.service';
+import { QuizSailsService } from '../../services/quiz-sails.service';
+import { ConfirmationModalComponent } from './../../@core/components/confirmation-modal/confirmation-modal.component';
 import { ThemeModule } from './../../@theme/theme.module';
 import { AtividadeRoutingModule } from './atividade-routing.module';
-import { EditAtividadeComponent } from './edit-atividade/edit-atividade.component';
 import { CreateAtividadeComponent } from './create-atividade/create-atividade.component';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { EditAtividadeComponent } from './edit-atividade/edit-atividade.component';
+import { FormAtividadeComponent } from './form-atividade/form-atividade.component';
 
 @NgModule({
   imports: [
     CommonModule,
     AtividadeRoutingModule,
     ThemeModule,
+    TableModule,
+    ConfirmationModalModule,
+    MatDialogModule,
+    NgxSpinnerModule,
   ],
   declarations: [
     CreateAtividadeComponent,
     EditAtividadeComponent,
+    FormAtividadeComponent,
+  ],
+  entryComponents: [
+    ConfirmationModalComponent,
+  ],
+  providers: [
+    QuizSailsService,
+    AtividadeService,
+    NgxSpinnerService,
   ],
 })
 export class AtividadeModule { }

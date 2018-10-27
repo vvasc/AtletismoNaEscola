@@ -53,7 +53,7 @@ export class TableService {
         title: 'Nome Completo',
         type: 'string',
       },
-      escola: {
+      nomeEscola: {
         title: 'Colégio',
         type: 'string',
       },
@@ -85,7 +85,7 @@ export class TableService {
         title: 'Título Atividade',
         type: 'string',
       },
-      titulopratica: {
+      provaPratica: {
         title: 'Título Atividade Prática',
         type: 'string',
       },
