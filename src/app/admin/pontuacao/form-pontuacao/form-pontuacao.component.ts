@@ -32,23 +32,39 @@ export class FormPontuacaoComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     // tslint:disable-next-line:max-line-length
-    if ('atividade' in changes && changes.atividade.currentValue) { // Se trocou a atividade, seta os campos correspondentes
-      this.tituloAtividade = changes.atividade.currentValue.titulo;
-      this.formPontuacao.controls['atividade'].setValue(changes.atividade.currentValue.id);
+    if ('atividade' in changes && !changes.atividade.firstChange) { // Se trocou a atividade, seta os campos correspondentes
+      if (changes.atividade.currentValue) {
+        this.tituloAtividade = changes.atividade.currentValue.titulo;
+        this.formPontuacao.controls['atividade'].setValue(changes.atividade.currentValue.id);
+      } else {
+        this.tituloAtividade = '';
+        this.formPontuacao.controls['atividade'].reset();
+      }
     }
-    if (changes.aluno && changes.aluno.currentValue) { // Se trocou o aluno, seta os campos correspondentes
-      this.nomeAluno = changes.aluno.currentValue.fullName;
-      this.formPontuacao.controls['aluno'].setValue(changes.aluno.currentValue.id);
+    if (changes.aluno && !changes.aluno.firstChange) { // Se trocou o aluno, seta os campos correspondentes
+      if (changes.aluno.currentValue) {
+        this.nomeAluno = changes.aluno.currentValue.fullName;
+        this.formPontuacao.controls['aluno'].setValue(changes.aluno.currentValue.id);
+      } else {
+        this.nomeAluno = '';
+        this.formPontuacao.controls['aluno'].reset();
+      }
     }
-    if (changes.pontuacao && changes.pontuacao.currentValue) { // Se trocou a pontuacao, seta os campos correspondentes
-      const newval = changes.pontuacao.currentValue;
-      this.nomeAluno = newval.aluno.fullName;
-      this.tituloAtividade = newval.atividade.titulo;
-      this.formPontuacao.setValue({
-        aluno: newval.aluno.id,
-        atividade: newval.atividade.id,
-        pontuacaoAula: newval.pontuacaoAula,
-      });
+    if (changes.pontuacao && !changes.pontuacao.firstChange) { // Se trocou a pontuacao, seta os campos correspondentes
+      if (changes.pontuacao.currentValue) {
+        const newval = changes.pontuacao.currentValue;
+        this.nomeAluno = newval.aluno.fullName;
+        this.tituloAtividade = newval.atividade.titulo;
+        this.formPontuacao.setValue({
+          aluno: newval.aluno.id,
+          atividade: newval.atividade.id,
+          pontuacaoAula: newval.pontuacaoAula,
+        });
+      } else {
+        this.formPontuacao.reset();
+        this.tituloAtividade = '';
+        this.nomeAluno = '';
+      }
     }
   }
 

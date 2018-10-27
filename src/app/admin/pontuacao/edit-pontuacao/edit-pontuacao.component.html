@@ -1,8 +1,10 @@
 <ngx-table
   [dataAsync]="pontuacaoObs"
   titulo="Pontuações"
+  [update]="update"
+  [remove]="delete"
   columns="pontuacoes"
-  (editE)="selectPontuacao($event)"
+  (editE)="selectPontuacao($event); scroll(form);"
 ></ngx-table>
 
 <nb-card>
@@ -12,12 +14,21 @@
   <nb-card-body>
     <ngx-form-pontuacao [pontuacao]='pontuacaoselecionada' (formValue)="getForm($event)"></ngx-form-pontuacao>
     <br>
-    <div class="form-group">
-      <button class="btn btn-primary"  [disabled]="!formPontuacao?.valid || querying" (click)="editPontuacao()">EDITAR PONTUAÇÃO</button>
-      <span style="padding-left: 10px;"> 
-        <button  class="btn btn-primary red" [disabled]="!formPontuacao?.valid || querying" (click)="deletar()">DELETAR</button>
-      </span>
-      
+    <div class="form-group" #form>
+      <button class="btn btn-primary btn-with-icon" [disabled]="!formPontuacao?.valid || querying" (click)="editPontuacao()">
+        <i class="nb-edit"></i>
+        EDITAR PONTUAÇÃO
+      </button>
+      <button style="margin-left: 20px;" class="btn btn-danger btn-with-icon delete" [disabled]="!formPontuacao?.valid || querying" (click)="deletar()">
+        <i class="nb-trash"></i>
+        DELETAR PONTUAÇÃO
+      </button>
+      <ngx-spinner
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#000000"
+        type = "square-jelly-box"
+      ></ngx-spinner>
     </div>
 
   </nb-card-body>
