@@ -15,7 +15,14 @@
     </div>
     
     <div class="header-container opcoes" *ngIf="userinfo">
-      <a (click)="recordes()">MEUS RECORDES</a>
+      <a (click)="recordes()">
+        <ng-container *ngIf="userinfo.role === 'aluno'; else elseTemplate">
+          MEUS RECORDES 
+        </ng-container>
+        <ng-template #elseTemplate>
+            RANKING
+        </ng-template>
+      </a>
       <a (click)="conteudo()">CONTEÚDO</a>
       <a (click)="quiz()">QUIZ</a>
     </div>

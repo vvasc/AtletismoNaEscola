@@ -1,5 +1,18 @@
 <div class="whitebg">
-  <div class="text titulo">Ranking dos alunos do {{user?.ano}}º ano do {{user?.escola.nome}}</div>
+  <ng-container *ngIf="user?.role !== 'superadmin'; else superadmin">
+    <div class="text titulo">
+      Ranking dos alunos do 
+      <ng-container *ngIf="user?.role !== 'diretor'">{{user?.ano}}º ano do </ng-container>
+      {{user?.escola.nome}}
+    </div>
+  </ng-container>
+
+  <ng-template #superadmin>
+    <div class="text titulo">
+      Ranking de Todos os Alunos
+    </div>
+  </ng-template>
+
   <table class="text">
     <tr>
       <th class="item">Nome</th>
