@@ -1,4 +1,18 @@
-<ngx-show-prova
-[quizSelectedAsync]="quizesAsync"
-(respostasPreenchidas)="resolverResposta($event)">
-</ngx-show-prova>
+<div class="center-div">
+    <div class="container" *ngIf="quizesAsync | async as quiz">
+        <ng-container *ngIf="quiz.length > 0">
+            <div class="row">
+                <h1 class="text-format">{{ quiz[0]?.titulo }}</h1>
+            </div>
+            <div class="row text-format">
+                <h2 class="text-format">Responda as {{ quiz[0]?.questoes.length }} Questoes</h2>
+            </div>
+        </ng-container>
+        <div class="row justify-content-center">
+            <ngx-show-prova
+                [quizSelectedAsync]="quizesAsync"
+                (respostasPreenchidas)="resolverResposta($event)">
+            </ngx-show-prova>
+        </div>
+    </div>
+</div>
