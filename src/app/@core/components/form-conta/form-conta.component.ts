@@ -28,7 +28,7 @@ export class FormContaComponent implements OnInit, OnChanges {
       password: ['', ...val],
       confirmPassword: ['', ...val],
       fullName: ['', [Validators.required, Validators.maxLength(120)]],
-      escola: ['', [Validators.required, Validators.pattern('[0-9]')]],
+      escola: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       nomeEscola: [{value: '', disabled: true}],
       ano: ['', [Validators.required, Validators.pattern('[0-9]')]],
     }, {
