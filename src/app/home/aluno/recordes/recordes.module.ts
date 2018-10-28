@@ -1,3 +1,4 @@
+import { RankingModule } from './ranking/ranking.module';
 import { RouterModule } from '@angular/router';
 import { TabelaPontuacaoModule } from './tabela-pontuacao/tabela-pontuacao.module';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,7 @@ import { PontuacaoService } from './../../../services/pontuacao.service';
     CommonModule,
     TabelaPontuacaoModule,
     RouterModule,
+    RankingModule,
   ],
   declarations: [RecordesComponent],
   providers: [PontuacaoService],
