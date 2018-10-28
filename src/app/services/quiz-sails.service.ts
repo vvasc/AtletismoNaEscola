@@ -23,8 +23,12 @@ export class QuizSailsService {
     return this.http.post(`${this.endpoint}/Quiz/`, {...quiz}, this.getOptions()).subscribe();
   }
 
-  getQuizesLivres() {
-    return this.http.get(`${this.endpoint}/Quizes-livres/`, this.getOptions());
+  getQuizesLivresConteudo() {
+    return this.http.get(`${this.endpoint}/Quizes-livres-conteudo/`, { headers: this.getHeaders() });
+  }
+
+  getQuizesLivresAtividade() {
+    return this.http.get(`${this.endpoint}/Quizes-livres-atividade/`, { headers: this.getHeaders() });
   }
 
   getAllQuiz() {

@@ -29,6 +29,10 @@ const routes: Routes = [
         loadChildren: './aluno-admin/aluno-admin.module#AlunoAdminModule',
       },
       {
+        path: 'professor',
+        loadChildren: './professor/professor.module#ProfessorModule',
+      },
+      {
         path: 'atividade',
         loadChildren: './atividade/atividade.module#AtividadeModule',
       },

@@ -53,7 +53,7 @@ export class TableService {
         title: 'Nome Completo',
         type: 'string',
       },
-      escola: {
+      nomeEscola: {
         title: 'Colégio',
         type: 'string',
       },
@@ -85,7 +85,7 @@ export class TableService {
         title: 'Título Atividade',
         type: 'string',
       },
-      titulopratica: {
+      provaPratica: {
         title: 'Título Atividade Prática',
         type: 'string',
       },
@@ -115,6 +115,26 @@ export class TableService {
       },
       id: {
         title: 'Identificação',
+        type: 'string',
+      },
+    },
+  };
+  professores = {
+    columns: {
+      fullName: {
+        title: 'Nome Completo',
+        type: 'string',
+      },
+      nomeEscola: {
+        title: 'Colégio',
+        type: 'string',
+      },
+      ano: {
+        title: 'Ano',
+        type: 'string',
+      },
+      emailAddress: {
+        title: 'Email',
         type: 'string',
       },
     },
@@ -159,6 +179,10 @@ export class TableService {
       }
       case 'quizes': {
         column = this.quizes;
+        break;
+      }
+      case 'professores': {
+        column = this.professores;
         break;
       }
     }

@@ -1,0 +1,52 @@
+<form [formGroup]="formConta">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="fullName">Nome Completo</label>
+        <input type="text" formControlName="fullName" class="form-control" id="fullName" placeholder="Nome Completo">
+        <div class="alert alert-danger" *ngIf="formConta.controls['fullName'].hasError('maxlength') && formConta.controls['fullName'].touched">Nome muito longo!</div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="ano">Ano</label>
+        <input type="text" formControlName="ano" class="form-control" id="Ano" placeholder="ano">
+        <div class="alert alert-danger" *ngIf="formConta.controls['ano'].hasError('pattern') && formConta.controls['ano'].touched">Ano inválido! Apenas um dígito!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" formControlName="emailAddress" class="form-control" id="email" placeholder="Email">
+        <div class="alert alert-danger" *ngIf="formConta.controls['emailAddress'].hasError('email') && formConta.controls['emailAddress'].touched">Email inválido!</div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="escola">Escola</label>
+        <input type="text" formControlName="nomeEscola" class="form-control" id="escola" placeholder="Escola">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" formControlName="password" class="form-control" id="senha" placeholder="Senha">
+        <div class="alert alert-danger" *ngIf="formConta.hasError('MatchPassword') && formConta.controls['confirmPassword'].touched">As senhas são diferentes!</div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="senhaconfirm">Confirmar Senha</label>
+        <input type="password" formControlName="confirmPassword" class="form-control" id="confirmPassword" placeholder="Senha">
+        <div class="alert alert-danger" *ngIf="formConta.hasError('MatchPassword') && formConta.controls['confirmPassword'].touched">As senhas são diferentes!</div>
+      </div>
+    </div>
+  </div>
+  
+</form>

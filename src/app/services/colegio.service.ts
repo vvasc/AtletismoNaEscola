@@ -7,20 +7,28 @@ export class ColegioService {
 
   constructor(private http: HttpClient) { }
 
+  deleteColegio(id) {
+    return this.http.delete(`${this.endpoint}/colegio/${id}`, this.getOptions() );
+  }
+
   createColegio(colegio: any) {
-    return this.http.post(`${this.endpoint}/Colegio/`, {...colegio}, { headers: this.getHeaders() });
+    return this.http.post(`${this.endpoint}/Colegio/`, {...colegio}, this.getOptions() );
   }
 
   getAllColegio() {
-    return this.http.get(`${this.endpoint}/Colegio/`, { headers: this.getHeaders() });
+    return this.http.get(`${this.endpoint}/Colegio/`, this.getOptions() );
   }
 
   getColegio(id: number) {
-    return this.http.get(`${this.endpoint}/Colegio/${id}`, { headers: this.getHeaders() });
+    return this.http.get(`${this.endpoint}/Colegio/${id}`, this.getOptions() );
   }
 
   patchColegio(id, colegio: any) {
-    return this.http.patch(`${this.endpoint}/Colegio/${id}`, {...colegio}, { headers: this.getHeaders() });
+    return this.http.patch(`${this.endpoint}/Colegio/${id}`, {...colegio}, this.getOptions() );
+  }
+
+  getOptions() {
+    return { headers: this.getHeaders(), withCredentials: true};
   }
 
   getHeaders() {

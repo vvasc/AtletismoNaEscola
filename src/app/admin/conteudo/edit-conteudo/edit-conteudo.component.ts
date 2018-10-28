@@ -50,6 +50,7 @@ export class EditConteudoComponent implements OnInit {
       data: {
         header: 'Aviso!',
         text: 'Você realmente deseja deletar esse conteudo?',
+        warning: false,
       },
       disableClose: true,
     });
@@ -78,8 +79,9 @@ export class EditConteudoComponent implements OnInit {
     this.spinner.show();
     const formval = this.formConteudo.value;
     (formval.owner === '') ? formval.owner = null : null;
-    this.conteudoService.patchConteudo(this.selecionado.id, formval).subscribe(succ => {
+    this.conteudoService.patchConteudo(this.selecionado.id, formval).subscribe((succ: any) => {
       this.selecionado = null;
+      succ['tituloquiz'] = (succ.owner) ? succ.owner.titulo : '';
       this.update = succ;
       this.SpinnerTimeout();
       this.notificacao.ngxtoaster('Sucesso!', 'Conteúdo Editado com Sucesso!', true);
@@ -116,7 +118,7 @@ export class EditConteudoComponent implements OnInit {
 
   refreshQuizes() {
     this.quizes = [];
-    this.quizService.getQuizesLivres().subscribe(dados => {
+    this.quizService.getQuizesLivresConteudo().subscribe(dados => {
       this.quizes = dados;
     }, err => {
       this.notificacao.ngxtoaster('Quizes', 'Não foi possível carregar os quizes! Recarregue a página!', false);

@@ -1,0 +1,28 @@
+.center-div {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 20%;
+    padding-right: 20%;
+    height: 100%;
+    width: 100%;
+}
+
+@media (max-width: 978px) {
+    .center-div {
+        padding:0;
+        margin:0;
+    }
+}
+
+.text-format {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #732204;
+    align-self: flex-end;
+    padding-bottom: 15px;
+}
+
+h1 {
+    font-size: 45px;
+    font-weight: 475;
+}
