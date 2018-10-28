@@ -93,6 +93,7 @@ export class EditAtividadeComponent implements OnInit {
       data: {
         header: 'Aviso!',
         text: 'Você realmente deseja deletar esse Atividade?',
+        warning: false,
       },
       disableClose: true,
     });
