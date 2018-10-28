@@ -1,7 +1,9 @@
-<ngx-table
-  [dataAsync]="ConteudoAsync"
-  (editE)="resolver($event)"
-  titulo="Conteúdo"
-  columns='conteudo'
->
-</ngx-table>
+<div class="center-div" *ngIf="ConteudoAsync | async as conteudos">
+  <div class="container">
+    <div class="row justify-content-center" *ngFor="let conteudo of conteudos">
+      <div class="item" (click)="resolver(conteudo)">
+        {{ conteudo.titulo }}
+      </div>
+    </div>
+  </div>
+</div>
