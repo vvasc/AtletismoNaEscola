@@ -145,14 +145,15 @@ export class SampleLayoutComponent implements OnDestroy {
     });
     this.router.events.subscribe( (event) => { // Pra nao mostrar o header na tela principal
       if (event instanceof NavigationEnd) {
-        if (event.urlAfterRedirects === '/home/main' || event.urlAfterRedirects === '/home/login')
+        const dest = event.urlAfterRedirects;
+        if (dest === '/home/main' || dest === '/home/login')
           this.isMain = true;
         else
           this.isMain = false;
 
-        if (event.urlAfterRedirects.includes('recordes')) { // significa que está na pagina de recordes
+        if (dest.includes('recordes') || dest.includes('quiz')) { // significa que está na pagina de recordes
           this.fundo.setBackground('fundo-recordes');
-        } else if (event.urlAfterRedirects.includes('conteudo')) { // significa que está na pagina de conteudo
+        } else if (dest.includes('conteudo')) { // significa que está na pagina de conteudo
           this.fundo.setBackground('fundo-conteudo');
         } else this.fundo.setBackground('fundo-main');
       }

@@ -77,6 +77,7 @@ export class EditColegioComponent implements OnInit {
       data: {
         header: 'Aviso!',
         text: 'Você realmente deseja deletar esse Colégio?',
+        warning: false,
       },
       disableClose: true,
     });

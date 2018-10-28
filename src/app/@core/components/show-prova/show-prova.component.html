@@ -1,0 +1,34 @@
+<ng-container *ngIf="quizSelectedAsync | async as quizSelected">
+    <div *ngIf="quizSelected && quizSelected.length; else todosQuizesRespondidos" class="row justify-content-center">
+      <div class="col-md-12 text-center" *ngFor="let showQuestao of quizSelected[0]?.questoes">
+        <div class="row box">
+          <div class="col-12">
+            <div>
+              <nb-card>
+                <nb-card-header> 
+                  Pergunta: {{ showQuestao.Pergunta }}
+                </nb-card-header>
+                <nb-card-body>
+                  <div
+                    class="col input-group">
+                    <label for="alternativas">
+                    <ngx-show-questao
+                    [alternativas]="showQuestao.Alternativas | objectToArray"
+                    (selected)="resolverQuestao($event, showQuestao?.id, quizSelected[0]?.questoes)">
+                    </ngx-show-questao>
+                    </label>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="quizSelected && quizSelected.length" class="row justify-content-center">
+      <button type="button" class="btn btn-success" (click)="finalizarQuiz(quizSelected[0]?.questoes, quizSelected[0]?.id, quizSelected[0]?.ownerAtividade.id)">Finalizar Quiz</button>
+    </div>
+    <ng-template #todosQuizesRespondidos >
+      <h1 class="text-format">Todos os Quizes foram respondidos!</h1>
+    </ng-template>
+</ng-container>
