@@ -1,3 +1,15 @@
-<p>
-  create-aluno works!
-</p>
+<nb-card>
+  <nb-card-header>
+    Criar Professor
+  </nb-card-header>
+  <nb-card-body>
+    <ngx-form-aluno
+    [professoresAsync]="professoresAsync"
+    (formEmitter)="form['aluno']=$event">
+    </ngx-form-aluno>
+    <button class="btn btn-primary btn-with-icon" [disabled]="!form['aluno']?.valid" (click)="createAluno()">
+      <i class="nb-plus"></i>
+      CRIAR ALUNO
+    </button>
+  </nb-card-body>
+</nb-card>

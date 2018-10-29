@@ -1,3 +1,29 @@
-<p>
-  edit-aluno works!
-</p>
+<ngx-table
+  columns="alunos"
+  titulo="Selecão de Alunos"
+  [dataAsync]="alunosAsync"
+  [update]="update"
+  [remove]="delete"
+  (editE)="resolvedAluno = $event"
+></ngx-table>
+
+<nb-card>
+    <nb-card-header>
+      Editar Professor
+    </nb-card-header>
+    <nb-card-body>
+      <ngx-form-aluno
+      [professoresAsync]="professoresAsync"
+      (formEmitter)="form['aluno']=$event"
+      [resolvedAluno]=resolvedAluno>
+      </ngx-form-aluno>
+      <button class="btn btn-primary btn-with-icon" [disabled]="!form['aluno']?.valid" (click)="editAluno()">
+        <i class="nb-plus"></i>
+        EDITAR ALUNO
+      </button>
+      <button class="btn btn-danger btn-with-icon delete" [disabled]="!resolvedAluno?.id" (click)="deleteAluno()">
+        <i class="nb-trash"></i>
+        DELETAR ALUNO
+      </button>
+    </nb-card-body>
+  </nb-card>
