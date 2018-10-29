@@ -41,7 +41,7 @@ export class FormPontuacaoComponent implements OnInit, OnChanges {
         this.formPontuacao.controls['atividade'].reset();
       }
     }
-    if (changes.aluno && !changes.aluno.firstChange) { // Se trocou o aluno, seta os campos correspondentes
+    if ('aluno' in changes && !changes.aluno.firstChange) { // Se trocou o aluno, seta os campos correspondentes
       if (changes.aluno.currentValue) {
         this.nomeAluno = changes.aluno.currentValue.fullName;
         this.formPontuacao.controls['aluno'].setValue(changes.aluno.currentValue.id);
@@ -50,7 +50,8 @@ export class FormPontuacaoComponent implements OnInit, OnChanges {
         this.formPontuacao.controls['aluno'].reset();
       }
     }
-    if (changes.pontuacao && !changes.pontuacao.firstChange) { // Se trocou a pontuacao, seta os campos correspondentes
+    if ('pontuacao' in changes && !changes.pontuacao.firstChange) {
+      // Se trocou a pontuacao, seta os campos correspondentes
       if (changes.pontuacao.currentValue) {
         const newval = changes.pontuacao.currentValue;
         this.nomeAluno = newval.aluno.fullName;

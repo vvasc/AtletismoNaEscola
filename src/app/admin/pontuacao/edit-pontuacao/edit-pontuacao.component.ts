@@ -19,8 +19,8 @@ export class EditPontuacaoComponent implements OnInit {
   formPontuacao: FormGroup;
   pontuacaoObs: Observable<any>;
   querying: boolean = false;
-  delete;
-  update;
+  delete: any = [];
+  update: any = [];
 
   constructor(
     private pontuacaoservice: PontuacaoService,
@@ -57,10 +57,10 @@ export class EditPontuacaoComponent implements OnInit {
     this.pontuacaoservice.patchPontuacao(this.pontuacaoselecionada.id, formval).subscribe(succ => {
       this.querying = false;
       this.SpinnerTimeout();
-      succ['nomealuno'] = succ['aluno'].fullName;
-      succ['anoaluno'] = succ['aluno'].ano;
-      succ['atividadetitulo'] = succ['atividade'].titulo;
       this.update = succ;
+      this.update['nomealuno'] = succ['aluno'].fullName;
+      this.update['anoaluno'] = succ['aluno'].ano;
+      this.update['atividadetitulo'] = succ['atividade'].titulo;
       this.pontuacaoselecionada = null;
       this.notificacao.ngxtoaster('Sucesso!', 'Pontuação Editada com Sucesso!', true);
       this.formPontuacao.reset();
