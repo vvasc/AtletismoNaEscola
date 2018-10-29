@@ -11,7 +11,6 @@ import {
 // import { AdminGuard } from './guards/admin-guard';
 
 const routes: Routes = [
-  { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
   {
     path: 'home',
     loadChildren: './home/home.module#HomeModule',
