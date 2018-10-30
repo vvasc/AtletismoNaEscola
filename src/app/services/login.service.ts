@@ -4,7 +4,7 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
 import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
-  private endpoint: string = 'http://localhost:1337';
+  private endpoint: string = 'http://localhost:8081';
 
   constructor(
     private http: HttpClient,

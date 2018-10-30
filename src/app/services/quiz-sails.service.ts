@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class QuizSailsService {
-  private endpoint: string = 'http://localhost:1337';
+  private endpoint: string = 'http://localhost:8081';
 
   constructor(private http: HttpClient) { }
 

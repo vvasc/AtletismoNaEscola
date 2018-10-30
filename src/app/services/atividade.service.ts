@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class AtividadeService {
-    private endpoint: string = 'http://localhost:1337';
+    private endpoint: string = 'http://localhost:8081';
 
     constructor(private http: HttpClient) { }
 
