@@ -1,3 +1,7 @@
+import { ConfirmationModalComponent } from './../../@core/components/confirmation-modal/confirmation-modal.component';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { MatDialogModule } from '@angular/material';
+import { ConfirmationModalModule } from './../../@core/components/confirmation-modal/confirmation-modal.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormPontuacaoComponent } from './form-pontuacao/form-pontuacao.component';
@@ -16,16 +20,23 @@ import { PontuacaoService } from '../../services/pontuacao.service';
     ThemeModule,
     PontuacaoRoutingModule,
     TableModule,
+    ConfirmationModalModule,
+    MatDialogModule,
+    NgxSpinnerModule,
   ],
   declarations: [
     CreatePontuacaoComponent,
     EditPontuacaoComponent,
     FormPontuacaoComponent,
   ],
+  entryComponents: [
+    ConfirmationModalComponent,
+  ],
   providers: [
     AccountService,
     AtividadeService,
     PontuacaoService,
+    NgxSpinnerService,
   ],
 })
 export class PontuacaoModule { }

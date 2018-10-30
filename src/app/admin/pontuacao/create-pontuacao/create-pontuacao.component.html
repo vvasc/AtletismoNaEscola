@@ -2,15 +2,17 @@
   [dataAsync]="alunosObs"
   titulo="Selecão de Aluno"
   columns="alunos"
-  (editE)="selectAluno($event)"
+  (editE)="selectAluno($event); scroll(atividade);"
 ></ngx-table>
 
-<ngx-table
-  [dataAsync]="atividadesObs"
-  titulo="Selecão de Atividade"
-  columns="atividades"
-  (editE)="selectAtividade($event)"
-></ngx-table>
+<div #atividade>
+  <ngx-table
+    [dataAsync]="atividadesObs"
+    titulo="Selecão de Atividade"
+    columns="atividades"
+    (editE)="selectAtividade($event); scroll(form)"
+  ></ngx-table>
+</div>
 
 <nb-card>
   <nb-card-header>
@@ -22,6 +24,17 @@
       [aluno]="alunoEscolhido"
       (formValue)="resolveForm($event)"
     ></ngx-form-pontuacao>
-    <button class="btn btn-primary" [disabled]="!formPontuacao?.valid || querying" (click)="criarPontuacao()">CRIAR PONTUAÇÃO</button>
+    <div class="form-group" #form>
+      <button class="btn btn-primary btn-with-icon" [disabled]="!formPontuacao?.valid || querying" (click)="criarPontuacao()">
+        <i class="nb-plus"></i>
+        CRIAR PONTUAÇÃO
+      </button>
+      <ngx-spinner
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#000000"
+        type = "square-jelly-box"
+      ></ngx-spinner>
+    </div>
   </nb-card-body>
 </nb-card>
