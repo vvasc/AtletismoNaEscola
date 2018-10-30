@@ -3,7 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AccountService {
-  private endpoint: string = 'http://localhost:1337';
+  private endpoint: string = 'http://localhost:8081';
 
   constructor(private http: HttpClient) { }
 
