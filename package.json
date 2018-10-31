@@ -79,6 +79,7 @@
     "roboto-fontface": "0.8.0",
     "rxjs": "^6.1.0",
     "rxjs-compat": "^6.1.0",
+    "sails-mongo": "^1.0.1",
     "socicon": "3.0.5",
     "tinymce": "4.5.7",
     "typeface-exo": "0.0.22",

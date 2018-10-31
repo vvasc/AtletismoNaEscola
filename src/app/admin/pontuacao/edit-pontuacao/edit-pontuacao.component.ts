@@ -42,7 +42,7 @@ export class EditPontuacaoComponent implements OnInit {
     this.pontuacaoselecionada = event;
   }
 
-  editPontuacao(event) {
+  editPontuacao() {
     const formval = this.formPontuacao.value;
     this.pontuacaoservice.patchPontuacao(this.pontuacaoselecionada.id, formval).subscribe(succ => {
       this.notificacao.ngxtoaster('Sucesso!', 'Pontuação Editada com Sucesso!', true);
@@ -57,7 +57,7 @@ export class EditPontuacaoComponent implements OnInit {
     this.formPontuacao = form;
   }
 
-  deletar(event) {
+  deletar() {
     this.pontuacaoservice.deletarPontuacao(this.pontuacaoselecionada.id).subscribe(succ => {
       this.notificacao.ngxtoaster('Sucesso!', 'Pontuação deletada com Sucesso!', true);
       this.formPontuacao.reset();
