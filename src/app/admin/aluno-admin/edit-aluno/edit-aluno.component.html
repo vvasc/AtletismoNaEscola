@@ -9,7 +9,7 @@
 
 <nb-card>
     <nb-card-header>
-      Editar Professor
+      Editar Aluno
     </nb-card-header>
     <nb-card-body>
       <ngx-form-aluno
@@ -21,7 +21,7 @@
         <i class="nb-plus"></i>
         EDITAR ALUNO
       </button>
-      <button class="btn btn-danger btn-with-icon delete" [disabled]="!resolvedAluno?.id" (click)="deleteAluno()">
+      <button style="margin-left: 20px;" class="btn btn-danger btn-with-icon delete" [disabled]="!resolvedAluno?.id" (click)="deleteAluno()">
         <i class="nb-trash"></i>
         DELETAR ALUNO
       </button>

@@ -1,6 +1,6 @@
 import { AccountService } from './../../../services/account.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 import { NotificacaoService } from '../../../services/notificacao.service';
 import { ConfirmationModalComponent } from '../../../@core/components/confirmation-modal/confirmation-modal.component';
@@ -43,7 +43,7 @@ export class EditAlunoComponent implements OnInit {
     const ACCOUNT = {
       emailAddress: aluno.emailAddress,
       fullName: aluno.fullName,
-      escola: aluno.escola,
+      escola: aluno.professor,
       ano: aluno.ano,
     };
     if ('password' in aluno && aluno.password !== '' && aluno.password !== null) {
@@ -52,7 +52,7 @@ export class EditAlunoComponent implements OnInit {
     this.accountService.patchAccount(this.resolvedAluno.id, ACCOUNT).pipe(
       catchError(error => {
         this.notificacaoService.ngxtoaster('Aluno', 'Erro!', false);
-        return error;
+        return throwError(error);
       })).subscribe((success: any) => {
       success['nomeEscola'] = success.escola.nome;
       this.update = success;
@@ -77,7 +77,7 @@ export class EditAlunoComponent implements OnInit {
           this.accountService.deleteAccount(this.resolvedAluno.id).pipe(
             catchError(error => {
               this.notificacaoService.ngxtoaster('Aluno', 'Erro na Deleção!', false);
-              return error;
+              return throwError(error);
             })).subscribe((succ) => {
             this.delete = this.resolvedAluno.id;
             this.resolvedAluno = null;

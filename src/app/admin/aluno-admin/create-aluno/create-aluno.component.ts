@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../../services/account.service';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { NotificacaoService } from '../../../services/notificacao.service';
 
@@ -27,13 +27,13 @@ export class CreateAlunoComponent implements OnInit {
       emailAddress: aluno.emailAddress,
       password: aluno.password,
       fullName: aluno.fullName,
-      escola: aluno.escola,
+      escola: aluno.professor,
       ano: aluno.ano,
     };
     this.accountService.createAccount(ACCOUNT).pipe(
       catchError(error => {
         this.notificacaoService.ngxtoaster('Aluno', 'Erro ao criar Aluno', false);
-        return error;
+        return throwError(error);
       },
     )).subscribe(response => {
       this.notificacaoService.ngxtoaster('Aluno', 'Criado com sucesso', true);
