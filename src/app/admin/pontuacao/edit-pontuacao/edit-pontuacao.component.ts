@@ -50,7 +50,7 @@ export class EditPontuacaoComponent implements OnInit {
     this.pontuacaoselecionada = event;
   }
 
-  editPontuacao(event) {
+  editPontuacao() {
     const formval = this.formPontuacao.value;
     this.querying = true;
     this.spinner.show();
