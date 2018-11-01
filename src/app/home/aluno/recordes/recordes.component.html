@@ -1,24 +1,33 @@
 <ng-container *ngIf="userinfo?.role === 'aluno'; else elseTemplate">
-    <div class="centered">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 titulo">Meus Recordes</div>
-                <div class="col-md-6 imagem">
-                    <div class="right wrap noborder" [routerLink]="['/home/aluno/recordes/ranking']" >
-                        <img *ngIf="medalha" class="icon" [src]="medalha">
-                        <div class="container">
-                            <div class="row colocacao">{{ colocacao }}º LUGAR</div>
-                            <div class="row right pontos">{{ userinfo?.totalpontos }} PONTOS</div>
+    <ng-container *ngIf="pontuacaoAluno?.length; else SEMPONTUACOES">
+        <div class="centered">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 titulo">Meus Recordes</div>
+                    <div class="col-md-6 imagem">
+                        <div class="right wrap noborder" [routerLink]="['/home/aluno/recordes/ranking']" >
+                            <img *ngIf="medalha" class="icon" [src]="medalha">
+                            <div class="container">
+                                <div class="row colocacao">{{ colocacao }}º LUGAR</div>
+                                <div class="row right pontos">{{ userinfo?.totalpontos }} PONTOS</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        
+            <div class="tabela bottompad">
+                <ngx-tabela-pontuacao [dados]="pontuacaoAluno" [total]="userinfo?.totalpontos"></ngx-tabela-pontuacao>    
+            </div>
         </div>
+    </ng-container>
+
+    <ng-template #SEMPONTUACOES>
+        <div class="center-div">
+            <h1 class="titulo">Você ainda não tem pontuação!</h1>
+        </div>
+    </ng-template>
     
-        <div class="tabela bottompad">
-            <ngx-tabela-pontuacao [dados]="pontuacaoAluno" [total]="userinfo?.totalpontos"></ngx-tabela-pontuacao>    
-        </div>
-    </div>
 </ng-container>
 
 <ng-template #elseTemplate>
