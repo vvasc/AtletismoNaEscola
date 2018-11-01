@@ -19,6 +19,10 @@ export class AccountService {
     return this.http.get(`${this.endpoint}/professores`, this.getOptions() );
   }
 
+  getAlunos() {
+    return this.http.get(`${this.endpoint}/alunos`, this.getOptions() );
+  }
+
   getAllAccounts() {
     return this.http.get(`${this.endpoint}/Account`, this.getOptions() );
   }
