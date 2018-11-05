@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { Router } from '@angular/router';
+import { concatMap, tap } from 'rxjs/operators';
+
 @Injectable()
 export class AuthService {
   private endpoint: string = 'http://localhost:8081';
@@ -31,6 +33,15 @@ export class AuthService {
   logout() {
     this.localStorage.clear().subscribe(() => {});
     this.route.navigate(['/home/main']);
+  }
+
+  refresh() {
+    return this.isLogged().pipe(
+      concatMap(user => {
+        return this.http.get(`${this.endpoint}/Account/${user.id}`, { headers: this.getHeaders() });
+      }),
+      tap(user => this.Logged(user)),
+    );
   }
 
   getHeaders() {

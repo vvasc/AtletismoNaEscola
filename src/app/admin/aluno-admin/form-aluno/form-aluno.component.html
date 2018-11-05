@@ -1,0 +1,55 @@
+<form [formGroup]="formAluno">
+  <div class="row">
+    <div class="col-sm-9">
+      <div class="form-group">
+        <label for="fullName">Nome Completo</label>
+        <input type="text" formControlName="fullName" class="form-control" id="fullName" placeholder="Nome Completo">
+        <div class="alert alert-danger" *ngIf="formAluno.controls['fullName'].hasError('maxlength') && formAluno.controls['fullName'].touched">Nome muito longo!</div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group">
+        <label for="ano">Ano</label>
+        <input type="text" formControlName="ano" class="form-control" id="Ano" placeholder="ano">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="professor">Professor Responsável</label>
+        <select class="form-control" formControlName="professor">
+          <option [value]="null">Nenhum Professor selecionado</option>
+          <option *ngFor="let professor of professoresAsync | async" [value]="professor.escola.id">{{ professor.fullName }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" formControlName="emailAddress" class="form-control" id="email" placeholder="Email">
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" formControlName="password" class="form-control" id="senha" placeholder="Senha">
+        <div class="alert alert-danger" *ngIf="formAluno.hasError('MatchPassword') && formAluno.controls['confirmPassword'].touched">As senhas são diferentes!</div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="senhaconfirm">Confirmar Senha</label>
+        <input type="password" formControlName="confirmPassword" class="form-control" id="confirmPassword" placeholder="Senha">
+        <div class="alert alert-danger" *ngIf="formAluno.hasError('MatchPassword') && formAluno.controls['confirmPassword'].touched">As senhas são diferentes!</div>
+      </div>
+    </div>
+  </div>
+</form>

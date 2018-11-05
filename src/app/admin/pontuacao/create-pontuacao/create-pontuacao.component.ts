@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../../services/account.service';
 import { Observable } from 'rxjs';
@@ -24,6 +25,7 @@ export class CreatePontuacaoComponent implements OnInit {
     private notificacao: NotificacaoService,
     private atividadeservice: AtividadeService,
     private pontuacaoservice: PontuacaoService,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit() {
@@ -46,6 +48,10 @@ export class CreatePontuacaoComponent implements OnInit {
     );
   }
 
+  scroll(el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+
   selectAluno(event) { // Recebe objeto do aluno clicado na tabela
     this.alunoEscolhido = event;
   }
@@ -60,15 +66,27 @@ export class CreatePontuacaoComponent implements OnInit {
 
   criarPontuacao() {
     this.querying = true;
+    this.spinner.show();
     this.pontuacaoservice.createPontuacao(this.formPontuacao.value).subscribe(sucesso => {
       this.querying = false;
+      this.spinnerTimeout();
       this.notificacao.ngxtoaster('SUCESSO!', 'Pontuação criada com sucesso!', true);
+      this.formPontuacao.reset();
+      this.atividadeEscolhida = null;
+      this.alunoEscolhido = null;
     }, err  => {
       this.querying = false;
+      this.spinnerTimeout();
       const errmsg = (err.status === 400) ?
       'Já existe pontuacao dessa atividade para esse Aluno!' : 'Não foi possível criar a pontuação';
       this.notificacao.ngxtoaster('ERRO!', errmsg, false);
     });
+  }
+
+  spinnerTimeout() {
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
   }
 
 }
