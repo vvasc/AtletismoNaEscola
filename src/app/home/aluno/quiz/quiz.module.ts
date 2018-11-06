@@ -20,6 +20,7 @@ import { PontuacaoService } from '../../../services/pontuacao.service';
     QuizSailsService,
     AuthService,
     PontuacaoService,
+    AuthService,
   ],
 })
 export class QuizModule { }
