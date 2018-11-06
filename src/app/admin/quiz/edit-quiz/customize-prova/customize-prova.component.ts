@@ -98,7 +98,16 @@ export class CustomizeProvaComponent implements OnChanges, OnInit {
 
   patchDrangDrop(quizSelected: any) {
     this.formAtividade.patchValue(quizSelected);
-    this.showQuestoes = ('questoes' in quizSelected) ? quizSelected.questoes : null;
+    if ('questoes' in quizSelected) {
+      const questoes_em_ordem = [];
+      quizSelected.ordem.map( id => { // Itera sobre o array
+        quizSelected.questoes.map(questao => { // Atribuindo o objeto no indice apropriado
+          if (questao.id === id)
+            questoes_em_ordem.push(questao);
+        });
+      });
+      this.showQuestoes = questoes_em_ordem;
+    }
   }
 
   createProva() {
