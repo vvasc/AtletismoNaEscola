@@ -20,7 +20,7 @@ export class QuizSailsService {
   }
 
   createQuiz(quiz: any) {
-    return this.http.post(`${this.endpoint}/Quiz/`, {...quiz}, this.getOptions()).subscribe();
+    return this.http.post(`${this.endpoint}/Quiz/`, {...quiz}, this.getOptions());
   }
 
   getQuizesLivresConteudo() {

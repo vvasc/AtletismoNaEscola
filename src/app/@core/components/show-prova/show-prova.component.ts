@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { findIndex, difference, cloneDeep } from 'lodash';
 import { MatDialog } from '@angular/material';
@@ -10,16 +10,35 @@ import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-m
   styleUrls: ['./show-prova.component.scss'],
 })
 
-export class ShowProvaComponent implements OnInit {
+export class ShowProvaComponent implements OnInit, OnChanges {
   @Input() quizSelectedAsync: Observable<any>;
   @Output() respostasPreenchidas = new EventEmitter();
   respostas: any = [];
+  quizSelected;
+  questoesOrdenadas: any = [];
 
   constructor(
     public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if ('quizSelectedAsync' in changes && changes.quizSelectedAsync.currentValue) {
+      changes.quizSelectedAsync.currentValue.subscribe( ([quiz]) => {
+        this.questoesOrdenadas = quiz.ordem.map(id => {
+          let match;
+          quiz.questoes.map(questao => {
+            if (questao.id === id)
+              match = questao;
+          });
+          return match;
+        });
+        this.quizSelected = quiz;
+      });
+    }
+
   }
 
   resolverQuestao(alternativaSelected: any, idQuestao: any) {

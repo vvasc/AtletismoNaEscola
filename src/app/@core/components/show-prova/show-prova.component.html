@@ -1,6 +1,6 @@
-<ng-container *ngIf="quizSelectedAsync | async as quizSelected">
-    <div *ngIf="quizSelected && quizSelected.length; else todosQuizesRespondidos" class="row justify-content-center">
-      <div class="col-md-12 text-center" *ngFor="let showQuestao of quizSelected[0]?.questoes">
+<ng-container *ngIf="quizSelected; else todosQuizesRespondidos">
+    <div class="row justify-content-center">
+      <div class="col-md-12 text-center" *ngFor="let showQuestao of questoesOrdenadas">
         <div class="row box">
           <div class="col-12">
             <div>
@@ -14,7 +14,7 @@
                     <label for="alternativas">
                     <ngx-show-questao
                     [alternativas]="showQuestao.Alternativas | objectToArray"
-                    (selected)="resolverQuestao($event, showQuestao?.id, quizSelected[0]?.questoes)">
+                    (selected)="resolverQuestao($event, showQuestao?.id, questoesOrdenadas)">
                     </ngx-show-questao>
                     </label>
                   </div>
@@ -25,10 +25,10 @@
         </div>
       </div>
     </div>
-    <div *ngIf="quizSelected && quizSelected.length" class="row justify-content-center">
-      <button type="button" class="btn btn-success" (click)="finalizarQuiz(quizSelected[0]?.questoes, quizSelected[0]?.id, quizSelected[0]?.ownerAtividade.id)">Finalizar Quiz</button>
+    <div class="row justify-content-center">
+      <button type="button" class="btn btn-success" (click)="finalizarQuiz(questoesOrdenadas, quizSelected?.id, quizSelected?.ownerAtividade.id)">Finalizar Quiz</button>
     </div>
-    <ng-template #todosQuizesRespondidos >
-      <h1 class="text-format">Todos os Quizes foram respondidos!</h1>
-    </ng-template>
 </ng-container>
+<ng-template #todosQuizesRespondidos >
+  <h1 class="text-format">Todos os Quizes foram respondidos!</h1>
+</ng-template>

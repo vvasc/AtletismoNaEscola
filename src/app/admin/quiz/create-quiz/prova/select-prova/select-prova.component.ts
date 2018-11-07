@@ -66,6 +66,8 @@ export class SelectProvaComponent implements OnChanges, OnInit {
       this.notificacaoService.ngxtoaster('Erro', 'Erro no Preenchimento', false);
       return;
     }
+
+    const quizes_em_ordem = [...this.questoesSelected.map(questoes => questoes.id)];
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
       width: '40%',
       data: {
@@ -81,13 +83,18 @@ export class SelectProvaComponent implements OnChanges, OnInit {
           this.spinner.show();
           this.quizService.createQuiz({
             titulo: this.formTitulo.value.titulo,
-            questoes: [...this.questoesSelected.map(questoes => questoes.id)],
+            questoes: quizes_em_ordem,
+            ordem: quizes_em_ordem,
+          }).subscribe(success => {
+            this.formTitulo.reset();
+            this.questoesSelected = [];
+            this.notificacaoService.ngxtoaster('Sucesso!', 'Quiz Criado com Sucesso!', true);
+          }, error => {
+            this.notificacaoService.ngxtoaster('Erro!', 'Falha na criação!', false);
           });
         }
         setTimeout(() => {
           this.spinner.hide();
-          this.formTitulo.reset();
-          this.questoesSelected = [];
         }, 2000);
       }),
     ).subscribe();
