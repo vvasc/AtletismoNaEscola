@@ -64,7 +64,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   </div>
   <div class="row">
     <div class="col-md-2">
-      <button type="button" class="btn btn-primary" (click)="createProva()">Editar Prova</button>
+      <button type="button" class="btn btn-primary" (click)="editProva()">Editar Prova</button>
     </div>
     <div class="col-md-2">
       <button type="button" class="btn btn-danger" (click)="deleteProva()">Apagar Prova</button>
@@ -110,11 +110,14 @@ export class CustomizeProvaComponent implements OnChanges, OnInit {
     }
   }
 
-  createProva() {
+  editProva() {
+    const nova_ordem = this.showQuestoes.map(questao => {
+      return questao.id;
+    });
     this.QuizE.emit({
       titulo: this.formAtividade.get('titulo').value,
       id: this.quizSelected.id,
-      questoes: [ ...this.showQuestoes.map(questoes => questoes.id)],
+      ordem: nova_ordem,
     });
     this.formAtividade.reset();
     this.showQuestoes = null;

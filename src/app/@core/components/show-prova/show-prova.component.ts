@@ -14,6 +14,8 @@ export class ShowProvaComponent implements OnInit, OnChanges {
   @Input() quizSelectedAsync: Observable<any>;
   @Output() respostasPreenchidas = new EventEmitter();
   respostas: any = [];
+  quizSelected;
+  questoesOrdenadas: any = [];
 
   constructor(
     public dialog: MatDialog,
@@ -22,9 +24,19 @@ export class ShowProvaComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-  ngOnChanges(SimpleChanges changes) {
-    if ('quizSelectedAsync' in changes) {
-      this.qui
+  ngOnChanges(changes: SimpleChanges) {
+    if ('quizSelectedAsync' in changes && changes.quizSelectedAsync.currentValue) {
+      changes.quizSelectedAsync.currentValue.subscribe( ([quiz]) => {
+        this.questoesOrdenadas = quiz.ordem.map(id => {
+          let match;
+          quiz.questoes.map(questao => {
+            if (questao.id === id)
+              match = questao;
+          });
+          return match;
+        });
+        this.quizSelected = quiz;
+      });
     }
 
   }
