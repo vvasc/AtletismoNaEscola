@@ -80,7 +80,7 @@ export class EditPontuacaoComponent implements OnInit {
     this.formPontuacao = form;
   }
 
-  deletar(event) {
+  deletar() {
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
       width: '40%',
       data: {
