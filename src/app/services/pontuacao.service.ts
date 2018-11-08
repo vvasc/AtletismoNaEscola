@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class PontuacaoService {
-  private endpoint: string = 'http://localhost:8081';
+  private endpoint: string = 'http://www.atletismonaescola.com.br/api';
 
   constructor(private http: HttpClient) { }
 

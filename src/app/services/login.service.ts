@@ -6,7 +6,7 @@ import { concatMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
-  private endpoint: string = 'http://localhost:8081';
+  private endpoint: string = 'http://www.atletismonaescola.com.br/api';
 
   constructor(
     private http: HttpClient,
