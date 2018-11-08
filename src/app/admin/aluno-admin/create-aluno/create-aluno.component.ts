@@ -37,6 +37,7 @@ export class CreateAlunoComponent implements OnInit {
       },
     )).subscribe(response => {
       this.notificacaoService.ngxtoaster('Aluno', 'Criado com sucesso', true);
+      this.form['aluno'].reset();
     });
   }
 

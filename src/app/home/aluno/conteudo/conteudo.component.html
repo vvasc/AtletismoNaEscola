@@ -1,9 +1,12 @@
 <div class="center-div" *ngIf="ConteudoAsync | async as conteudos">
-  <div class="container">
+  <div *ngIf="conteudos && conteudos.length; else naoHaConteudos"class="container">
     <div class="row justify-content-center" *ngFor="let conteudo of conteudos">
       <div class="item" (click)="resolver(conteudo)">
         {{ conteudo.titulo }}
       </div>
     </div>
   </div>
+  <ng-template #naoHaConteudos>
+    <h3>Não há Conteúdos</h3>
+  </ng-template>
 </div>
