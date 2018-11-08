@@ -27,15 +27,17 @@ export class ShowProvaComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if ('quizSelectedAsync' in changes && changes.quizSelectedAsync.currentValue) {
       changes.quizSelectedAsync.currentValue.subscribe( ([quiz]) => {
-        this.questoesOrdenadas = quiz.ordem.map(id => {
-          let match;
-          quiz.questoes.map(questao => {
-            if (questao.id === id)
-              match = questao;
+        if (quiz) {
+          this.questoesOrdenadas = quiz.ordem.map(id => {
+            let match;
+            quiz.questoes.map(questao => {
+              if (questao.id === id)
+                match = questao;
+            });
+            return match;
           });
-          return match;
-        });
-        this.quizSelected = quiz;
+          this.quizSelected = quiz;
+        }
       });
     }
 
