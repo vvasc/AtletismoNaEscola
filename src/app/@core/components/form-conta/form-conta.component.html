@@ -27,7 +27,7 @@
     <div class="col-sm-6">
       <div class="form-group">
         <label for="escola">Escola</label>
-        <select class="form-control" formControlName="nomeEscola">
+        <select class="form-control" formControlName="escola" id="escola" placeholder="Escola">
           <option [value]="null">Nenhuma escola selecionada</option>
           <option *ngFor="let escola of escolasAsync | async" [ngValue]="escola.id">{{ escola.nome }}</option>
         </select>
