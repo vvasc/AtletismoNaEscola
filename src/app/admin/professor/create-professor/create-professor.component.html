@@ -1,16 +1,9 @@
-<ngx-table *ngIf="user?.role === 'superadmin'"
-  columns="colegio"
-  titulo="Selecionar Escola"
-  [dataAsync]="escolas"
-  (editE)="selectEscola($event); scroll(form);"
-></ngx-table>
-
 <nb-card>
   <nb-card-header>
     Criar Professor
   </nb-card-header>
   <nb-card-body>
-    <ngx-form-conta [escola]="selectedEscola" (formValue)="resolveForm($event)"></ngx-form-conta>
+    <ngx-form-conta [escolasAsync]="escolasAsync" (formValue)="resolveForm($event)"></ngx-form-conta>
     <br #form>
     <div class="form-group">
       <button class="btn btn-primary btn-with-icon" [disabled]="!formProfessor?.valid || querying" (click)="criarProfessor()">

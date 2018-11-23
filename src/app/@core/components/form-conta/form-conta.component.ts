@@ -1,5 +1,6 @@
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-form-conta',
@@ -8,7 +9,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitte
 })
 export class FormContaComponent implements OnInit, OnChanges {
   formConta: FormGroup;
-  @Input() escola; // Escola selecionada
+  @Input() escolasAsync: Observable<any>; // Escola selecionada
   @Output() formValue = new EventEmitter();
   @Input() conta; // Dados para serem preenchidos da conta
   @Input() edit: boolean = false; // True se for o componente de edit, desabilita o required da senha
@@ -28,8 +29,7 @@ export class FormContaComponent implements OnInit, OnChanges {
       password: ['', ...val],
       confirmPassword: ['', ...val],
       fullName: ['', [Validators.required, Validators.maxLength(120)]],
-      escola: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      nomeEscola: [{value: '', disabled: true}],
+      escola: ['', [Validators.required]],
       ano: ['', [Validators.required, Validators.pattern('[0-9]')]],
     }, {
       validator: this.passwordValidator,
