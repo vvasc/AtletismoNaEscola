@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ColegioService } from '../../../services/colegio.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NotificacaoService } from '../../../services/notificacao.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'ngx-create-professor',
@@ -11,8 +12,8 @@ import { NotificacaoService } from '../../../services/notificacao.service';
   styleUrls: ['./create-professor.component.scss'],
 })
 export class CreateProfessorComponent implements OnInit {
-  escolas;
-  selectedEscola;
+  escolasAsync: Observable<any>;
+  selectedEscola: any;
   formProfessor;
   querying = false;
   user;
@@ -28,15 +29,14 @@ export class CreateProfessorComponent implements OnInit {
   ngOnInit() {
     this.authservice.isLogged().subscribe(user => {
       this.user = user;
-      if (user.role === 'superadmin')
-        this.escolas = this.colegioService.getAllColegio();
-      else
-        this.selectedEscola = user.escola;
+      if (user.role === 'superadmin') {
+        this.escolasAsync = this.colegioService.getAllColegio();
+      } else {
+        const arr = [];
+        arr.push(user.escola);
+        this.escolasAsync = of(arr);
+      }
     });
-  }
-
-  selectEscola(escola) {
-    this.selectedEscola = escola;
   }
 
   resolveForm(event) {
