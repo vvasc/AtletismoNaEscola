@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../../services/account.service';
 import { AuthService } from '../../../services/login.service';
 import { ColegioService } from '../../../services/colegio.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'ngx-edit-professor',
@@ -15,11 +16,11 @@ import { ColegioService } from '../../../services/colegio.service';
   styleUrls: ['./edit-professor.component.scss'],
 })
 export class EditProfessorComponent implements OnInit {
-  professoresAsync;
+  professoresAsync: Observable<any>;
+  escolasAsync: Observable<any>;
   selectedProfessor;
   formProfessor;
   user;
-  escolas;
   selectedEscola;
   querying = false;
   update;
@@ -28,7 +29,7 @@ export class EditProfessorComponent implements OnInit {
   constructor(
     private accountservice: AccountService,
     private authservice: AuthService,
-    private colegioservice: ColegioService,
+    private colegioService: ColegioService,
     private spinner: NgxSpinnerService,
     private notificacao: NotificacaoService,
     private dialog: MatDialog,
@@ -37,10 +38,13 @@ export class EditProfessorComponent implements OnInit {
   ngOnInit() {
     this.authservice.isLogged().subscribe(user => {
       this.user = user;
-      if (user.role === 'superadmin') // Se o usuario for superadmin, libera pra escolher o colegio do professor
-        this.escolas = this.colegioservice.getAllColegio();
-      else
-        this.selectedEscola = user.escola;
+      if (user.role === 'superadmin') {
+        this.escolasAsync = this.colegioService.getAllColegio();
+      } else {
+        const arr = [];
+        arr.push(user.escola);
+        this.escolasAsync = of(arr);
+      }
     });
     this.professoresAsync = this.accountservice.getProfessores().pipe(
       map((contas: any) => {

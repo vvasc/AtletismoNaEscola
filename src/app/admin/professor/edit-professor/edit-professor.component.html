@@ -6,20 +6,12 @@
   [remove]="delete"
   (editE)="selectProfessor($event); scroll(form);"
 ></ngx-table>
-
-<ngx-table *ngIf="user?.role === 'superadmin'"
-  columns="colegio"
-  titulo="Selecão de Escola"
-  [dataAsync]="escolas"
-  (editE)="selectEscola($event); scroll(form);"
-></ngx-table>
-
 <nb-card>
   <nb-card-header>
     Editar professor
   </nb-card-header>
   <nb-card-body>
-    <ngx-form-conta edit="true" [conta]="selectedProfessor" [escola]="selectedEscola" (formValue)="resolveForm($event)"></ngx-form-conta>
+    <ngx-form-conta edit="true" [conta]="selectedProfessor" [escolasAsync]="escolasAsync" (formValue)="resolveForm($event)"></ngx-form-conta>
     <br>
     <div class="form-group" #form>
       <button class="btn btn-primary btn-with-icon" [disabled]="!formProfessor?.valid || querying" (click)="editProfessor()">

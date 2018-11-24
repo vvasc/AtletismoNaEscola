@@ -53,20 +53,6 @@ export const PROFESSOR_MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-  {
-    title: 'Quiz',
-    icon: 'ion-help',
-    children: [
-      {
-        title: 'Criar Quiz',
-        link: '/admin/quiz/create',
-      },
-      {
-        title: 'Editar Quiz',
-        link: '/admin/quiz/edit',
-      },
-    ],
-  },
 ];
 
 export const DIRETOR_MENU_ITEMS: NbMenuItem[] = [
