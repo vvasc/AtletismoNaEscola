@@ -219,6 +219,22 @@
 
   @include media-breakpoint-down(is) {
 
+    .logo {
+      position: absolute !important;
+      top: -9999px !important;
+      left: -9999px !important;
+    }
+
+    .buttext {
+      position: absolute !important;
+      top: -9999px !important;
+      left: -9999px !important;
+    }
+
+    .btn {
+      padding: 0;
+    }
+
     .header-container {
       .logo {
         font-size: 1.25rem;
