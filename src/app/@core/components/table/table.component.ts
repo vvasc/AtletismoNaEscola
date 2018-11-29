@@ -25,10 +25,12 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   @Input() titulo: string = '';
   @Input() columns: string; // Determina colunas mostradas
   @Input() edit: boolean = false; // Ativa ou desativa a edicao
+  @Input() delete: boolean = false; // Ativa ou desativa a deleção
   @Input() update: any = null; // Use para dar update na table
   @Input() remove: number|string = null; // Use para id que deseja remover
   @Output() editE = new EventEmitter(); // Objeto com id especifico emitido para ser tratado no component pai
   @Output() editConfirm = new EventEmitter(); // Retorna objeto com informacoes sobre a linha editada
+  @Output() deleteConfirm = new EventEmitter(); // Retorna objeto com informacoes sobre a linha editada
   private unsubscribeData: Subject<void> = new Subject();
   dataSource: any = [];
   source: LocalDataSource = new LocalDataSource();
@@ -59,6 +61,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
 
   initializeComponent() {
     this.tableService.setEdit(this.edit);
+    this.tableService.setDelete(this.delete);
     this.settings = this.tableService.getColumns(this.columns);
     this.dataAsync.pipe(takeUntil(this.unsubscribeData)).subscribe(res => {
       this.dataSource = res;
@@ -84,6 +87,10 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
 
   emitConfirm(event: any) { // Emite o evento recebido da table com as info do evento escolhido
     this.editConfirm.emit(event.data); // Emite o evento para ser tratado no pai
+  }
+
+  emitDelete(event: any) { // Emite o evento de deleção da tabela para o pai
+    this.deleteConfirm.emit(event.data);
   }
 
   ngOnDestroy() {

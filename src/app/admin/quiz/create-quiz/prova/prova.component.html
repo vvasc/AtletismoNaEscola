@@ -1,7 +1,10 @@
 <ngx-table
   [dataAsync]="QuestoesAsync"
   (editE)="resolver($event)"
+  delete=true
+  [remove]="deleted"
   titulo="Tabela de Questões"
+  (deleteConfirm)="deleteQuestao($event)"
   columns='questao'
 >
 </ngx-table>

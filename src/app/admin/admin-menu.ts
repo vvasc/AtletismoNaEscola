@@ -178,20 +178,6 @@ export const SUPERADMIN_MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
-    title: 'Aluno',
-    icon: 'ion-person',
-    children: [
-      {
-        title: 'Adicionar Aluno',
-        link: '/admin/aluno/create',
-      },
-      {
-        title: 'Editar Aluno',
-        link: '/admin/aluno/edit',
-      },
-    ],
-  },
-  {
     title: 'Pontuação',
     icon: 'nb-star',
     children: [
