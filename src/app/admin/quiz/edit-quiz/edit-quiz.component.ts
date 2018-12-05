@@ -33,4 +33,8 @@ export class EditQuizComponent implements OnInit {
       this.update = response;
     });
   }
+
+  scroll(el) {
+    el.scrollIntoView({ behavior: 'smooth'});
+  }
 }

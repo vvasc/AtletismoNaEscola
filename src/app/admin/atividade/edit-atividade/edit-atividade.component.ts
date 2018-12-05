@@ -127,4 +127,8 @@ export class EditAtividadeComponent implements OnInit {
     }, 1000);
   }
 
+  scroll(el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+
 }

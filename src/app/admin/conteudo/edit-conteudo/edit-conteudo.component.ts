@@ -137,4 +137,8 @@ export class EditConteudoComponent implements OnInit {
   preview() {
     window.open(`${this.end}/#/home/aluno/conteudo/preview`, '_blank'); // Abre o preview em outra aba
   }
+
+  scroll(el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
 }

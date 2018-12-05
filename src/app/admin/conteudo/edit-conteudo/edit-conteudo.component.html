@@ -1,6 +1,6 @@
 <ngx-table
   [dataAsync]="conteudosObs"
-  (editE)="select($event)"
+  (editE)="select($event); scroll(form);"
   titulo="Conteúdos"
   [update]="update"
   [remove]="delete"
@@ -12,6 +12,7 @@
     Editar Conteúdo
   </nb-card-header>
   <nb-card-body>
+    <div #form></div>
     <ngx-form-conteudo [dados]="selecionado" [quizes]="quizes" (formValue)="getForm($event)"></ngx-form-conteudo>
     <br>
     <div class="form-group">
