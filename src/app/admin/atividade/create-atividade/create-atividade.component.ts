@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { QuizSailsService } from '../../../services/quiz-sails.service';
 import { NotificacaoService } from '../../../services/notificacao.service';
 import { AtividadeService } from '../../../services/atividade.service';
-import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,7 +16,6 @@ export class CreateAtividadeComponent implements OnInit {
 
   constructor(
     private atividadeService: AtividadeService,
-    private quizService: QuizSailsService,
     private notificacao: NotificacaoService,
   ) { }
 

@@ -22,7 +22,7 @@ export class EditConteudoComponent implements OnInit {
   conteudosObs: Observable<any>;
   selecionado; // Conteudo selecionado para dar patch no forms
   querying: boolean = false;
-  end = 'http://localhost:4200';
+  end = 'http://atletismonaescola.com.br';
   localstorage$: Subject<string>; // Usado para nao ficar atualizando o storage toda hora, só atualiza a cada 1 seg
   update;
   delete;

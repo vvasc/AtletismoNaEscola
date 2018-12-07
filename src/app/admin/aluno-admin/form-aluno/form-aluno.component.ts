@@ -56,7 +56,9 @@ export class FormAlunoComponent implements OnInit, OnChanges {
 
   onFormValueChanges() {
     this.formAluno.valueChanges.subscribe(form => {
-      if ((form.password !== null && form.password !== '') || (form.confirmPassword !== null && form.password !== '')) {
+      // tslint:disable-next-line:max-line-length
+      if ((form.password !== null && form.password !== '') || (form.confirmPassword !== null && form.confirmPassword !== '')) {
+        // Ativa o validators para a senha caso o usuario inserir algo nos campos, se deletar tira
         if (this.formAluno.validator === null) {
           this.formAluno.setValidators(this.passwordValidator);
           this.formAluno.get('password').setValidators(Validators.required);

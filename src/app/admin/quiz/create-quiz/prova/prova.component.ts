@@ -33,6 +33,7 @@ export class ProvaComponent implements OnInit {
   }
 
   resolver(event: any) {
+    this.notificacao.ngxtoaster('', 'Questão Selecionada!', true, {timeOut: 600, easeTime: 0});
     this.QuestaoResolver = event;
   }
 
