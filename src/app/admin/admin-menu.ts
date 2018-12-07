@@ -53,20 +53,6 @@ export const DIRETOR_MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
-    title: 'Aluno',
-    icon: 'ion-person',
-    children: [
-      {
-        title: 'Adicionar Aluno',
-        link: '/admin/aluno/create',
-      },
-      {
-        title: 'Editar Aluno',
-        link: '/admin/aluno/edit',
-      },
-    ],
-  },
-  {
     title: 'Professor',
     icon: 'ion-person',
     children: [
@@ -77,20 +63,6 @@ export const DIRETOR_MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Editar Professor',
         link: '/admin/professor/edit',
-      },
-    ],
-  },
-  {
-    title: 'Pontuação',
-    icon: 'nb-star',
-    children: [
-      {
-        title: 'Criar Pontuação',
-        link: '/admin/pontuacao/create',
-      },
-      {
-        title: 'Editar Pontuação',
-        link: '/admin/pontuacao/edit',
       },
     ],
   },
@@ -122,30 +94,16 @@ export const SUPERADMIN_MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
-    title: 'Professor',
+    title: 'Diretor',
     icon: 'ion-person',
     children: [
       {
-        title: 'Adicionar Professor',
-        link: '/admin/professor/create',
+        title: 'Adicionar Diretor',
+        link: '/admin/diretor/create',
       },
       {
-        title: 'Editar Professor',
-        link: '/admin/professor/edit',
-      },
-    ],
-  },
-  {
-    title: 'Pontuação',
-    icon: 'nb-star',
-    children: [
-      {
-        title: 'Criar Pontuação',
-        link: '/admin/pontuacao/create',
-      },
-      {
-        title: 'Editar Pontuação',
-        link: '/admin/pontuacao/edit',
+        title: 'Editar Diretor',
+        link: '/admin/diretor/edit',
       },
     ],
   },
