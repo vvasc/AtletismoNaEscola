@@ -18,6 +18,7 @@ export class TableService {
       edit: false,
       delete: false,
     },
+    noDataMessage: 'Sem dado para mostrar!',
   };
   questao = {
     columns: {
@@ -87,14 +88,6 @@ export class TableService {
     columns: {
       titulo: {
         title: 'Título Atividade',
-        type: 'string',
-      },
-      provaPratica: {
-        title: 'Título Atividade Prática',
-        type: 'string',
-      },
-      tituloquiz: {
-        title: 'Título Quiz',
         type: 'string',
       },
     },

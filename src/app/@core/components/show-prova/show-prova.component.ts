@@ -52,7 +52,7 @@ export class ShowProvaComponent implements OnInit, OnChanges {
       this.respostas[wasAnswer].resposta = alternativaSelected ;
   }
 
-  finalizarQuiz(questoes: any, idQuiz: any, idAtividade: any) {
+  finalizarQuiz(questoes: any, idQuiz: any) {
     const clonedQuestoes = cloneDeep(questoes);
     // tslint:disable-next-line:max-line-length
     const idsRespostas = this.respostas.sort((resposta1, resposta2) => resposta1.id < resposta2.id).map(resposta => resposta.id);
@@ -80,7 +80,6 @@ export class ShowProvaComponent implements OnInit, OnChanges {
       );
       this.respostasPreenchidas.emit({
         id: idQuiz,
-        atividade: idAtividade,
         pontuacao: +this.respostas.length - +respostasErradas.length,
       });
     }

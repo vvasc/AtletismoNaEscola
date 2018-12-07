@@ -23,14 +23,6 @@ export class CreateAtividadeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.carregaQuizes();
-  }
-
-  carregaQuizes() {
-    this.quizesAsync = this.quizService.getQuizesLivresAtividade().pipe(catchError((error: any) => {
-      this.notificacao.ngxtoaster('Quizes', 'Não foi possível carregar os quizes! Recarregue a página!', false);
-      return error;
-    }));
   }
 
 
@@ -45,7 +37,6 @@ export class CreateAtividadeComponent implements OnInit {
     this.atividadeService.createAtividade(formval).subscribe(res => {
       this.querying = false;
       this.notificacao.ngxtoaster('Atividade', 'Criado com Sucesso!', true);
-      this.carregaQuizes(); // Renova a lista dos quizes livres
       this.formAtividade.reset();
     }, err => {
       this.querying = false;
