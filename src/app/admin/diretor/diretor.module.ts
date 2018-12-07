@@ -2,7 +2,6 @@ import { ConfirmationModalComponent } from '../../@core/components/confirmation-
 import { MatDialogModule } from '@angular/material';
 import { ConfirmationModalModule } from '../../@core/components/confirmation-modal/confirmation-modal.module';
 import { AccountService } from '../../services/account.service';
-import { FormContaComponent } from '../../@core/components/form-conta/form-conta.component';
 import { ColegioService } from '../../services/colegio.service';
 import { EditDiretorComponent } from './edit-diretor/edit-diretor.component';
 import { CreateDiretorComponent } from './create-diretor/create-diretor.component';
