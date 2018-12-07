@@ -2,7 +2,7 @@
   [dataAsync]="colegioAsync"
   [update]="update"
   [remove]="delete"
-  (editE)="resolver($event)"
+  (editE)="resolver($event); scroll(form);"
   titulo="Colégios"
   columns='colegio'>
 </ngx-table>
@@ -10,7 +10,7 @@
   <nb-card-header>Editar Colégio</nb-card-header>
   <nb-card-body>
     <ngx-form-colegio [dados]="colegioResolver" (formValue)="getForm($event)"></ngx-form-colegio>
-    <div class="form-group">
+    <div #form class="form-group">
       <button class="btn btn-primary btn-with-icon" [disabled]="!formColegio?.valid || querying" (click)="onSubmit()">
         <i class="nb-edit"></i>
         EDITAR COLÉGIO

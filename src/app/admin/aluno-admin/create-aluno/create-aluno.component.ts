@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../../services/account.service';
-import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { NotificacaoService } from '../../../services/notificacao.service';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'ngx-create-aluno',
@@ -10,34 +10,46 @@ import { NotificacaoService } from '../../../services/notificacao.service';
   styleUrls: ['./create-aluno.component.scss'],
 })
 export class CreateAlunoComponent implements OnInit {
-  professoresAsync: Observable<any>;
-  form: any = {};
+  formAluno: any = {};
   constructor(
     private accountService: AccountService,
     private notificacaoService: NotificacaoService,
   ) { }
 
   ngOnInit() {
-    this.professoresAsync = this.accountService.getProfessores();
   }
 
   createAluno() {
-    const aluno = this.form['aluno'].value;
+    const aluno = this.formAluno.value;
     const ACCOUNT = {
       emailAddress: aluno.emailAddress,
       password: aluno.password,
       fullName: aluno.fullName,
-      escola: aluno.professor,
+      escola: aluno.escola,
       ano: aluno.ano,
     };
     this.accountService.createAccount(ACCOUNT).pipe(
-      catchError(error => {
-        this.notificacaoService.ngxtoaster('Aluno', 'Erro ao criar Aluno', false);
-        return throwError(error);
+      catchError(err => {
+        let msg;
+        switch (err.error.code) {
+          case 'E_UNIQUE':
+            msg = 'Já existe Aluno com este Email!';
+            break;
+          case 'E_INVALID_NEW_RECORD':
+            msg = 'O email fornecido não é válido!';
+            break;
+          default:
+            msg = 'Erro ao criar Aluno';
+            break;
+        }
+        this.notificacaoService.ngxtoaster('Aluno', msg, false);
+        return throwError(err);
       },
     )).subscribe(response => {
       this.notificacaoService.ngxtoaster('Aluno', 'Criado com sucesso', true);
-      this.form['aluno'].reset();
+      const temp = aluno.escola;
+      this.formAluno.reset();
+      this.formAluno.controls['escola'].setValue(temp);
     });
   }
 

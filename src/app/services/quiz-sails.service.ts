@@ -7,17 +7,25 @@ export class QuizSailsService {
 
   constructor(private http: HttpClient) { }
 
+  // Questões
+
   getAllQuestoes() {
-    return this.http.get(`${this.endpoint}/Questoes`, this.getOptions());
+    return this.http.get(`${this.endpoint}/Questao`, this.getOptions());
   }
 
   getQuestao(id: number) {
-    return this.http.get(`${this.endpoint}/Questoes/${id}`, this.getOptions());
+    return this.http.get(`${this.endpoint}/Questao/${id}`, this.getOptions());
   }
 
   createQuestao(questao: any) {
-    return this.http.post(`${this.endpoint}/Questoes/`, {...questao}, this.getOptions()).subscribe();
+    return this.http.post(`${this.endpoint}/Questao`, {...questao}, this.getOptions());
   }
+
+  deleteQuestao(id: any) {
+    return this.http.delete(`${this.endpoint}/Questao/${id}`, this.getOptions());
+  }
+
+  // Quiz
 
   createQuiz(quiz: any) {
     return this.http.post(`${this.endpoint}/Quiz/`, {...quiz}, this.getOptions());

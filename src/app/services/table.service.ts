@@ -9,11 +9,16 @@ export class TableService {
       cancelButtonContent: '<i class="nb-close"></i>',
       confirmSave: true, // Para emitir o evento de confirmamento de edicao da linha
     },
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
+    },
     actions: {
       add: false,
       edit: false,
       delete: false,
     },
+    noDataMessage: 'Sem dado para mostrar!',
   };
   questao = {
     columns: {
@@ -85,14 +90,6 @@ export class TableService {
         title: 'Título Atividade',
         type: 'string',
       },
-      provaPratica: {
-        title: 'Título Atividade Prática',
-        type: 'string',
-      },
-      tituloquiz: {
-        title: 'Título Quiz',
-        type: 'string',
-      },
     },
   };
   colegio = {
@@ -144,6 +141,10 @@ export class TableService {
 
   setEdit(edit = false) {
     this.basic.actions.edit = edit;
+  }
+
+  setDelete(del = false) {
+    this.basic.actions.delete = del;
   }
 
   getColumns(tipo: any) {

@@ -37,15 +37,7 @@ export class CreatePontuacaoComponent implements OnInit {
         return accounts;
       }),
     ); // Pega todos os alunos para passar para a tabela
-    this.atividadesObs = this.atividadeservice.getAllAtividades().pipe(
-      // Pega todas as atividades para passar para a tabela
-      map((atividades: any) => { // refatorando objeto para ser usado na table
-        atividades.map(element => {
-          element.tituloquiz = element.quiz[0].titulo;
-        });
-        return atividades;
-      }),
-    );
+    this.atividadesObs = this.atividadeservice.getAllAtividades();
   }
 
   scroll(el) {

@@ -4,7 +4,7 @@
   [dataAsync]="alunosAsync"
   [update]="update"
   [remove]="delete"
-  (editE)="resolvedAluno = $event"
+  (editE)="resolvedAluno = $event; scroll(form);"
 ></ngx-table>
 
 <nb-card>
@@ -13,11 +13,10 @@
     </nb-card-header>
     <nb-card-body>
       <ngx-form-aluno
-      [professoresAsync]="professoresAsync"
-      (formEmitter)="form['aluno']=$event"
+      (formEmitter)="getForm($event)"
       [resolvedAluno]=resolvedAluno>
       </ngx-form-aluno>
-      <button class="btn btn-primary btn-with-icon" [disabled]="!form['aluno']?.valid" (click)="editAluno()">
+      <button #form class="btn btn-primary btn-with-icon" [disabled]="!formAluno?.valid" (click)="editAluno()">
         <i class="nb-plus"></i>
         EDITAR ALUNO
       </button>

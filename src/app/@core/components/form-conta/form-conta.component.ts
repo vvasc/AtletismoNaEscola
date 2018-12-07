@@ -42,9 +42,8 @@ export class FormContaComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if ('escola' in changes && this.formConta && !changes.escola.firstChange) {
       const data = changes.escola.currentValue;
-      const [id, nome] = (data === null) ? [null, null] : [data.id, data.nome];
+      const [id] = (data === null) ? [null, null] : [data.id];
       this.formConta.controls['escola'].setValue(id);
-      this.formConta.controls['nomeEscola'].setValue(nome);
     }
     if ('conta' in changes && this.formConta && !changes.conta.firstChange) {
       const conta = changes.conta.currentValue;
@@ -53,7 +52,6 @@ export class FormContaComponent implements OnInit, OnChanges {
         this.formConta.controls['fullName'].setValue(conta.fullName);
         this.formConta.controls['escola'].setValue(conta.escola.id);
         this.formConta.controls['ano'].setValue(conta.ano);
-        this.formConta.controls['nomeEscola'].setValue(conta.escola.nome);
       } else
         this.formConta.reset();
     }

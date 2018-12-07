@@ -39,20 +39,6 @@ export const PROFESSOR_MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-  {
-    title: 'Atividade',
-    icon: 'ion-clipboard',
-    children: [
-      {
-        title: 'Criar Atividade',
-        link: '/admin/atividade/create',
-      },
-      {
-        title: 'Editar Atividade',
-        link: '/admin/atividade/edit',
-      },
-    ],
-  },
 ];
 
 export const DIRETOR_MENU_ITEMS: NbMenuItem[] = [
@@ -108,34 +94,6 @@ export const DIRETOR_MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-  {
-    title: 'Atividade',
-    icon: 'ion-clipboard',
-    children: [
-      {
-        title: 'Criar Atividade',
-        link: '/admin/atividade/create',
-      },
-      {
-        title: 'Editar Atividade',
-        link: '/admin/atividade/edit',
-      },
-    ],
-  },
-  {
-    title: 'Quiz',
-    icon: 'ion-help',
-    children: [
-      {
-        title: 'Criar Quiz',
-        link: '/admin/quiz/create',
-      },
-      {
-        title: 'Editar Quiz',
-        link: '/admin/quiz/edit',
-      },
-    ],
-  },
 ];
 
 export const SUPERADMIN_MENU_ITEMS: NbMenuItem[] = [
@@ -174,20 +132,6 @@ export const SUPERADMIN_MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Editar Professor',
         link: '/admin/professor/edit',
-      },
-    ],
-  },
-  {
-    title: 'Aluno',
-    icon: 'ion-person',
-    children: [
-      {
-        title: 'Adicionar Aluno',
-        link: '/admin/aluno/create',
-      },
-      {
-        title: 'Editar Aluno',
-        link: '/admin/aluno/edit',
       },
     ],
   },

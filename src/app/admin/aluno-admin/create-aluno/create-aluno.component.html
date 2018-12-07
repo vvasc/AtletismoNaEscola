@@ -4,10 +4,9 @@
   </nb-card-header>
   <nb-card-body>
     <ngx-form-aluno
-    [professoresAsync]="professoresAsync"
-    (formEmitter)="form['aluno']=$event">
+    (formEmitter)="formAluno=$event">
     </ngx-form-aluno>
-    <button class="btn btn-primary btn-with-icon" [disabled]="!form['aluno']?.valid" (click)="createAluno()">
+    <button class="btn btn-primary btn-with-icon" [disabled]="!formAluno?.valid" (click)="createAluno()">
       <i class="nb-plus"></i>
       CRIAR ALUNO
     </button>

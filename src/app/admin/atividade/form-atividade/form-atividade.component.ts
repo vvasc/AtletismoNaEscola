@@ -19,8 +19,6 @@ export class FormAtividadeComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.formAtividade = this.formBuilder.group({
       titulo: ['', Validators.required],
-      quiz: ['', Validators.required],
-      provaPratica: ['', Validators.required],
     });
 
     this.formAtividade.valueChanges.subscribe(form => {
@@ -31,15 +29,9 @@ export class FormAtividadeComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.selecionado && this.formAtividade) {
       const data = changes.selecionado.currentValue;
-      let id = '';
-      this.highlighted = null;
       if (data) {
-        [this.highlighted] = data.quiz;
-        [{id}] = data.quiz; // Pega o ID
         this.formAtividade.setValue({
           titulo: data.titulo,
-          quiz: id,
-          provaPratica: data.provaPratica,
         });
       } else
         this.formAtividade.reset();
