@@ -33,6 +33,10 @@ const routes: Routes = [
         loadChildren: './professor/professor.module#ProfessorModule',
       },
       {
+        path: 'diretor',
+        loadChildren: './diretor/diretor.module#DiretorModule',
+      },
+      {
         path: 'atividade',
         loadChildren: './atividade/atividade.module#AtividadeModule',
       },

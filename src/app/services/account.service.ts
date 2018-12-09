@@ -15,6 +15,10 @@ export class AccountService {
     return this.http.patch(`${this.endpoint}/account/${id}`, {...account}, this.getOptions());
   }
 
+  getDiretores() {
+    return this.http.get(`${this.endpoint}/diretores`, this.getOptions() );
+  }
+
   getProfessores() {
     return this.http.get(`${this.endpoint}/professores`, this.getOptions() );
   }

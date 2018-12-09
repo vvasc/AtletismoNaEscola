@@ -1,0 +1,21 @@
+<nb-card>
+  <nb-card-header>
+    Criar Diretor
+  </nb-card-header>
+  <nb-card-body>
+    <ngx-form-conta [escolasAsync]="escolasAsync" (formValue)="resolveForm($event)"></ngx-form-conta>
+    <br #form>
+    <div class="form-group">
+      <button class="btn btn-primary btn-with-icon" [disabled]="!formDiretor?.valid || querying" (click)="criarDiretor()">
+        <i class="nb-plus"></i>
+        CRIAR PROFESSOR
+      </button>
+      <ngx-spinner
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#000000"
+        type = "square-jelly-box"
+      ></ngx-spinner>
+    </div>
+  </nb-card-body>
+</nb-card>

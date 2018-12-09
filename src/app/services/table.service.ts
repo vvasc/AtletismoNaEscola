@@ -136,6 +136,22 @@ export class TableService {
       },
     },
   };
+  diretores = {
+    columns: {
+      fullName: {
+        title: 'Nome Completo',
+        type: 'string',
+      },
+      nomeEscola: {
+        title: 'Colégio',
+        type: 'string',
+      },
+      emailAddress: {
+        title: 'Email',
+        type: 'string',
+      },
+    },
+  };
 
   constructor() { }
 
@@ -184,6 +200,10 @@ export class TableService {
       }
       case 'professores': {
         column = this.professores;
+        break;
+      }
+      case 'diretores': {
+        column = this.diretores;
         break;
       }
     }
