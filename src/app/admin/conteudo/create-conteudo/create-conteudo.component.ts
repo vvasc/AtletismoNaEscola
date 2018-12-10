@@ -16,7 +16,7 @@ export class CreateConteudoComponent implements OnInit {
   formConteudo: FormGroup;
   querying: boolean = false; // Usado para desativar o botao de criação durante os http request
   localstorage$: Subject<string>; // Usado para nao ficar atualizando o storage toda hora, só atualiza a cada 1 seg
-  end = 'http://localhost:8081';
+  end = 'http://www.atletismonaescola.com.br';
 
   constructor(
     private quizService: QuizSailsService,
