@@ -20,7 +20,7 @@ export class FormPontuacaoComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.formPontuacao = this.fb.group({
-      pontuacaoAula: ['', Validators.required],
+      pontuacao: ['', Validators.required],
       aluno: ['', Validators.required],
       atividade: ['', Validators.required],
     });
@@ -59,7 +59,7 @@ export class FormPontuacaoComponent implements OnInit, OnChanges {
         this.formPontuacao.setValue({
           aluno: newval.aluno.id,
           atividade: newval.atividade.id,
-          pontuacaoAula: newval.pontuacaoAula,
+          pontuacao: newval.pontuacao,
         });
       } else {
         this.formPontuacao.reset();

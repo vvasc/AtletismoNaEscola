@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           (user.role === 'aluno') ? this.router.navigate(['/home/aluno']) : this.router.navigate(['/admin/main']);
         },
         error => {
-          const msg = (error.error.raw === 'BadCombo') ? 'Usuário ou senha inválidos!' : 'Conexão Falhou!';
+          const msg = (error.error === 'badCombo') ? 'Usuário ou senha inválidos!' : 'Conexão Falhou!';
           this.notificacao.ngxtoaster('Erro', msg, false);
         });
   }

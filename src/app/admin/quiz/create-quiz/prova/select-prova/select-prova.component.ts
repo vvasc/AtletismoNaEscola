@@ -23,6 +23,7 @@ export class SelectProvaComponent implements OnChanges, OnInit {
   questaoAnterior: any;
   questoesSelected: any = [];
   formTitulo: FormGroup;
+  maxQuestoes = 10;
 
   constructor(
       public dialog: MatDialog,
@@ -50,7 +51,10 @@ export class SelectProvaComponent implements OnChanges, OnInit {
   }
 
   addQuestao(questao: any) {
-    !find(this.questoesSelected, ['Pergunta', questao.Pergunta]) ? this.questoesSelected.push(questao) : null;
+    if (this.questoesSelected.length < this.maxQuestoes)
+      !find(this.questoesSelected, ['Pergunta', questao.Pergunta]) ? this.questoesSelected.push(questao) : null;
+    else
+      this.notificacaoService.ngxtoaster('Quiz Cheio!', 'Já foi atingido o número máximo de questões!', false);
   }
 
   remove(event: CdkDragExit<any>) {

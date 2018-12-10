@@ -4,10 +4,11 @@
   [remove]="remove"
   titulo="Quizes Criados"
   columns="quizes"
-  (editE)="selectProva($event)"
+  (editE)="selectProva($event); scroll(form)"
 ></ngx-table>
 <nb-card>
   <nb-card-body>
+    <div #form></div>
     <ngx-customize-prova
     [quizSelected]="provaSelected"
     (QuizE)="resolveQuiz($event)"

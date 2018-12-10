@@ -9,6 +9,7 @@ import { ConfirmationModalModule } from '../../../@core/components/confirmation-
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { EditQuizRoutingModule } from './edit-quiz-routing.module';
 import { TableModule } from '../../../@core/components/table/table.module';
+import { NotificacaoService } from '../../../services/notificacao.service';
 
 const EDIT_QUIZ_MODULES = [
   ThemeModule,
@@ -28,6 +29,8 @@ const EDIT_QUIZ_MODULES = [
     EditQuizComponent,
     CustomizeProvaComponent,
   ],
-  providers: [],
+  providers: [
+    NotificacaoService,
+  ],
 })
 export class EditQuizModule { }

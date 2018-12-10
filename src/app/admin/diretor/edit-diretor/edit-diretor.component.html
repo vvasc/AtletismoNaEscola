@@ -1,0 +1,33 @@
+<ngx-table
+  columns="diretores"
+  titulo="Selecão de Diretor"
+  [dataAsync]="diretoresAsync"
+  [update]="update"
+  [remove]="delete"
+  (editE)="selectDiretor($event); scroll(form);"
+></ngx-table>
+<nb-card>
+  <nb-card-header>
+    Editar Diretor
+  </nb-card-header>
+  <nb-card-body>
+    <ngx-form-conta edit="true" [conta]="selectedDiretor" [escolasAsync]="escolasAsync" (formValue)="resolveForm($event)"></ngx-form-conta>
+    <br>
+    <div class="form-group" #form>
+      <button class="btn btn-primary btn-with-icon" [disabled]="!formDiretor?.valid || querying" (click)="editDiretor()">
+        <i class="nb-edit"></i>
+        EDITAR PROFESSOR
+      </button>
+      <button class="btn btn-danger btn-with-icon delete" [disabled]="!selectedDiretor?.id || querying" (click)="deleteDiretor()">
+        <i class="nb-trash"></i>
+        DELETAR PROFESSOR
+      </button>
+      <ngx-spinner
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#000000"
+        type = "square-jelly-box"
+      ></ngx-spinner>
+    </div>
+  </nb-card-body>
+</nb-card>

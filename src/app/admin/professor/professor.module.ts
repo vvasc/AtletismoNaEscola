@@ -1,8 +1,8 @@
+import { FormContaModule } from './../../@core/components/form-conta/form-conta.module';
 import { ConfirmationModalComponent } from './../../@core/components/confirmation-modal/confirmation-modal.component';
 import { MatDialogModule } from '@angular/material';
 import { ConfirmationModalModule } from './../../@core/components/confirmation-modal/confirmation-modal.module';
 import { AccountService } from './../../services/account.service';
-import { FormContaComponent } from './../../@core/components/form-conta/form-conta.component';
 import { ColegioService } from './../../services/colegio.service';
 import { EditProfessorComponent } from './edit-professor/edit-professor.component';
 import { CreateProfessorComponent } from './create-professor/create-professor.component';
@@ -23,11 +23,11 @@ import { NotificacaoService } from '../../services/notificacao.service';
     MatDialogModule,
     TableModule,
     NgxSpinnerModule,
+    FormContaModule,
   ],
   declarations: [
     CreateProfessorComponent,
     EditProfessorComponent,
-    FormContaComponent,
   ],
   entryComponents: [
     ConfirmationModalComponent,

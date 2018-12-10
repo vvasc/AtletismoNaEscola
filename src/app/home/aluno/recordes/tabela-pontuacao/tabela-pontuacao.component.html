@@ -3,11 +3,14 @@
   <table class="whitebg text">
     <tr class="item" *ngFor="let dado of dados; let i = index">
       <td class="container left">
-        <div class="row"><b>{{ i + 1 }}. {{ dado.atividade.titulo }}</b></div>
-        <div class="row">{{ dado.atividade.provaPratica }}: {{ dado.pontuacaoAula }} pontos</div>
-        <div class="row">Quiz {{ i + 1 }}: {{ dado.pontuacaoQuiz }} pontos</div>
+        <ng-container *ngIf="dado.atividade; else elseTemplate">
+          <div class="row"><b>{{ i + 1 }}. {{ dado.atividade.titulo }}</b></div>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <div class="row"><b>{{ i + 1 }}. {{ dado.quiz.titulo }}</b></div>
+        </ng-template>
       </td>
-      <td class="pontos"><b>{{ dado.pontuacaoAula + dado.pontuacaoQuiz }}p</b></td>
+      <td class="pontos"><b>{{ dado.pontuacao }}p</b></td>
     </tr>
 
     <tr>

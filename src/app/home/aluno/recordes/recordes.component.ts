@@ -28,7 +28,10 @@ export class RecordesComponent implements OnInit {
     ]).subscribe(([pontuacoesAluno, user, pontuacoesColegio]) => {
       this.userinfo = user;
       if (user.role === 'aluno') {
-        this.pontuacaoAluno = pontuacoesAluno;
+        const pontuacoesQuiz = pontuacoesAluno.filter(pontuacao => pontuacao.quiz);
+        const pontuacoesAtividade = pontuacoesAluno.filter(pontuacao => pontuacao.atividade);
+        this.pontuacaoAluno = [ ...pontuacoesAtividade, ...pontuacoesQuiz];
+
         // Pega as pontuacoes do colegio ordenados por total de pontos,do maior para o menor
         pontuacoesColegio.map((element, index) => {
           if (element.id === user.id) {

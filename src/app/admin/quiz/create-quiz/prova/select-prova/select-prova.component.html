@@ -5,7 +5,7 @@
         <form [formGroup]="formTitulo">
           <div class="form-group">
             <div class="input-group">
-              <input formControlName="titulo" placeholder="titulo" id="titulo" class="form-control" type="text">
+              <input formControlName="titulo" placeholder="Titulo da Quiz" id="titulo" class="form-control" type="text">
             </div>
           </div>
         </form>
@@ -14,11 +14,11 @@
     <nb-card-body>
       <cdk-drop (dropped)="dropped($event)">
         <div class="row">
-          <div class="col-md-12" *ngFor="let questao of questoesSelected" cdkDrag>
+          <div class="col-md-12" *ngFor="let questao of questoesSelected; let i = index " cdkDrag>
             <div class="row box">
-              <div class="col-6">
-                <div cdkDragHandle class="btn btn-success"><i class="fa fa-pencil"></i></div>
-                {{ questao.Pergunta }}
+              <div cdkDragHandle class="handle btn btn-success"><i class="fa fa-pencil"></i></div>
+              <div class="pergunta">
+                {{ i + 1 }}). {{ questao.Pergunta }}
               </div>
             </div>
           </div>

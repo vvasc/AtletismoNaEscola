@@ -1,3 +1,4 @@
+import { InstrucoesComponent } from './instrucoes/instrucoes.component';
 import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
 import { MatDialogModule } from '@angular/material';
 import { ConfirmationModalComponent } from './../../@core/components/confirmation-modal/confirmation-modal.component';
@@ -29,6 +30,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
     CreateConteudoComponent,
     EditConteudoComponent,
     FormConteudoComponent,
+    InstrucoesComponent,
   ],
   entryComponents: [
     ConfirmationModalComponent,

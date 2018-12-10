@@ -90,7 +90,8 @@ export class CustomizeProvaComponent implements OnChanges, OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if ('quizSelected' in changes && changes.quizSelected.currentValue !== changes.quizSelected.previousValue) {
+    // tslint:disable-next-line:max-line-length
+    if ('quizSelected' in changes && changes.quizSelected.currentValue !== changes.quizSelected.previousValue && changes.quizSelected.currentValue) {
       // tslint:disable-next-line:max-line-length
       !changes.quizSelected.previousValue || changes.quizSelected.previousValue.id !== changes.quizSelected.currentValue.id ? this.patchDrangDrop(changes.quizSelected.currentValue) : null;
     }

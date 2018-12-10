@@ -1,14 +1,13 @@
+import { Observable } from 'rxjs';
 // tslint:disable-next-line
 import { ConfirmationModalComponent } from './../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { AtividadeService } from '../../../services/atividade.service';
-import { QuizSailsService } from '../../../services/quiz-sails.service';
 import { NotificacaoService } from '../../../services/notificacao.service';
-import { catchError, map, tap } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-edit-atividade',
@@ -18,7 +17,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class EditAtividadeComponent implements OnInit {
   formAtividade: FormGroup;
   selecionado;
-  quizesAsync: Observable<any>;
   atividadesObs: Observable<any>;
   querying: boolean = false;
   update;
@@ -26,7 +24,6 @@ export class EditAtividadeComponent implements OnInit {
 
   constructor(
     private atividadeService: AtividadeService,
-    private quizService: QuizSailsService,
     private notificacao: NotificacaoService,
     private dialog: MatDialog,
     private spinner: NgxSpinnerService,
@@ -34,7 +31,6 @@ export class EditAtividadeComponent implements OnInit {
 
   ngOnInit() {
     this.refreshAtividade();
-    this.refreshQuizes();
   }
 
   getForm(form) {
@@ -57,24 +53,14 @@ export class EditAtividadeComponent implements OnInit {
     );
   }
 
-  refreshQuizes() {
-    this.quizesAsync = this.quizService.getQuizesLivresAtividade().pipe(catchError((error: any) => {
-      this.notificacao.ngxtoaster('Quizes', 'Não foi possível carregar os quizes! Recarregue a página!', false);
-      return error;
-    }));
-  }
-
   editAtividade() {
     const formval = this.formAtividade.value;
     this.querying = true;
     this.atividadeService.patchAtividade(this.selecionado.id, formval).subscribe((succ: any) => {
       this.querying = false;
-      succ['tituloquiz'] = (succ.quiz) ? succ.quiz[0].titulo : '';
       this.update = succ;
       this.selecionado = null;
       this.notificacao.ngxtoaster('Sucesso!', 'Atividade editada com sucesso!', true);
-      this.refreshAtividade();
-      this.refreshQuizes();
       this.formAtividade.reset();
     }, err => {
       this.querying = false;
@@ -92,7 +78,7 @@ export class EditAtividadeComponent implements OnInit {
       width: '40%',
       data: {
         header: 'Aviso!',
-        text: 'Você realmente deseja deletar esse Atividade?',
+        text: 'Você realmente deseja deletar esse Atividade? Todas as Pontuações Relacionadas serão deletadas!',
         warning: false,
       },
       disableClose: true,
@@ -108,7 +94,6 @@ export class EditAtividadeComponent implements OnInit {
             this.delete = this.selecionado.id;
             this.selecionado = null;
             this.SpinnerTimeout();
-            this.refreshQuizes();
             this.formAtividade.reset();
             this.notificacao.ngxtoaster('Atividade', 'Atividade Deletado!', true);
           }, (err) => {
@@ -125,6 +110,10 @@ export class EditAtividadeComponent implements OnInit {
     setTimeout(() => {
       this.spinner.hide();
     }, 1000);
+  }
+
+  scroll(el) {
+    el.scrollIntoView({ behavior: 'smooth' });
   }
 
 }

@@ -6,7 +6,7 @@
     </div>
     
     <div class="header-container" *ngIf="userinfo">
-      <img src="../../../../assets/usuario.jpg" class="rounded foto">
+      <img src="../../../../assets/usuario.png" class="rounded foto">
       <div class="container userinfo">
         <div class="row">{{userinfo.fullName}}</div>
         <div class="row">{{userinfo.ano}}º ano</div>
@@ -37,6 +37,7 @@
         <p (click)="recordes(); this.toggle = !this.toggle">MEUS RECORDES</p>
         <p (click)="conteudo(); this.toggle = !this.toggle">CONTEÚDO</p>
         <p (click)="quiz(); this.toggle = !this.toggle">QUIZ</p>
+        <p *ngIf="userinfo?.role != 'aluno'" (click)="admin(); this.toggle = !this.toggle">ADMIN</p>
         <p (click)="logout(); this.toggle = !this.toggle">SAIR</p>
       </div>
     </div>

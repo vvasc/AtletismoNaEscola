@@ -109,4 +109,8 @@ export class EditColegioComponent implements OnInit {
       this.spinner.hide();
     }, 1000);
   }
+
+  scroll(el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
 }

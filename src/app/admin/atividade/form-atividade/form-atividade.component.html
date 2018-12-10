@@ -5,20 +5,4 @@
 			<input type="text" placeholder="Título" class="form-control" formControlName="titulo">
         </div>
     </div>
-    <div class="row">
-		<div class="col-sm-6 form-group">
-			<label>Quiz</label>
-			<select class="form-control" formControlName="quiz">
-				<option value=""></option>
-				<option *ngFor="let quiz of quizes | async" [value]="quiz.id">{{ quiz.titulo }}</option>
-				<option style="background-color: green;" *ngIf="highlighted" [value]="highlighted.id">{{highlighted.titulo}}</option>
-			</select>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-6 form-group">
-			<label>Prova Prática</label>
-			<input type="text" placeholder="Título Prova prática" class="form-control" formControlName="provaPratica">
-		</div>
-	</div>
 </form>

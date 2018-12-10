@@ -1,6 +1,6 @@
 <ngx-table
   [dataAsync]="atividadesObs"
-  (editE)="select($event)"
+  (editE)="select($event); scroll(form);"
   titulo="Atividades"
   [update]="update"
   [remove]="delete"
@@ -12,9 +12,9 @@
     Editar Atividade
   </nb-card-header>
   <nb-card-body>
-    <ngx-form-atividade [selecionado]="selecionado" [quizes]="quizesAsync" (formValue)="getForm($event)"></ngx-form-atividade>
+    <ngx-form-atividade [selecionado]="selecionado" (formValue)="getForm($event)"></ngx-form-atividade>
     <br>
-    <div class="form-group">
+    <div #form class="form-group">
       <button class="btn btn-primary btn-with-icon" [disabled]="!formAtividade?.valid || querying" (click)="editAtividade()">
         <i class="nb-edit"></i>
         EDITAR ATIVIDADE

@@ -7,22 +7,11 @@
         <div class="alert alert-danger" *ngIf="formAluno.controls['fullName'].hasError('maxlength') && formAluno.controls['fullName'].touched">Nome muito longo!</div>
       </div>
     </div>
+
     <div class="col-sm-3">
       <div class="form-group">
         <label for="ano">Ano</label>
         <input type="text" formControlName="ano" class="form-control" id="Ano" placeholder="ano">
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="form-group">
-        <label for="professor">Professor Responsável</label>
-        <select class="form-control" formControlName="professor">
-          <option [value]="null">Nenhum Professor selecionado</option>
-          <option *ngFor="let professor of professoresAsync | async" [value]="professor.escola.id">{{ professor.fullName }}</option>
-        </select>
       </div>
     </div>
   </div>
