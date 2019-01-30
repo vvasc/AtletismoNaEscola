@@ -86,7 +86,7 @@ export class EditPontuacaoComponent implements OnInit {
       width: '40%',
       data: {
         header: 'Aviso!',
-        text: 'Você realmente deseja deletar esse Colégio?',
+        text: 'Você realmente deseja deletar essa Pontuação?',
       },
       disableClose: true,
     });
@@ -102,11 +102,11 @@ export class EditPontuacaoComponent implements OnInit {
             this.pontuacaoselecionada = null;
             this.SpinnerTimeout();
             this.formPontuacao.reset();
-            this.notificacao.ngxtoaster('Colégio', 'Colégio Deletado!', true);
+            this.notificacao.ngxtoaster('Pontuação', 'Pontuação Deletada!', true);
           }, (err) => {
             this.querying = false;
             this.SpinnerTimeout();
-            this.notificacao.ngxtoaster('Colégio', 'Algo deu errado!', false);
+            this.notificacao.ngxtoaster('Pontuação', 'Algo deu errado!', false);
           });
         }
       }),

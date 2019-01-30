@@ -29,7 +29,7 @@ export class CreatePontuacaoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.alunosObs = this.accountservice.getAllAccounts().pipe(
+    this.alunosObs = this.accountservice.getAlunos().pipe(
       map((accounts: any) => {
         accounts.map(conta => {
           conta.nomeEscola = conta.escola.nome;
