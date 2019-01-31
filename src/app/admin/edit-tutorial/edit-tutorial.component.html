@@ -1,0 +1,22 @@
+<ngx-instrucoes></ngx-instrucoes>
+<nb-card>
+  <nb-card-header>
+    Editar Tutorial
+  </nb-card-header>
+  <nb-card-body [formGroup]="tutorialform">
+    <ckeditor formControlName="iframe" [config]="{extraPlugins: 'divarea,image2', height: '320', skin: 'moono'}"></ckeditor>
+    <br>
+    <div class="form-group">
+      <button class="btn btn-primary btn-with-icon" [disabled]="querying" (click)="editTutorial()">
+        <i class="nb-edit"></i>
+        EDITAR
+      </button>
+      <ngx-spinner
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#000000"
+        type = "square-jelly-box"
+      ></ngx-spinner>
+    </div>
+  </nb-card-body>
+</nb-card>
