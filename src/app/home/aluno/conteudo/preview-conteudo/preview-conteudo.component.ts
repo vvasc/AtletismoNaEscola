@@ -2,12 +2,13 @@ import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular
 
 @Component({
   selector: 'ngx-preview-conteudo',
-  templateUrl: './preview-conteudo.component.html',
-  styleUrls: ['./preview-conteudo.component.scss'],
+  // Nota-se que usa o mesmo html e css do select-conteudo
+  templateUrl: '../select-conteudo/select-conteudo.component.html',
+  styleUrls: ['../select-conteudo/select-conteudo.component.scss'],
 })
 export class PreviewConteudoComponent implements OnInit {
   texto;
-  @ViewChild('htmlcontainer') htmlcontainer: ElementRef;
+  @ViewChild('textohtml') htmlcontainer: ElementRef;
   constructor() { }
 
   loadHTML(texto) {
