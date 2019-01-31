@@ -27,6 +27,10 @@ const routes: Routes = [
         // canActivate: [AlunoGuard],
       },
       {
+        path: 'tutorial',
+        loadChildren: './tutorial/tutorial.module#TutorialModule',
+      },
+      {
         path: '**',
         redirectTo: 'main',
       },

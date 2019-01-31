@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.authService.Logged(user);
           this.notificacao.ngxtoaster('Sucesso', 'Login efetuado com sucesso!', true);
           // tslint:disable-next-line:max-line-length
-          (user.role === 'aluno') ? this.router.navigate(['/home/aluno/recordes/ranking']) : this.router.navigate(['/admin/main']);
+          (user.role === 'aluno') ? this.router.navigate(['/home/tutorial']) : this.router.navigate(['/admin/main']);
         },
         error => {
           const msg = (error.error === 'badCombo') ? 'Usuário ou senha inválidos!' : 'Conexão Falhou!';
