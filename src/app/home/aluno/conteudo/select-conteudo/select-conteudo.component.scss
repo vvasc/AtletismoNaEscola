@@ -8,6 +8,19 @@
     width: 100%;
 }
 
+.text {
+    max-width: 100%;
+}
+
+:host ::ng-deep img { 
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+:host ::ng-deep iframe { 
+    max-width: 100% !important;
+}
+
 @media (max-width: 978px) {
     .center-div {
         padding:0;
