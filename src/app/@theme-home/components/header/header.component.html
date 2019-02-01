@@ -1,4 +1,4 @@
-<ng-container *ngIf="userAsync | async as userinfo">
+<ng-container *ngIf="userAsync | async as userinfo; else Signout">
     <div class="header-container empty"></div>
 
     <div class="header-container first">
@@ -15,14 +15,13 @@
     </div>
     
     <div class="header-container opcoes" *ngIf="userinfo">
-      <a (click)="recordes()">
-        <ng-container *ngIf="userinfo.role === 'aluno'; else elseTemplate">
-          MEUS RECORDES 
-        </ng-container>
-        <ng-template #elseTemplate>
-            RANKING
-        </ng-template>
-      </a>
+      <ng-container *ngIf="userinfo.role === 'aluno'; else elseTemplate">
+        <a (click)="rankingProfessor()">MEUS RECORDES</a>
+        <a (click)="rankingAluno()">RANKING</a>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <a (click)="rankingProfessor()">RANKING</a>
+      </ng-template>
       <a (click)="conteudo()">CONTEÚDO</a>
       <a (click)="quiz()">QUIZ</a>
     </div>
@@ -34,7 +33,8 @@
         <div class="bar3"></div>
       </div>
       <div class="burger-options" [ngClass]="{'hide': true, 'burger-open': this.toggle}">
-        <p (click)="recordes(); this.toggle = !this.toggle">MEUS RECORDES</p>
+        <p (click)="rankingProfessor(); this.toggle = !this.toggle">MEUS RECORDES</p>
+        <p (click)="rankingAluno(); this.toggle = !this.toggle">RANKING</p>
         <p (click)="conteudo(); this.toggle = !this.toggle">CONTEÚDO</p>
         <p (click)="quiz(); this.toggle = !this.toggle">QUIZ</p>
         <p *ngIf="userinfo?.role != 'aluno'" (click)="admin(); this.toggle = !this.toggle">ADMIN</p>
@@ -47,3 +47,8 @@
       <Button class="btn btn-hero-secondary" *ngIf="userinfo" (click)="logout()">SAIR</Button>  
     </div>    
   </ng-container>
+<ng-template #Signout>
+  <div class="header-container last">
+    <Button class="btn btn-hero-secondary" (click)="logout()">SAIR</Button>  
+  </div>    
+</ng-template>
