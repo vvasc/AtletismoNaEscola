@@ -80,6 +80,11 @@ export const SUPERADMIN_MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
+    title: 'Tutorial',
+    icon: 'nb-info',
+    link: '/admin/tutorial',
+  },
+  {
     title: 'Colégio',
     icon: 'fa fa-bank',
     children: [
