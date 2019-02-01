@@ -19,9 +19,13 @@ export class TutorialComponent implements OnInit {
 
   ngOnInit() {
     this.tutorialService.getTutorial().subscribe(tut => {
-      this.textohtml.nativeElement.innerHTML = tut['iframe'];
+      if (tut !== null)
+        this.textohtml.nativeElement.innerHTML = tut['iframe'];
+      // Sem Tutorial!
+      else
+        this.router.navigate(['/home/aluno/recordes/ranking']);
     }, err => {
-      this.router.navigate(['/home/login']);
+      this.router.navigate(['/home/aluno/recordes/ranking']);
     });
   }
 

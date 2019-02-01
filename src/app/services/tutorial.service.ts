@@ -8,6 +8,10 @@ export class TutorialService {
 
   constructor(private http: HttpClient) { }
 
+  deleteTutorial() {
+    return this.http.delete(`${this.endpoint}/Tutorial`, this.getOptions());
+  }
+
   getTutorial() {
     return this.http.get(`${this.endpoint}/Tutorial`, this.getOptions());
   }

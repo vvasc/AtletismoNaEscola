@@ -1,3 +1,6 @@
+import { switchMap, filter, tap } from 'rxjs/operators';
+import { ConfirmationModalComponent } from './../../@core/components/confirmation-modal/confirmation-modal.component';
+import { MatDialog } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -18,6 +21,7 @@ export class EditTutorialComponent implements OnInit {
     private notificacao: NotificacaoService,
     private spinner: NgxSpinnerService,
     private tutorialService: TutorialService,
+    private dialog: MatDialog,
   ) {
     this.tutorialform = this.fb.group({
       iframe: ['', Validators.required],
@@ -25,32 +29,66 @@ export class EditTutorialComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.querying = true;
-    this.spinner.show();
-    this.tutorialService.getTutorial().subscribe(tut => {
-      this.querying = false;
-      this.SpinnerTimeout();
-      // Se tiver tutorial
-      if (tut !== null)
-        this.tutorialform.patchValue(tut);
+    this.ShowSpinner();
+    this.tutorialService.getTutorial().pipe(
+      tap((tut) => {
+        // Se tiver tutorial
+        if (tut !== null)
+          this.tutorialform.patchValue(tut);
+      }),
+    ).subscribe(tut => {
+      this.HideSpinner();
     }, err => {
       this.notificacao.ngxtoaster('Erro!', 'Erro ao carregar Tutorial! Recarregue a página!', false);
     });
   }
 
   editTutorial() {
-    this.querying = true;
-    this.spinner.show();
+    this.ShowSpinner();
     const formval = this.tutorialform.value;
     this.tutorialService.editTutorial(formval).subscribe(success => {
-      this.querying = false;
-      this.SpinnerTimeout();
+      this.HideSpinner();
       this.notificacao.ngxtoaster('Tutorial', 'Tutorial Editado com Sucesso!', true);
     }, (err) => {
-      this.querying = false;
-      this.SpinnerTimeout();
+      this.HideSpinner();
       this.notificacao.ngxtoaster('Tutorial', 'Erro ao Editar!', false);
     });
+  }
+
+  deleteTutorial() {
+    const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+      width: '40%',
+      data: {
+        header: 'Aviso!',
+        text: 'Você realmente deseja deletar o tutorial?',
+        warning: false,
+      },
+      disableClose: true,
+    });
+    dialogRef.afterClosed().pipe(
+      filter(res => res),
+      switchMap(() => {
+        this.ShowSpinner();
+        return this.tutorialService.deleteTutorial();
+      }),
+    ).subscribe((succ) => {
+      this.HideSpinner();
+      this.tutorialform.reset();
+      this.notificacao.ngxtoaster('Tutorial', 'Tutorial Deletado!', true);
+    }, (err) => {
+      this.HideSpinner();
+      this.notificacao.ngxtoaster('Tutorial', 'Erro ao Deletar!', false);
+    });
+  }
+
+  HideSpinner() {
+    this.querying = false;
+    this.SpinnerTimeout();
+  }
+
+  ShowSpinner() {
+    this.querying = true;
+    this.spinner.show();
   }
 
   SpinnerTimeout() {

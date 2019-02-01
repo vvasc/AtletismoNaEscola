@@ -9,7 +9,11 @@
     <div class="form-group">
       <button class="btn btn-primary btn-with-icon" [disabled]="querying" (click)="editTutorial()">
         <i class="nb-edit"></i>
-        EDITAR
+        EDITAR/CRIAR TUTORIAL
+      </button>
+      <button class="btn btn-danger btn-with-icon delete" [disabled]="!tutorialform?.valid || querying" (click)="deleteTutorial()">
+        <i class="nb-trash"></i>
+        DELETAR TUTORIAL
       </button>
       <ngx-spinner
         bdColor = "rgba(0,0,0,0)"
