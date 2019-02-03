@@ -10,10 +10,12 @@ import { EditTutorialComponent } from './edit-tutorial.component';
 import { TutorialService } from '../../services/tutorial.service';
 import { EditTutorialRoutingModule } from './edit-tutorial-routing.module';
 import { ConfirmationModalModule } from '../../@core/components/confirmation-modal/confirmation-modal.module';
+import { InstrucoesModule } from '../conteudo/instrucoes/instrucoes.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    InstrucoesModule,
     ThemeModule,
     CKEditorModule,
     NgxSpinnerModule,

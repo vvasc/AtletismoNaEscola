@@ -14,10 +14,12 @@ import { CommonModule } from '@angular/common';
 import { ConteudoRoutingModule } from './conteudo-routing.module';
 import { FormConteudoComponent } from './form-conteudo/form-conteudo.component';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { InstrucoesModule } from './instrucoes/instrucoes.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    InstrucoesModule,
     ConteudoRoutingModule,
     ThemeModule,
     CKEditorModule,
