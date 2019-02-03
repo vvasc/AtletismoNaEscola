@@ -1,6 +1,5 @@
 import { MatDialogModule } from '@angular/material';
 import { ConfirmationModalComponent } from './../../@core/components/confirmation-modal/confirmation-modal.component';
-import { InstrucoesComponent } from '../conteudo/instrucoes/instrucoes.component';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { ThemeModule } from '../../@theme-admin/theme.module';
@@ -25,7 +24,6 @@ import { InstrucoesModule } from '../conteudo/instrucoes/instrucoes.module';
   ],
   declarations: [
     EditTutorialComponent,
-    InstrucoesComponent,
   ],
   providers: [
     TutorialService,
