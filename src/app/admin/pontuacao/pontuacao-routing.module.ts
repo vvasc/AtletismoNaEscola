@@ -10,8 +10,14 @@ const routes: Routes = [
     component: CreatePontuacaoComponent,
   },
   {
-    path: 'edit',
+    path: 'edit-atividade',
     component: EditPontuacaoComponent,
+    data: { type: 'atividade' },
+  },
+  {
+    path: 'edit-quiz',
+    component: EditPontuacaoComponent,
+    data: { type: 'quiz' },
   },
   {
     path: '**',

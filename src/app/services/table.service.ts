@@ -68,7 +68,23 @@ export class TableService {
       },
     },
   };
-  pontuacoes = {
+  pontuacoesQuiz = {
+    columns: {
+      nomealuno: {
+        title: 'Nome do Aluno',
+        type: 'string',
+      },
+      anoaluno: {
+        title: 'Ano',
+        type: 'string',
+      },
+      quiztitulo: {
+        title: 'Quiz',
+        type: 'string',
+      },
+    },
+  };
+  pontuacoesAtividade = {
     columns: {
       nomealuno: {
         title: 'Nome do Aluno',
@@ -182,8 +198,12 @@ export class TableService {
         column = this.alunos;
         break;
       }
-      case 'pontuacoes': {
-        column = this.pontuacoes;
+      case 'pontuacoesAtividade': {
+        column = this.pontuacoesAtividade;
+        break;
+      }
+      case 'pontuacoesQuiz': {
+        column = this.pontuacoesQuiz;
         break;
       }
       case 'atividades': {

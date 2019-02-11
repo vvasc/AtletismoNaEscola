@@ -4,7 +4,7 @@
     <input type="text" class="form-control" disabled [(ngModel)]="nomeAluno">
   </div>
   <div class="col-sm-4 form-group">
-    <label>Atividade</label>
+    <label>{{ FormType | titlecase }}</label>
     <input type="text" class="form-control" disabled [(ngModel)]="tituloAtividade">
   </div>
   <div [formGroup]="formPontuacao" class="col-sm-4 form-group"> 
