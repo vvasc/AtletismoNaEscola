@@ -59,7 +59,8 @@ export class ShowProvaComponent implements OnInit, OnChanges {
     const idsQuestoes = clonedQuestoes.sort((resposta1, resposta2) => resposta1.id < resposta2.id).map(questao => questao.id);
     // tslint:disable-next-line:max-line-length
     const questoesRespostas = clonedQuestoes.sort((resposta1, resposta2) => resposta1.id < resposta2.id).map(questao => {
-       return { id: questao.id, resposta: +questao.RespostaCorreta };
+      // Decrescenta 1 pois a primeira posicao de um array é 0
+       return { id: questao.id, resposta: +questao.RespostaCorreta - 1 };
     });
     const diffids = difference(idsQuestoes, idsRespostas);
     if (diffids && diffids.length) {
