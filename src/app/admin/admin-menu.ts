@@ -34,8 +34,12 @@ export const PROFESSOR_MENU_ITEMS: NbMenuItem[] = [
         link: '/admin/pontuacao/create',
       },
       {
-        title: 'Editar Pontuação',
-        link: '/admin/pontuacao/edit',
+        title: 'Editar Pontuação Atividade',
+        link: '/admin/pontuacao/edit-atividade',
+      },
+      {
+        title: 'Editar Pontuação Quiz',
+        link: '/admin/pontuacao/edit-quiz',
       },
     ],
   },

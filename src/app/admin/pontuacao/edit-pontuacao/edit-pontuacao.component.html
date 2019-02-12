@@ -3,7 +3,7 @@
   titulo="Pontuações"
   [update]="update"
   [remove]="delete"
-  columns="pontuacoes"
+  [columns]="column"
   (editE)="selectPontuacao($event); scroll(form);"
 ></ngx-table>
 
@@ -12,7 +12,7 @@
     Editar Pontuação
   </nb-card-header>
   <nb-card-body>
-    <ngx-form-pontuacao [pontuacao]='pontuacaoselecionada' (formValue)="getForm($event)"></ngx-form-pontuacao>
+    <ngx-form-pontuacao [FormType]="componentType" [pontuacao]='pontuacaoselecionada' (formValue)="getForm($event)"></ngx-form-pontuacao>
     <br>
     <div class="form-group" #form>
       <button class="btn btn-primary btn-with-icon" [disabled]="!formPontuacao?.valid || querying" (click)="editPontuacao()">
