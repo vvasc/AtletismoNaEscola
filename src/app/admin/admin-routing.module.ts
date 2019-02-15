@@ -45,6 +45,10 @@ const routes: Routes = [
         loadChildren: './colegio/colegio.module#ColegioModule',
       },
       {
+        path: 'tutorial',
+        loadChildren: './edit-tutorial/edit-tutorial.module#EditTutorialModule',
+      },
+      {
         path: '**',
         redirectTo: 'main',
       },

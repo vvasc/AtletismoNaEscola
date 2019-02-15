@@ -1,4 +1,3 @@
-import { InstrucoesComponent } from './instrucoes/instrucoes.component';
 import { NgxSpinnerService, NgxSpinnerModule } from 'ngx-spinner';
 import { MatDialogModule } from '@angular/material';
 import { ConfirmationModalComponent } from './../../@core/components/confirmation-modal/confirmation-modal.component';
@@ -14,10 +13,12 @@ import { CommonModule } from '@angular/common';
 import { ConteudoRoutingModule } from './conteudo-routing.module';
 import { FormConteudoComponent } from './form-conteudo/form-conteudo.component';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { InstrucoesModule } from './instrucoes/instrucoes.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    InstrucoesModule,
     ConteudoRoutingModule,
     ThemeModule,
     CKEditorModule,
@@ -30,7 +31,6 @@ import { CKEditorModule } from 'ng2-ckeditor';
     CreateConteudoComponent,
     EditConteudoComponent,
     FormConteudoComponent,
-    InstrucoesComponent,
   ],
   entryComponents: [
     ConfirmationModalComponent,

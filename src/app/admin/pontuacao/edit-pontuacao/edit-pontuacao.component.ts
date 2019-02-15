@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 // tslint:disable-next-line
 import { ConfirmationModalComponent } from './../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -21,25 +22,47 @@ export class EditPontuacaoComponent implements OnInit {
   querying: boolean = false;
   delete: any = [];
   update: any = [];
+  // Determina qual pontuacao mostrar e editar
+  componentType;
+  // Determina as colunas para serem mostradas
+  column;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private pontuacaoservice: PontuacaoService,
     private notificaoservice: NotificacaoService,
     private notificacao: NotificacaoService,
     private dialog: MatDialog,
     private spinner: NgxSpinnerService,
-  ) { }
+  ) {
+    this.activatedRoute.data.subscribe(d => {
+      this.componentType = d.type;
+      this.column = (d.type === 'atividade') ? 'pontuacoesAtividade' : 'pontuacoesQuiz';
+    });
+  }
 
   ngOnInit() {
     this.pontuacaoObs = this.pontuacaoservice.getAllPontuacao().pipe(
       map((pontuacoes: any) => {
-        pontuacoes = pontuacoes.filter(p => p.atividade);
-        pontuacoes.map(pontuacao => { // refatorando objeto para ser usado na table
-          pontuacao.nomealuno = pontuacao.aluno.fullName;
-          pontuacao.anoaluno = pontuacao.aluno.ano;
-          pontuacao.atividadetitulo = pontuacao.atividade.titulo;
-        });
-        return pontuacoes;
+        if (this.componentType === 'atividade') {
+          // Editar Pontuações de Atividade
+          pontuacoes = pontuacoes.filter(p => p.atividade);
+          pontuacoes.map(pontuacao => { // refatorando objeto para ser usado na table
+            pontuacao.nomealuno = pontuacao.aluno.fullName;
+            pontuacao.anoaluno = pontuacao.aluno.ano;
+            pontuacao.atividadetitulo = pontuacao.atividade.titulo;
+          });
+          return pontuacoes;
+        } else {
+          // Editar Pontuações de Quiz
+          pontuacoes = pontuacoes.filter(p => p.quiz);
+          pontuacoes.map(pontuacao => { // refatorando objeto para ser usado na table
+            pontuacao.nomealuno = pontuacao.aluno.fullName;
+            pontuacao.anoaluno = pontuacao.aluno.ano;
+            pontuacao.quiztitulo = pontuacao.quiz.titulo;
+          });
+          return pontuacoes;
+        }
       }),
     );
     this.pontuacaoObs.subscribe(null, err => {
@@ -58,10 +81,15 @@ export class EditPontuacaoComponent implements OnInit {
     this.pontuacaoservice.patchPontuacao(this.pontuacaoselecionada.id, formval).subscribe(succ => {
       this.querying = false;
       this.SpinnerTimeout();
-      this.update = succ;
-      this.update['nomealuno'] = succ['aluno'].fullName;
-      this.update['anoaluno'] = succ['aluno'].ano;
-      this.update['atividadetitulo'] = succ['atividade'].titulo;
+      const temp  = succ;
+      temp['nomealuno'] = succ['aluno'].fullName;
+      temp['anoaluno'] = succ['aluno'].ano;
+      if (this.componentType === 'atividade') {
+        temp['atividadetitulo'] = succ['atividade'].titulo;
+      } else {
+        temp['quiztitulo'] = succ['quiz'].titulo;
+      }
+      this.update = temp;
       this.pontuacaoselecionada = null;
       this.notificacao.ngxtoaster('Sucesso!', 'Pontuação Editada com Sucesso!', true);
       this.formPontuacao.reset();
@@ -86,7 +114,7 @@ export class EditPontuacaoComponent implements OnInit {
       width: '40%',
       data: {
         header: 'Aviso!',
-        text: 'Você realmente deseja deletar esse Colégio?',
+        text: 'Você realmente deseja deletar essa Pontuação?',
       },
       disableClose: true,
     });
@@ -102,11 +130,11 @@ export class EditPontuacaoComponent implements OnInit {
             this.pontuacaoselecionada = null;
             this.SpinnerTimeout();
             this.formPontuacao.reset();
-            this.notificacao.ngxtoaster('Colégio', 'Colégio Deletado!', true);
+            this.notificacao.ngxtoaster('Pontuação', 'Pontuação Deletada!', true);
           }, (err) => {
             this.querying = false;
             this.SpinnerTimeout();
-            this.notificacao.ngxtoaster('Colégio', 'Algo deu errado!', false);
+            this.notificacao.ngxtoaster('Pontuação', 'Algo deu errado!', false);
           });
         }
       }),

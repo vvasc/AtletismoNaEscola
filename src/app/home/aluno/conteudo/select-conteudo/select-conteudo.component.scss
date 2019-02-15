@@ -4,8 +4,19 @@
     align-items: flex-start;
     padding-left: 20%;
     padding-right: 20%;
-    height: 100%;
-    width: 100%;
+}
+
+.text {
+    max-width: 100%;
+}
+
+:host ::ng-deep img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+:host ::ng-deep iframe {
+    max-width: 100% !important;
 }
 
 @media (max-width: 978px) {

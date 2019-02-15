@@ -34,8 +34,12 @@ export const PROFESSOR_MENU_ITEMS: NbMenuItem[] = [
         link: '/admin/pontuacao/create',
       },
       {
-        title: 'Editar Pontuação',
-        link: '/admin/pontuacao/edit',
+        title: 'Editar Pontuação Atividade',
+        link: '/admin/pontuacao/edit-atividade',
+      },
+      {
+        title: 'Editar Pontuação Quiz',
+        link: '/admin/pontuacao/edit-quiz',
       },
     ],
   },
@@ -78,6 +82,11 @@ export const SUPERADMIN_MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Ferramentas',
     group: true,
+  },
+  {
+    title: 'Tutorial',
+    icon: 'nb-info',
+    link: '/admin/tutorial',
   },
   {
     title: 'Colégio',

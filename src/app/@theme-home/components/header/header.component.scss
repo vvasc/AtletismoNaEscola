@@ -3,6 +3,7 @@
 @import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
 $header-options-color: rgb(0, 0, 172);
+$option_hide: 779px;
 
 @include nb-install-component() {
   display: flex;
@@ -15,7 +16,7 @@ $header-options-color: rgb(0, 0, 172);
   }
 
   .offscreen {
-    @media screen and (min-width: 684px) { // Enquanto a tela for maior que 684, tire da visao da tela
+    @media screen and (min-width: $option_hide) { // Enquanto a tela for maior que 684, tire da visao da tela
       position: absolute !important; // Melhor que display: none;, pois vc ainda consegue manipular o elemento
       top: -9999px !important;       // Display: none; remove o elemento e desabilita a manipulacao deste
       left: -9999px !important;
@@ -39,7 +40,7 @@ $header-options-color: rgb(0, 0, 172);
   }
 
   .burger-open {
-    @media screen and (max-width: 684px) {
+    @media screen and (max-width: $option_hide) {
       position: fixed !important;
       top: 0 !important;
       left: 0 !important;
@@ -312,7 +313,7 @@ $header-options-color: rgb(0, 0, 172);
   }
 }
 
-@media (max-width: 864px) {
+@media (max-width: 994px) {
 
   .header-container {
     &.first {
@@ -328,7 +329,7 @@ $header-options-color: rgb(0, 0, 172);
   }
 }
 
-@media (max-width: 684px) {
+@media (max-width: $option_hide) {
   .opcoes {
     position: absolute !important;
     top: -9999px !important;
