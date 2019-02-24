@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TutorialService {
   // Alterar endpoint em Production!!
-  private endpoint: string = 'http://localhost:1337';
+  private endpoint: string = 'http://www.atletismonaescola.com.br/api';
 
   constructor(private http: HttpClient) { }
 
