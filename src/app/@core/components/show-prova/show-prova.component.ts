@@ -75,13 +75,14 @@ export class ShowProvaComponent implements OnInit, OnChanges {
       });
       dialogRef.afterClosed().subscribe();
     } else {
-      const respostasErradas = difference(
-        this.respostas.map(resposta => resposta.resposta),
-        questoesRespostas.map(resposta => resposta.resposta),
-      );
+      let questoesCorretas = 0;
+      this.respostas.map(questao => {
+        const gabarito = questoesRespostas.find(resposta => resposta.id === questao.id);
+        questoesCorretas += (questao.resposta === gabarito.resposta) ? 1 : 0;
+      });
       this.respostasPreenchidas.emit({
         id: idQuiz,
-        pontuacao: +this.respostas.length - +respostasErradas.length,
+        pontuacao: questoesCorretas,
       });
     }
   }
