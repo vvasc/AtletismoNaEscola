@@ -5,12 +5,16 @@ import { NgModule } from '@angular/core';
 import { ThemeModule } from '../../@theme-admin/theme.module';
 import { DataComponent } from './data.component';
 import { DataRoutingModule } from './data-routing.module';
+import { TutorialService } from '../../services/tutorial.service';
 
 const DATA_COMPONENTS = [DataComponent];
 
 @NgModule({
   imports: [DataRoutingModule, ThemeModule, RankingTabelaModule],
   declarations: [...DATA_COMPONENTS],
-  providers: [PontuacaoService],
+  providers: [
+    PontuacaoService,
+    TutorialService,
+  ],
 })
 export class DataModule {}
