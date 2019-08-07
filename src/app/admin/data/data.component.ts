@@ -1,7 +1,8 @@
 import { combineLatest } from 'rxjs';
 import { AuthService } from './../../services/login.service';
 import { PontuacaoService } from './../../services/pontuacao.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { TutorialService } from '../../services/tutorial.service';
 
 @Component({
   selector: 'ngx-data',
@@ -11,18 +12,26 @@ import { Component, OnInit } from '@angular/core';
 export class DataComponent implements OnInit {
   userinfo;
   rankingtabela;
+  texto;
+  @ViewChild('textohtml') textohtml: ElementRef;
 
   constructor(
     private pontuacaoservice: PontuacaoService,
     private authService: AuthService,
+    private tutorial: TutorialService,
   ) { }
 
   ngOnInit() {
-    combineLatest([this.pontuacaoservice.getPontuacaoColegio(), this.authService.isLogged()])
-      .subscribe(([pontuacoesColegio, user]) => {
-        this.userinfo = user;
-        this.rankingtabela = pontuacoesColegio;
-      });
+    combineLatest([
+      this.pontuacaoservice.getPontuacaoColegio(),
+      this.authService.isLogged(),
+      this.tutorial.getTutorial('admin'),
+    ]).subscribe(([pontuacoesColegio, user, tutorial]) => {
+      this.userinfo = user;
+      this.rankingtabela = pontuacoesColegio;
+      this.texto = tutorial != null ? tutorial['iframe'] : '';
+      this.textohtml.nativeElement.innerHTML = this.texto;
+    });
   }
 
 }
