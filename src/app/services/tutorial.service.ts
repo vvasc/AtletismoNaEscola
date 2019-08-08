@@ -8,16 +8,16 @@ export class TutorialService {
 
   constructor(private http: HttpClient) { }
 
-  deleteTutorial() {
-    return this.http.delete(`${this.endpoint}/Tutorial`, this.getOptions());
+  deleteTutorial(nome = 'aluno') {
+    return this.http.delete(`${this.endpoint}/Tutorial/${nome}`, this.getOptions());
   }
 
-  getTutorial() {
-    return this.http.get(`${this.endpoint}/Tutorial`, this.getOptions());
+  getTutorial(nome = 'aluno') {
+    return this.http.get(`${this.endpoint}/Tutorial/${nome}`, this.getOptions());
   }
 
-  editTutorial(form) {
-    return this.http.patch(`${this.endpoint}/Tutorial`, form, this.getOptions());
+  editTutorial(form, nome = 'aluno') {
+    return this.http.patch(`${this.endpoint}/Tutorial/${nome}`, form, this.getOptions());
   }
 
   getOptions() {
